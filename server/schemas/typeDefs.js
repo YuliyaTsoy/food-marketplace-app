@@ -29,7 +29,7 @@ type Product {
     image: String
     store: Store
     dateListed: String
-    category: [Category]
+    category: Category
 }
 
 type Category {
