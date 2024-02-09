@@ -36,6 +36,13 @@ type Auth {
     user: User
 }
 
+input OrderInput {
+    name: String!
+    price: String!
+    productId: String!
+    
+  }
+
 type Query {
     product(_id: ID!): Product
     products(category: ID, name: String): [Product]
@@ -48,7 +55,7 @@ type Query {
 
 type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
-    addOrder(products: [ID]!): Order
+    addOrder(orderData: OrderInput!): User
     login(email: String!, password: String!): Auth
     addProduct(name: String!, price: Float!, description: String!, category: ID!): Product
     createStore(storeName: String!, storeOwner: String!): Store
