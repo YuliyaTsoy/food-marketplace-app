@@ -32,15 +32,16 @@ type Category {
 }
 
 type Auth {
-    token: ID!
+    token: String!
     user: User
 }
 
 input OrderInput {
     name: String!
     price: String!
-    productId: String!
-    
+    productId: ID!
+    storeId: ID!
+    categoryId: ID!
   }
 
 type Query {
