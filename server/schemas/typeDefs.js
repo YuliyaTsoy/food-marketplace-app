@@ -22,8 +22,14 @@ type Order {
 }
 
 type Product {
-
+    _id: ID
+    name: String
+    price: Float
+    description: String
+    image: String
+    category: [Category]
 }
+
 
 `;
 
