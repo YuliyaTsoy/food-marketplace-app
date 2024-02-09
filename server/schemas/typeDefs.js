@@ -27,9 +27,14 @@ type Product {
     price: Float
     description: String
     image: String
+    store: Store
     category: [Category]
 }
 
+type Category {
+    _id: ID
+    name: String
+}
 
 `;
 
