@@ -57,6 +57,7 @@ type Mutation {
     addOrder(products: [ID]!): Order
     login(email: String!, password: String!): Auth
     addProduct(name: String!, price: Float!, description: String!, category: ID!): Product
+    createStore(storeName: String!, storeOwner: String!): Store
 }
 
 `;
