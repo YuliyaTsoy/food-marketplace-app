@@ -9,7 +9,10 @@ type User {
 }
 
 type Store {
-
+    _id: ID
+    storeOwner: User!
+    storeName: String!
+    products: [Product]
 }
 
 type Order {
