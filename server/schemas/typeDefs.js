@@ -28,6 +28,7 @@ type Product {
     description: String
     image: String
     store: Store
+    dateListed: String
     category: [Category]
 }
 
@@ -53,7 +54,7 @@ type Query {
 
 type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
-    
+    addOrder(products: [ID]!): Order
 }
 
 `;
