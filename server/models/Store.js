@@ -5,6 +5,11 @@ const storeSchema = new Schema({
   storeOwner: {
     type: Schema.Types.ObjectId,
     ref: "User",
+    required: true,
+  },
+  storeName: {
+    type: String,
+    required: true,
   },
 });
 
