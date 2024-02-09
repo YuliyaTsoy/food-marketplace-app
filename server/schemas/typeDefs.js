@@ -5,7 +5,7 @@ type User {
     email: String!
     password: String!
     store: Store
-    orders: [Order]
+    orders: [Product]
 }
 
 type Store {
@@ -13,12 +13,6 @@ type Store {
     storeOwner: User!
     storeName: String!
     products: [Product]
-}
-
-type Order {
-     _id: ID
-     orderDate: String
-     products: [Product]   
 }
 
 type Product {
