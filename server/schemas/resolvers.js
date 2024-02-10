@@ -16,7 +16,9 @@ const resolvers = {
     product: async (parent, { productId }) => {
         return Product.findOne({ _id: productId });
         },
-    
+    category: async (parent, { categoryId }) => {
+        return Product.findOne({ _id: categoryId });
+        },
   },
   Mutation: {
     // create user in db (signup)
