@@ -8,7 +8,7 @@ const productSchema = new Schema({
     trim: true,
   },
   price: {
-    type: Float32Array,
+    type: Number,
     required: true,
   },
   description: {
