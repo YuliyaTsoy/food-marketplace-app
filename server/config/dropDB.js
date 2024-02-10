@@ -9,7 +9,7 @@ module.exports = async (model, collection) => {
       })
       .toArray();
 
-    if (model.length) {
+    if (modelExists.length) {
       await db.dropCollection(collection);
     }
   } catch (err) {

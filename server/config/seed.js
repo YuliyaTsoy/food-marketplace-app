@@ -17,5 +17,6 @@ db.once("open", async () => {
     password: "supersecretpassword",
   });
 
+  console.log("seed complete!");
   process.exit();
 });
