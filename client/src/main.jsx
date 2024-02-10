@@ -12,7 +12,6 @@ import Home from './pages/Home'
 import Store from './pages/Store'
 import Signup from './pages/Signup'
 import AddProduct from './pages/AddProduct'
-
 */
 
 const router = createBrowserRouter([
@@ -33,9 +32,10 @@ const router = createBrowserRouter([
         path: '/Store',
         element: <Store/>
       },
-	  {
-		path: '/Signup',
-		element: <Signup/>
+	    {
+		    path: '/Signup',
+		    element: <Signup/>
+      }
       */
     ]
   }
