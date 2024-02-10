@@ -5,7 +5,7 @@ type User {
     email: String!
     password: String!
     store: Store
-    orders: [Order]
+    orders: [Product]
 }
 
 type Store {
@@ -13,12 +13,6 @@ type Store {
     storeOwner: User!
     storeName: String!
     products: [Product]
-}
-
-type Order {
-     _id: ID
-     orderDate: String
-     products: [Product]   
 }
 
 type Product {
@@ -29,7 +23,7 @@ type Product {
     image: String
     store: Store
     dateListed: String
-    category: [Category]
+    category: Category
 }
 
 type Category {
@@ -38,9 +32,17 @@ type Category {
 }
 
 type Auth {
-    token: ID!
+    token: String!
     user: User
 }
+
+input OrderInput {
+    name: String!
+    price: String!
+    productId: ID!
+    storeId: ID!
+    categoryId: ID!
+  }
 
 type Query {
     product(_id: ID!): Product
@@ -54,7 +56,7 @@ type Query {
 
 type Mutation {
     addUser(username: String!, email: String!, password: String!): Auth
-    addOrder(products: [ID]!): Order
+    addOrder(orderData: OrderInput!): User
     login(email: String!, password: String!): Auth
     addProduct(name: String!, price: Float!, description: String!, category: ID!): Product
     createStore(storeName: String!, storeOwner: String!): Store

@@ -1,3 +1,20 @@
-const resolvers = {}
+const { User, Product, Store, Category } = require("../models");
+//import for JWT authentication
+const { signToken, AuthenticationError } = require("../utils/auth");
 
-module.exports = resolvers
+const resolvers = {
+  Query: {
+    exampleQuery: {},
+  },
+  Mutation: {
+    exampleMutation: {},
+    addUser: async (parent, args) => {
+      const user = await User.create(args);
+      const token = signToken(user);
+
+      return { token, user };
+    },
+  },
+};
+
+module.exports = resolvers;
