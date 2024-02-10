@@ -5,9 +5,9 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-	  <>
-	  	{/* TODO: Put content here */}
-	  </>
+    <>
+      {/* TODO: Put content here */}
+    </>
   );
 }
 export default App
