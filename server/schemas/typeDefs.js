@@ -49,7 +49,6 @@ type Query {
     products(category: ID, name: String): [Product]
     users: [User]
     user: User
-    order(_id: ID!): User
     categories: [Category]
     store(_id: ID!): Store
     stores: [Store]
