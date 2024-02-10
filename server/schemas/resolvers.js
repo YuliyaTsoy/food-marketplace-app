@@ -78,6 +78,15 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
+    addCategory: async (parent, { name }, context) => {
+      if (context.user) {
+        const newCategory = await Category.create({
+          name,
+        });
+        return newCategory;
+      }
+      throw AuthenticationError;
+    },
   },
 };
 
