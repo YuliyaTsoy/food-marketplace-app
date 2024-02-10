@@ -1,7 +1,7 @@
 import Nav from './Nav'
 
 function Header() {
-    <Nav />
+    return <Nav />
 }
 
 export default Header;
