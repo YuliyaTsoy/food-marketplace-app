@@ -20,51 +20,61 @@ db.once("open", async () => {
       name: "Carrots",
       price: 2.99,
       category: categories[0]._id,
+      description: "Description here",
     },
     {
       name: "Potatoes",
       price: 3.99,
       category: categories[0]._id,
+      description: "Description here",
     },
     {
       name: "Brussel Sprouts",
       price: 1.99,
       category: categories[0]._id,
+      description: "Description here",
     },
     {
       name: "Samosas",
       price: 6.99,
       category: categories[1]._id,
+      description: "Description here",
     },
     {
       name: "Empanadas",
       price: 7.99,
       category: categories[1]._id,
+      description: "Description here",
     },
     {
       name: "Fish Tacos",
       price: 17.52,
       category: categories[1]._id,
+      description: "Description here",
     },
     {
       name: "Canned Peas",
       price: 3.99,
       category: categories[2]._id,
+      description: "Description here",
     },
     {
       name: "Brisket",
       price: 13.99,
       category: categories[3]._id,
+      description: "Description here",
     },
     {
       name: "Homemade Mozzarella Cheese",
       price: 5.99,
       category: categories[4]._id,
+      description: "Description here",
     },
     {
       name: "Gouda",
       price: 4.99,
       category: categories[4]._id,
+      description: "Description here",
     },
   ]);
   await User.create({
