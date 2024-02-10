@@ -14,7 +14,7 @@ const resolvers = {
         return Product.find();
         },
     product: async (parent, { productId }) => {
-        return Product.findOne({ _id: productId });
+        return Product.findOne({ _id: productId }).populate ('category');
         },
     categories: async (parent, { categoryId }) => {
         return Category.find();
