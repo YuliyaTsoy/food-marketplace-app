@@ -1,7 +1,8 @@
-import { Fragment } from 'react'
-import { Disclosure, Menu, Transition } from '@headlessui/react'
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Disclosure } from '@headlessui/react'
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useLocation } from 'react-router-dom'
+//import logo 
+import logo from '../assets/logo.png'
 
 function NavBar() {
     const currentPage = useLocation().pathname
@@ -28,7 +29,7 @@ function NavBar() {
             {({ open }) => (
                 <>
                     <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-                        <div className="relative flex h-16 items-center justify-between">
+                        <div className="relative flex h-28 items-center justify-between">
                             <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                                 {/* Mobile menu button*/}
                                 <Disclosure.Button className={`relative inline-flex items-center justify-center rounded-md p-2 text-black hover:${colorPalette.hoverBg} hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white`}>
@@ -45,8 +46,8 @@ function NavBar() {
                                 {/* Company logo */}
                                 <div className="flex flex-shrink-0 items-center">
                                     <img
-                                        className="h-8 w-20"
-                                        src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                                        className="h-28 w-52"
+                                        src={logo}
                                         alt="Your Company"
                                     />
                                 </div>
