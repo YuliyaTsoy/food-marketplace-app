@@ -60,7 +60,15 @@ const resolvers = {
     addProduct: async (parent, args, context) => {
       if (context.user) {
         const product = await Product.create(args);
+        return product;
       }
+    },
+    // create store in db
+    createStore: async (parent, args, context) => {
+      if (context.user) {
+        return await Store.create(args);
+      }
+      throw AuthenticationError;
     },
   },
 };
