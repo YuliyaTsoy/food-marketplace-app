@@ -5,11 +5,18 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 const resolvers = {
   Query: {
     users: async () => {
-      return User.find();
-    },
+        return User.find();
+        },
     user: async (parent, { userId }) => {
       return User.findOne({ _id: userId });
-    },
+        },
+    products: async () => {
+        return Product.find();
+        },
+    product: async (parent, { productId }) => {
+        return Product.findOne({ _id: productId });
+        },
+    
   },
   Mutation: {
     // create user in db (signup)
@@ -53,7 +60,15 @@ const resolvers = {
     addProduct: async (parent, args, context) => {
       if (context.user) {
         const product = await Product.create(args);
+        return product;
       }
+    },
+    // create store in db
+    createStore: async (parent, args, context) => {
+      if (context.user) {
+        return await Store.create(args);
+      }
+      throw AuthenticationError;
     },
   },
 };
