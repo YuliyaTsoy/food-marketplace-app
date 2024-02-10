@@ -47,6 +47,7 @@ input OrderInput {
 type Query {
     product(_id: ID!): Product
     products(category: ID, name: String): [Product]
+    users: [User]
     user: User
     order(_id: ID!): User
     categories: [Category]
