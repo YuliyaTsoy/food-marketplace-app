@@ -48,7 +48,7 @@ type Query {
     product(_id: ID!): Product
     products(category: ID, name: String): [Product]
     user: User
-    order(_id: ID!): Order
+    order(_id: ID!): User
     categories: [Category]
     store(_id: ID!): Store
     stores: [Store]
