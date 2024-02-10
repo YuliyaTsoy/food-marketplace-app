@@ -34,11 +34,11 @@ function NavBar() {
                                     )}
                                 </Disclosure.Button>
                             </div>
-                            {/* Company logo */}
-                            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
+                            <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-between">
+                                {/* Company logo */}
                                 <div className="flex flex-shrink-0 items-center">
                                     <img
-                                        className="h-8 w-auto"
+                                        className="h-8 w-20"
                                         src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
                                         alt="Your Company"
                                     />
@@ -71,7 +71,8 @@ function NavBar() {
                     <Disclosure.Panel className="sm:hidden">
                         <div className="space-y-1 px-2 pb-3 pt-2">
                             {navigation.map((item) => {
-                                (
+                                item.href == currentPage ? item.current = true : item.current = false;
+                                return (
                                     <Disclosure.Button
                                         key={item.name}
                                         as="a"
@@ -80,7 +81,6 @@ function NavBar() {
                                             item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                                             'block rounded-md px-3 py-2 text-base font-medium'
                                         )}
-                                        aria-current={item.current ? 'page' : undefined}
                                     >
                                         <p className='text-center'> {item.name} </p>
                                     </Disclosure.Button>
