@@ -3,7 +3,18 @@ const { User, Product, Store, Category } = require("../models");
 const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
-  Query: {},
+  Query: {
+    me: async (parent, args, context) => {
+      
+        if (context.user) {
+          userData = await User.findOne({ _id: context.user._id }).select(
+            "-__v -password"
+          );
+          return userData;
+        }
+        throw  AuthenticationError;
+      },
+  },
   Mutation: {
     addUser: async (parent, args) => {
       const user = await User.create(args);
