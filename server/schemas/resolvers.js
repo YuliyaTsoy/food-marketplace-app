@@ -5,15 +5,8 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 const resolvers = {
   Query: {
     exampleQuery: {},
-    me: async (parent, args, context) => {
-      
-        if (context.user) {
-          userData = await User.findOne({ _id: context.user._id }).select(
-            "-__v -password"
-          );
-          return userData;
-        }
-        throw  AuthenticationError;
+    users: async (parent, { userId }) => {
+        return User.findOne({ _id: userId });
       },
   },
   Mutation: {
