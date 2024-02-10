@@ -77,6 +77,7 @@ db.once("open", async () => {
     username: "leonlemartin",
     email: "leon@lemartin.com",
     password: "supersecretpassword",
+    orders: [products[5]._id, products[2]._id, products[7]._id],
   });
 
   console.log("seed complete!");
