@@ -7,11 +7,11 @@ import './index.css'
 /*
 Uncomment imports as they are implemented
 
-import Login from './components/pages/Login'
-import Home from './components/pages/Home'
-import Store from './components/pages/Store'
-import Signup from './components/pages/Signup'
-import AddProduct from './components/pages/AddProduct'
+import Login from './pages/Login'
+import Home from './pages/Home'
+import Store from './pages/Store'
+import Signup from './pages/Signup'
+import AddProduct from './pages/AddProduct'
 
 */
 
