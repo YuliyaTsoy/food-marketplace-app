@@ -52,7 +52,6 @@ type Query {
     categories: [Category]
     store(_id: ID!): Store
     stores: [Store]
-    exampleQuery: String
 }
 
 type Mutation {
@@ -61,7 +60,6 @@ type Mutation {
     login(email: String!, password: String!): Auth
     addProduct(name: String!, price: Float!, description: String!, category: ID!): Product
     createStore(storeName: String!, storeOwner: String!): Store
-    exampleMutatation: String
 }
 
 `;
