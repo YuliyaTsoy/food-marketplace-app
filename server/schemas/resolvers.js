@@ -43,6 +43,11 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
+    addProduct: async (parent, args, context) => {
+      if (context.user) {
+        const product = await Product.create(args);
+      }
+    },
   },
 };
 
