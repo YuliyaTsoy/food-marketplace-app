@@ -27,6 +27,16 @@ const resolvers = {
 
       throw AuthenticationError;
     },
+    login: async (parent, { email, password }) => {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        throw AuthenticationError;
+      }
+
+      const token = signToken(user);
+      return { token, user };
+    },
   },
 };
 
