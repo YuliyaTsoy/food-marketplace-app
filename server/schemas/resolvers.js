@@ -20,7 +20,7 @@ const resolvers = {
       return Category.find();
     },
     store: async (parent, { storeId }) => {
-      return Store.findOne({ _id: storeId });
+      return Store.findOne({ _id: storeId }).populate('product');
     },
     stores: async () => {
       return Store.find();
