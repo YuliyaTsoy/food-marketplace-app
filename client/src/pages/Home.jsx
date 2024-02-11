@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef, useMemo } from 'react'
 import Filter from '../components/Filter'
 
 // dummy import of tomato image
-import Tomato from '../assets/tomato.jpg'
+import {Tomato} from '../assets/samplepics/index'
 
 // Title case a string. Guaranteed to work regardless of user input
 function titleCaseName(string) {

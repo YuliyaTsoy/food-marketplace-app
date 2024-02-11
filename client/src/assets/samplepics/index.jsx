@@ -9,6 +9,10 @@ import Empanadas from './empanadas.jpg'
 import Eggplant from './eggplant.jpg'
 import Carrots from './carrots.jpg'
 import BrusselSprouts from './brussel_sprouts.jpg'
+import CannedPeas from './canned_peas.jpg'
+import Brisket from './brisket.jpg'
+import Mozarella from './mozarella.jpg'
+import Gouda from './gouda.jpg'
 
 module.exports = {
   Tomato,
@@ -18,5 +22,9 @@ module.exports = {
   Empanadas,
   Eggplant,
   Carrots,
-  BrusselSprouts
+  BrusselSprouts,
+  CannedPeas,
+  Brisket,
+  Mozarella,
+  Gouda
 }
