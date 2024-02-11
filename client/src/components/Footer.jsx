@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer style={{backgroundColor: "red", height: '100px'}}>
+    <footer className="bg-red-200"style={{height: '100px'}}>
       <p style={{textAlign: "center", alignContent: "center"}}>This is a footer</p>
     </footer>
   )
