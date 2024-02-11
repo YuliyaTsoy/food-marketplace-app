@@ -4,24 +4,31 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
   Query: {
+    // find all users
     users: async () => {
       return User.find();
     },
+    // find one user by ID
     user: async (parent, { userId }) => {
       return User.findOne({ _id: userId }).populate('product');
     },
+    // find all products
     products: async () => {
       return Product.find();
     },
+    // find one product by ID
     product: async (parent, { productId }) => {
       return Product.findOne({ _id: productId }).populate('category');
     },
+    // find all categories
     categories: async () => {
       return Category.find();
     },
+    // find one store by ID
     store: async (parent, { storeId }) => {
       return Store.findOne({ _id: storeId }).populate('product');
     },
+    // find all stores
     stores: async () => {
       return Store.find();
     },
