@@ -12,10 +12,7 @@ const resolvers = {
     user: async (parent, { userId }) => {
       return User.findOne({ _id: userId })
       .populate('orders')
-      .populate({
-        path: 'orders',
-        populate: 'product'
-      });
+      .populate('store');
     },
     // find all products
     products: async () => {
