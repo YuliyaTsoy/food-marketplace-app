@@ -5,6 +5,5 @@ package-lock.json
 # For images
 *.jpg
 *.jpeg
-*.png
 *.gif
 *.svg
