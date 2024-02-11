@@ -1,3 +1,10 @@
 node_modules
 package-lock.json
 .env
+
+# For images
+*.jpg
+*.jpeg
+*.png
+*.gif
+*.svg
