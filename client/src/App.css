@@ -1,0 +1,28 @@
+.product-filter {
+  /*
+  Make the height of the filter tab as the height of the screen minus
+  the height of the header (7 rem) and the height of the footer (7 rem)
+  */
+  height: calc(100vh - 14rem);
+}
+
+.product-card {
+  margin: 10px;
+  
+}
+
+.product-picture-box img {
+  aspect-ratio: 1;
+  margin-top: 10px;
+  border-radius: 20px;
+  border-color: white;
+  width: calc(100%);
+  height: auto;
+}
+
+
+/* In case a user provides too long of a name we must check and deal with text overflow */
+h2, h3, h4 {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
