@@ -5,15 +5,6 @@ import Filter from '../components/Filter'
 // dummy import of tomato image
 import {Tomato} from '../assets/samplepics/index'
 
-<<<<<<< HEAD
-function Product() {
-    return (
-        <div className="product-card bg-red-200">
-            Hellooooo
-        </div>
-    )
-};
-=======
 // Title case a string. Guaranteed to work regardless of user input
 function titleCaseName(string) {
     const capWords = [];
@@ -51,7 +42,6 @@ class Product extends React.Component {
         )
     }
 }
->>>>>>> parent of 901d95d (Revert "Added sample pics, some minor styling, and a semi-functional Product component that currently lives in Home.jsx but probably will be refactored")
 
 export default function Home() {
     return (
