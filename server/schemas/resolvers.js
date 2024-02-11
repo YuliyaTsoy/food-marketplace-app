@@ -4,26 +4,38 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 
 const resolvers = {
   Query: {
+    // find all users
     users: async () => {
       return User.find();
     },
+    // find one user by ID
     user: async (parent, { userId }) => {
-      return User.findOne({ _id: userId });
+      return User.findOne({ _id: userId })
+      .populate('orders')
+      .populate('store');
     },
+    // find all products
     products: async () => {
       return Product.find();
     },
+    // find one product by ID
     product: async (parent, { productId }) => {
-      return Product.findOne({ _id: productId });
+      return Product.findOne({ _id: productId })
+      .populate('category')
+      .populate('store');
     },
-    category: async (parent, { categoryId }) => {
-      return Product.findOne({ _id: categoryId });
+    // find all categories
+    categories: async () => {
+      return Category.find();
     },
+    // find one store by ID
     store: async (parent, { storeId }) => {
-      return Product.findOne({ _id: storeId });
+      return Store.findOne({ _id: storeId })
+      .populate('product');
     },
+    // find all stores
     stores: async () => {
-      return Product.find();
+      return Store.find();
     },
   },
   Mutation: {
