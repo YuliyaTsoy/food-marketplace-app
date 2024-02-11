@@ -5,18 +5,26 @@ const { signToken, AuthenticationError } = require("../utils/auth");
 const resolvers = {
   Query: {
     users: async () => {
-        return User.find();
-        },
+      return User.find();
+    },
     user: async (parent, { userId }) => {
       return User.findOne({ _id: userId });
-        },
+    },
     products: async () => {
-        return Product.find();
-        },
+      return Product.find();
+    },
     product: async (parent, { productId }) => {
-        return Product.findOne({ _id: productId });
-        },
-    
+      return Product.findOne({ _id: productId });
+    },
+    category: async (parent, { categoryId }) => {
+      return Product.findOne({ _id: categoryId });
+    },
+    store: async (parent, { storeId }) => {
+      return Product.findOne({ _id: storeId });
+    },
+    stores: async () => {
+      return Product.find();
+    },
   },
   Mutation: {
     // create user in db (signup)
@@ -69,6 +77,12 @@ const resolvers = {
         return await Store.create(args);
       }
       throw AuthenticationError;
+    },
+    addCategory: async (parent, { name }, context) => {
+      const newCategory = await Category.create({
+        name,
+      });
+      return newCategory;
     },
   },
 };
