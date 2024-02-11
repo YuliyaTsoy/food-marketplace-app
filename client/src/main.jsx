@@ -11,7 +11,7 @@ import Home from './pages/Home'
 import Store from './pages/Store'
 import Signup from './pages/Signup'
 import AddProduct from './pages/AddProduct'
-
+import Product from './pages/Product'
 
 const router = createBrowserRouter([
   {
@@ -37,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: '/AddProduct',
         element: <AddProduct />
+      },
+      {
+        path: '/Product',
+        element: <Product />
       }
     ]
   }
