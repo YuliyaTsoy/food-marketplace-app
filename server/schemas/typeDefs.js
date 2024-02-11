@@ -52,6 +52,7 @@ type Query {
     categories: [Category]
     store(_id: ID!): Store
     stores: [Store]
+    myStore: User
 }
 
 type Mutation {

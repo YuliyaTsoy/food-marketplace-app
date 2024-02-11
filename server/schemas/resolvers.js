@@ -12,6 +12,18 @@ const resolvers = {
     user: async (parent, { userId }) => {
       return User.findOne({ _id: userId }).populate("orders").populate("store");
     },
+    // find my store (aka profile page)
+    myStore: async (parent, args, context) => {
+      if (context.user) {
+        const userData = await User.findOne({ _id: context.user._id })
+          .select("-__v -password")
+          .populate("store");
+
+        return userData;
+      }
+
+      throw AuthenticationError;
+    },
     // find all products
     products: async () => {
       return Product.find();
