@@ -14,6 +14,7 @@ function titleCaseName(string) {
     return capWords.join(' ');
 }
 
+
 class Product extends React.Component {
     constructor(props) {
         super(props);
@@ -24,19 +25,19 @@ class Product extends React.Component {
     render() {
         const {name, image, price, storeName} = this.props;
         return (
-            <div className="product-card bg-red-200 rounded-lg" ref={this.ref}>
+            <div className="product-card rounded-lg" ref={this.ref}>
                 <div className="product-picture-box">
                     <img
                     src={image}
                     alt={`Product image of ${name}`}
                     title={`Product image of ${name}`}
-                    loading="lazy" className="fit-picture" />
+                    loading="lazy" className="fit-picture mx-auto" />
                 </div>
                 <div className="product-description">
                     {/* price tag is trimmed down to 2 decimal points */}
-                    <h2 className="price-tag">{`$${price.toFixed(2)}`}</h2>
-                    <h3 className="product-name">{titleCaseName(name)}</h3>
-                    <h4 className="store-name">{storeName}</h4>
+                    <h2 className="price-tag font-bold">{`$${price.toFixed(2)}`}</h2>
+                    <h3 className="product-name text-xl">{titleCaseName(name)}</h3>
+                    <h4 className="store-name font-light">{storeName}</h4>
                 </div>
             </div>
         )
