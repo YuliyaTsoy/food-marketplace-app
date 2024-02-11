@@ -10,7 +10,12 @@ const resolvers = {
     },
     // find one user by ID
     user: async (parent, { userId }) => {
-      return User.findOne({ _id: userId }).populate('product').populate('store');
+      return User.findOne({ _id: userId })
+      .populate('orders')
+      .populate({
+        path: 'orders',
+        populate: 'product'
+      });
     },
     // find all products
     products: async () => {
@@ -18,7 +23,9 @@ const resolvers = {
     },
     // find one product by ID
     product: async (parent, { productId }) => {
-      return Product.findOne({ _id: productId }).populate('category').populate('store');
+      return Product.findOne({ _id: productId })
+      .populate('category')
+      .populate('store');
     },
     // find all categories
     categories: async () => {
@@ -26,7 +33,8 @@ const resolvers = {
     },
     // find one store by ID
     store: async (parent, { storeId }) => {
-      return Store.findOne({ _id: storeId }).populate('product');
+      return Store.findOne({ _id: storeId })
+      .populate('product');
     },
     // find all stores
     stores: async () => {
