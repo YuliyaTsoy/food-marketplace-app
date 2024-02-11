@@ -2,21 +2,31 @@
 .product-card {
   border: 5px solid rgb(153 27 27); /* equivalent to tailwind class: bg-red-800 */
   margin: 10px;
-  height: 200px;
-  width: 200px;
+  height: 250px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
 }
 
 .product-picture-box img {
+  aspect-ratio: 1/1;
   margin-top: 10px;
-  border-radius: 10px;
+  border-radius: 20px;
   border-color: white;
   border-width: 10px;
-  width: calc(70%);
-  height: calc(70%);
+  width: auto; /* calc(60) */
+  height: calc(60%);
+}
+
+.product-description {
+  display: flex;
+
+  white-space: nowwrap;
 }
 
 /* In case a user provides too long of a name we must check and deal with text overflow */
 h2, h3, h4 {
   overflow: hidden;
   text-overflow: ellipsis;
+  flex: 0 auto;
 }

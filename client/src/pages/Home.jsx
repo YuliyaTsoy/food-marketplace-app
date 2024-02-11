@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef, useMemo } from 'react'
 
 import Filter from '../components/Filter'
 
-// dummy import of tomato image
-import {Tomato} from '../assets/samplepics/index'
+// dummy imports
+import {Tomato, Samosa} from '../assets/samplepics/index'
 
 // Title case a string. Guaranteed to work regardless of user input
 function titleCaseName(string) {
@@ -25,21 +25,24 @@ class Product extends React.Component {
     render() {
         const {name, image, price, storeName} = this.props;
         return (
-            <div className="product-card rounded-lg" ref={this.ref}>
-                <div className="product-picture-box">
-                    <img
-                    src={image}
-                    alt={`Product image of ${name}`}
-                    title={`Product image of ${name}`}
-                    loading="lazy" className="fit-picture mx-auto" />
+            <article>
+                <div className="product-card rounded-lg" ref={this.ref}>
+                    <div className="product-picture-box">
+                        <img
+                        src={image}
+                        alt={`thumbnail of ${name}`}
+                        title="Click to see more product information"
+                        loading="lazy" className="fit-picture mx-auto" />
+                    </div>
+                    <div className="product-description ml-2.5 flex">
+                        {/* price tag is trimmed down to 2 decimal points */}
+                        <h2 className="price-tag font-bold">{`$${price.toFixed(2)}`}</h2>
+                        <h3 className="product-name text-xl">{titleCaseName(name)}</h3>
+                        <h4 className="store-name font-light">{storeName}</h4>
+                    </div>
                 </div>
-                <div className="product-description">
-                    {/* price tag is trimmed down to 2 decimal points */}
-                    <h2 className="price-tag font-bold">{`$${price.toFixed(2)}`}</h2>
-                    <h3 className="product-name text-xl">{titleCaseName(name)}</h3>
-                    <h4 className="store-name font-light">{storeName}</h4>
-                </div>
-            </div>
+            </article>
+
         )
     }
 }
@@ -50,6 +53,7 @@ export default function Home() {
             <Filter />
             <div className="grid gap-4 grid-cols-4">
                 <Product name="tomato" image={Tomato} price={432.891} storeName={"Luc's store"} />
+                <Product name="samosa" image={Samosa} price={12.32} storeName={"A store with way way too long of a name"} />
             </div>
         </div>
     );
