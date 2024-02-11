@@ -26,6 +26,12 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+//create new Apollo client using the httplink and headers created above 
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
+  cache: new InMemoryCache(),
+});
+
 function App() {
   return (
     <div className='content'>
