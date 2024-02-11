@@ -1,15 +1,5 @@
 
-.product-card {
-  border: 5px solid rgb(153 27 27); /* equivalent to tailwind class: bg-red-800 */
-  margin: 10px;
+div.product-card {
   height: 200px;
   width: 200px;
-}
-
-.product-picture-box img {
-  border-radius: 10px;
-  border-color: white;
-  border-width: 10px;
-  width: calc(70%);
-  height: calc(70%);
 }
