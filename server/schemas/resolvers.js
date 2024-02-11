@@ -17,13 +17,13 @@ const resolvers = {
       return Product.findOne({ _id: productId });
     },
     categories: async () => {
-      return Product.find();
+      return Category.find();
     },
     store: async (parent, { storeId }) => {
-      return Product.findOne({ _id: storeId });
+      return Store.findOne({ _id: storeId });
     },
     stores: async () => {
-      return Product.find();
+      return Store.find();
     },
   },
   Mutation: {
