@@ -2,7 +2,7 @@ import { Disclosure } from '@headlessui/react'
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useLocation } from 'react-router-dom'
 //import logo 
-import logo from '../assets/logo.png'
+import logo from '../assets/logo2.png'
 
 function NavBar() {
     const currentPage = useLocation().pathname
@@ -46,7 +46,7 @@ function NavBar() {
                                 {/* Company logo */}
                                 <div className="flex flex-shrink-0 items-center">
                                     <img
-                                        className="h-28 w-52"
+                                        className="h-24 w-52"
                                         src={logo}
                                         alt="Your Company"
                                     />
