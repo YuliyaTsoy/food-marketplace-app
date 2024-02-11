@@ -10,9 +10,7 @@ const resolvers = {
     },
     // find one user by ID
     user: async (parent, { userId }) => {
-      return User.findOne({ _id: userId })
-      .populate('orders')
-      .populate('store');
+      return User.findOne({ _id: userId }).populate("orders").populate("store");
     },
     // find all products
     products: async () => {
@@ -21,8 +19,8 @@ const resolvers = {
     // find one product by ID
     product: async (parent, { productId }) => {
       return Product.findOne({ _id: productId })
-      .populate('category')
-      .populate('store');
+        .populate("category")
+        .populate("store");
     },
     // find all categories
     categories: async () => {
@@ -30,8 +28,7 @@ const resolvers = {
     },
     // find one store by ID
     store: async (parent, { storeId }) => {
-      return Store.findOne({ _id: storeId })
-      .populate('product');
+      return Store.findOne({ _id: storeId }).populate("product");
     },
     // find all stores
     stores: async () => {
@@ -77,11 +74,21 @@ const resolvers = {
       return { token, user };
     },
     // add product to db
-    addProduct: async (parent, args, context) => {
+    addProduct: async (
+      parent,
+      { name, price, category, descripton },
+      context
+    ) => {
       if (context.user) {
-        const product = await Product.create(args);
+        const product = await Product.create({
+          name,
+          price,
+          category,
+          descripton,
+        });
         return product;
       }
+      throw AuthenticationError;
     },
     // create store in db
     createStore: async (parent, args, context) => {
