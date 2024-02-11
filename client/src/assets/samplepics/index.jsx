@@ -14,7 +14,7 @@ import Brisket from './brisket.jpg'
 import Mozarella from './mozarella.jpg'
 import Gouda from './gouda.jpg'
 
-module.exports = {
+export {
   Tomato,
   Samosa,
   Potatoes,
