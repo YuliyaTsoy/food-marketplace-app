@@ -8,6 +8,10 @@ export default function Login() {
 
     //set initial form state
     const [userFormData, setUserFormData] = useState({ email: '', password: '' })
+
+    //Error message for input validation
+    const [errorMessage, setErrorMessage] = useState({ email: '', password: '' })
+
     // color palette used in the page
     const colorPalette = {
         focus: 'ring-red-200',
@@ -23,6 +27,14 @@ export default function Login() {
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setUserFormData({ ...userFormData, [name]: value });
+        //check validity 
+        value === '' ? setErrorMessage({ ...errorMessage, [name]: 'cannot be empty' }) : setErrorMessage({ ...errorMessage, [name]: '' })
+
+        //check for validity for email
+        if (name === 'email') {
+            const regex = new RegExp("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/")
+            regex.test(value) ? setErrorMessage('') : setErrorMessage({ email: 'Please enter a valid email address' })
+        }
     };
 
     //handleformsubmit
@@ -59,7 +71,9 @@ export default function Login() {
                     onSubmit={handleFormSubmit}>
                     {/* email input */}
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+                        <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">
+                            Email address  <span style={{ color: 'red', fontWeight: 'lighter', fontStyle: 'italic' }}> {errorMessage.email}</span>
+                        </label>
                         <div className="mt-2">
                             <input id="email"
                                 name="email"
@@ -74,7 +88,8 @@ export default function Login() {
                     {/* password */}
                     <div>
                         <div className="flex items-center justify-between">
-                            <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Password</label>
+                            <label htmlFor="password" className="block text-sm font-medium leading-6 text-gray-900">Password
+                                <span style={{ color: 'red', fontWeight: 'lighter', fontStyle: 'italic' }}> {errorMessage.password}</span></label>
                         </div>
                         <div className="mt-2">
                             <input id="password"
