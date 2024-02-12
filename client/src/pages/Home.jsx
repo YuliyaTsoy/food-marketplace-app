@@ -2,18 +2,10 @@ import React, { useState, useEffect, useRef, useMemo } from 'react'
 
 import Filter from '../components/Filter'
 
+import { titleCaseString } from '../utils/strings';
+
 // dummy imports
 import {Tomato, Samosa, Potatoes, FishTacos} from '../assets/samplepics/index'
-
-// Title case a string. Guaranteed to work regardless of user input
-function titleCaseName(string) {
-    const capWords = [];
-    for (const word of string.split(' ')) {
-        capWords.push(word.substring(0, 1).toUpperCase() + word.substring(1).toLowerCase());
-    }
-    return capWords.join(' ');
-}
-
 
 class Product extends React.Component {
     constructor(props) {
@@ -36,7 +28,7 @@ class Product extends React.Component {
                     <div className="product-description ml-2.5">
                         {/* price tag is trimmed down to 2 decimal points */}
                         <h2 className="price-tag font-bold">{`$${price.toFixed(2)}`}</h2>
-                        <h3 className="product-name text-xl">{titleCaseName(name)}</h3>
+                        <h3 className="product-name text-xl">{titleCaseString(name)}</h3>
                         <h4 className="store-name font-light">{storeName}</h4>
                     </div>
                 </div>

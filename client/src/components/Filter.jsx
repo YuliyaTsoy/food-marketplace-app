@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { titleCaseString } from "../utils/strings";
+
 const initialCategoryFilter = {
 	cannedGoods: false,
 	dairy: false,
@@ -51,8 +53,6 @@ function Filter() {
 		}
 
 		setPriceRange([min, max]);
-
-		console.log('current price range is -> ', priceRange);
 	}
 
 	function clearFilters() {
@@ -86,6 +86,18 @@ function Filter() {
 		}));
 	}
 
+	// refactor this pattern into a single component for easier editing
+	function CategoryCheckbox(props) {
+		const checkboxText = titleCaseString(props.id.split('search-')[1].replace('-', ' '));
+		return (
+			<div className="filter-checkbox-container">
+				<input type="checkbox" id={props.id} name={props.name} onClick={toggleCategoryFilter}/>
+				<label htmlFor={props.id}>{checkboxText}</label>
+			</div>	
+		)
+	}
+	
+
 	return (
 		<aside className="product-filter w-1/6 bg-red-200">
 			<div className="flex space-x-4">
@@ -96,30 +108,12 @@ function Filter() {
 			</div>
 			<hr />
 			<div className="filter-categories">
-				<div className="filter-checkbox-container">
-					<input type="checkbox" id="search-canned-goods" name="cannedGoods" className="rounded-circle" onClick={toggleCategoryFilter}/>
-					<label htmlFor="search-canned-goods">Canned Goods</label>
-				</div>
-				<div className="filter-checkbox-container">
-					<input type="checkbox" id="search-dairy" name="dairy" onClick={toggleCategoryFilter}/>
-					<label htmlFor="search-dairy">Dairy</label>
-				</div>
-				<div className="filter-checkbox-container">
-					<input type="checkbox" id="search-fruit" name="fruits" onClick={toggleCategoryFilter}/>
-					<label htmlFor="search-fruit">Fruits</label>
-				</div>
-				<div className="filter-checkbox-container">
-					<input type="checkbox" id="search-meat" name="meat" onClick={toggleCategoryFilter}/>
-					<label htmlFor="search-meat">Meat</label>
-				</div>
-				<div className="filter-checkbox-container">
-					<input type="checkbox" id="search-prepared-goods" name="preparedGoods" onClick={toggleCategoryFilter}/>
-					<label htmlFor="search-prepared-goods">Prepared Goods</label>
-				</div>
-				<div className="filter-checkbox-container">
-					<input type="checkbox" id="search-vegetables" name="vegetables" onClick={toggleCategoryFilter}/>
-					<label htmlFor="search-vegetables">Vegetables</label>
-				</div>
+				<CategoryCheckbox id="search-canned-goods" name="cannedGoods" />
+				<CategoryCheckbox id="search-dairy" name="dairy" />
+				<CategoryCheckbox id="search-fruit" name="fruits" />
+				<CategoryCheckbox id="search-meat" name="meat" />
+				<CategoryCheckbox id="search-prepared-goods" name="preparedGoods" />
+				<CategoryCheckbox id="search-vegetables" name="vegetables" />
 			</div>
 			<hr />
 			<div>
