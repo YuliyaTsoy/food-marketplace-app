@@ -32,7 +32,7 @@ export default function Login() {
 
         //check for validity for email
         if (name === 'email') {
-            const regex = new RegExp("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/")
+            const regex = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$")
             regex.test(value) ? setErrorMessage('') : setErrorMessage({ email: 'Please enter a valid email address' })
         }
     };

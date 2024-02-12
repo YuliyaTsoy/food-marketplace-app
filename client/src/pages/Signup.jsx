@@ -30,7 +30,7 @@ function Signup() {
 
         //check for validity for email
         if (name === 'email') {
-            const regex = new RegExp("/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/")
+            const regex = new RegExp("^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$")
             regex.test(value) ? setErrorMessage('') : setErrorMessage({ email: 'Please enter a valid email address' })
         }
 
@@ -39,7 +39,6 @@ function Signup() {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
         console.log("form info: ", userFormData);
-
         //create user using mutation
 
         try {
@@ -152,7 +151,7 @@ function Signup() {
                     <div>
                         <button
                             type="submit"
-                            disabled={!(userFormData.username && userFormData.email && userFormData.password && userFormData.storeName)}
+                            // disabled={!(userFormData.username && userFormData.email && userFormData.password && userFormData.storeName)}
                             className="flex w-full justify-center rounded-md bg-red-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                             Sign in</button>
                     </div>
