@@ -1,15 +1,16 @@
 .product-filter {
   /*
   Make the height of the filter tab as the height of the screen minus
-  the height of the header (7 rem) and the height of the footer (7 rem)
+  the height of the header (7 rem), the height of the footer (7 rem),
+  the height of the filter's margin-top (2.5 rem), and the height of
+  the filter's margin-bottom (2.5 rem)
   */
-  /* height: calc(100vh - 14rem); */
-  height: calc(90vh - 14rem);
+  height: calc(100vh - 19rem);
   min-width: 175px;
 }
 
 .product-card {
-  margin: 10px;
+  margin: 20px;
   
 }
 :root {

@@ -21,8 +21,6 @@ function Filter() {
 	const [priceRange, setPriceRange] = useState(initialPriceRange);
 
 	function handlePriceRange(props) {
-		console.log('props -> ', props);
-
 		let { id, value } = props.target;
 
 		// If input contains non-numeric characters, get rid of them
@@ -66,7 +64,6 @@ function Filter() {
 	}
 
 	const toggleCategoryFilter = (e) => {
-		console.log("This button is checked: ", e.target);
 		const { name } = e.target;
 
 		const currFilter = filters[name];
@@ -87,9 +84,9 @@ function Filter() {
 	}
 
 	return (
-		<aside className="product-filter w-1/6 bg-red-200">
+		<aside className="product-filter w-1/6 bg-red-200 rounded my-10">
 			<div>
-			<div className="flex space-x-4">
+			<div className="flex space-x-4 mt-2.5">
 				<span className="text-center">Filters ({filterCount})</span>
 				<button className="bg-red-800 text-white rounded" onClick={clearFilters}>
 					<span>Clear filters</span>
@@ -110,13 +107,12 @@ function Filter() {
 			<hr />
 			<div>
 				<h3 className="font-bold my-2.5">Filter by Price</h3>
-				<div className="filter-price space-x-2.5 justify-center">
+				<div className="filter-price flex flex-col content-start space-y-2.5">
 					<div className="flex flex-col">
 						<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="0" id="min-price-filter" className="price-input flex-col" onChange={handlePriceRange}/>
 						<label htmlFor="min-price-filter">Min price</label>
 					</div>
-					<span>to</span>
-					<div>
+					<div className="flex flex-col">
 						<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="no limit" id="max-price-filter" className="price-input" onChange={handlePriceRange}/>
 						<label htmlFor="max-price-filter">Max price</label>
 					</div>
