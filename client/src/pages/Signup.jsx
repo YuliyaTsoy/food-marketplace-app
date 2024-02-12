@@ -3,6 +3,7 @@ import { useState } from 'react'
 function Signup() {
     //set initial form state
     const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '', storeName: '' })
+    // color palette used in the page
     const colorPalette = {
         focus: 'ring-red-200',
         text: 'text-black-300',
@@ -10,7 +11,7 @@ function Signup() {
         currentBg: 'bg-red-800'
     }
 
-    //handle input changes
+    //handle input changes for all inputs 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setUserFormData({ ...userFormData, [name]: value });
