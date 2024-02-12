@@ -56,7 +56,6 @@ const resolvers = {
     },
     // add order to user ("checkout")
     addOrder: async (parent, { productId }, context) => {
-      console.log(context.user);
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
           context.user._id,
