@@ -24,7 +24,9 @@ export default function Product() {
             Description: Lorem ipsum, dolor sit amet consectetur adipisicing
             elit.
           </p>
-         
+          <button className="bg-red-300 cursor-pointer hover:text-white rounded-full ml-10 mb-3 px-5 py-2">
+            Add to store
+          </button>
         </div>
       </div>
     </>
