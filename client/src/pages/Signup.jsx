@@ -35,7 +35,8 @@ function Signup() {
                 variables: { ...userFormData }
             });
             //login user just created 
-            Auth.login(data.createUser.token)
+            console.log(data)
+            // Auth.login(data.createUser.token)
         }
         catch (err) {
             console.error(err)
