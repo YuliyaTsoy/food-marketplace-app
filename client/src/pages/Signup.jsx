@@ -17,6 +17,10 @@ function Signup() {
         setUserFormData({ ...userFormData, [name]: value });
     }
 
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+    }
+
     return (<div className="container">
         <h1>this is the signup page</h1>
 
@@ -28,7 +32,8 @@ function Signup() {
 
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                <form className="space-y-6">
+                <form className="space-y-6"
+                    onSubmit={handleFormSubmit}>
                     {/* username */}
                     <div>
                         <label htmlFor="username" className="block text-sm font-medium leading-6 text-gray-900">Username</label>
