@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { ADD_USER } from '../utils/mutations'
-import Auth from '../utils/auth'
+// import Auth from '../utils/auth';
 
 
 function Signup() {
@@ -26,7 +26,28 @@ function Signup() {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
-        console.log("clicked sign in button")
+        console.log(userFormData);
+
+        //create user using mutation
+
+        // try {
+        //     const { data } = await createUser({
+        //         variables: { ...userFormData }
+        //     })
+        // }
+        // catch (err) {
+        //     console.error(err)
+        // }
+
+        //clear form
+        setUserFormData({
+            username: '',
+            email: '',
+            storeName: '',
+            password: ''
+        })
+        
+        //redirect user to their store 
     }
 
     return (<div className="container">
