@@ -40,6 +40,10 @@ h2, h3, h4 {
   padding-left: 1.5em;
 }
 
+.filter-price {
+  height: 100px;
+}
+
 .price-input {
   max-width: 80%;
   border-radius: 5%;
