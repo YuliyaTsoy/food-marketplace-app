@@ -15,6 +15,13 @@ type Store {
     products: [Product]
 }
 
+type Image {
+    _id: ID
+    name: String!
+    type: String!
+    data: String!
+}
+
 type Product {
     _id: ID
     name: String
