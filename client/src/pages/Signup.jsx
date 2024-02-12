@@ -1,4 +1,8 @@
 import { useState } from 'react'
+import { useMutation } from '@apollo/client'
+import { ADD_USER } from '../utils/mutations'
+import Auth from '../utils/auth'
+
 
 function Signup() {
     //set initial form state
@@ -9,7 +13,10 @@ function Signup() {
         text: 'text-black-300',
         hoverBg: 'bg-red-300',
         currentBg: 'bg-red-800'
-    }
+    };
+
+    //bring mutation to create user
+    const [createUser, { error, data }] = useMutation(ADD_USER)
 
     //handle input changes for all inputs 
     const handleInputChange = (event) => {
@@ -19,6 +26,7 @@ function Signup() {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+        console.log("clicked sign in button")
     }
 
     return (<div className="container">
