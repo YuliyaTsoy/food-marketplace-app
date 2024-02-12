@@ -35,7 +35,6 @@ export const LOGIN_USER = gql`
           name
           price
           store {
-            _id
             storeName
           }
         }
@@ -79,7 +78,6 @@ export const ADD_USER = gql`
           name
           price
           store {
-            _id
             storeName
           }
         }
@@ -104,7 +102,6 @@ export const ADD_ORDER = gql`
         }
       }
       store {
-        _id
         storeName
       }
     }
