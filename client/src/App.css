@@ -3,7 +3,9 @@
   Make the height of the filter tab as the height of the screen minus
   the height of the header (7 rem) and the height of the footer (7 rem)
   */
-  height: calc(100vh - 14rem);
+  /* height: calc(100vh - 14rem); */
+  height: calc(90vh - 14rem);
+  min-width: 175px;
 }
 
 .product-card {
@@ -25,4 +27,17 @@
 h2, h3, h4 {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.filter-checkbox-container > input {
+  border-radius: 50%;
+}
+
+.filter-checkbox-container > label {
+  padding-left: 1.5em;
+}
+
+.price-input {
+  max-width: 40%;
+  border-radius: 10%;
 }
