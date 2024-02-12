@@ -13,6 +13,13 @@ type Store {
     products: [Product]
 }
 
+type Image {
+    _id: ID
+    name: String!
+    type: String!
+    data: String!
+}
+
 type Product {
     _id: ID
     name: String
@@ -50,6 +57,7 @@ type Mutation {
     login(email: String!, password: String!): Auth
     addProduct(name: String!, price: Float!, description: String!, category: ID!): Product
     addCategory(name: String!): Category
+    uploadImage(name: String, type: String, data: String): Image
     updateProduct(_id: ID!, name: String!, price: Float!, description: String!, category: ID!): Product
 }
 
