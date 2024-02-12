@@ -94,39 +94,45 @@ function Filter() {
 			</button>
 			<hr />
 			<div className="filter-categories">
-				<div>
-					<input type="checkbox" id="search-canned-goods" name="cannedGoods" onClick={toggleCategoryFilter}/>
+				<div className="filter-checkbox-container">
+					<input type="checkbox" id="search-canned-goods" name="cannedGoods" className="rounded-circle" onClick={toggleCategoryFilter}/>
 					<label htmlFor="search-canned-goods">Canned Goods</label>
 				</div>
-				<div>
+				<div className="filter-checkbox-container">
 					<input type="checkbox" id="search-dairy" name="dairy" onClick={toggleCategoryFilter}/>
 					<label htmlFor="search-dairy">Dairy</label>
 				</div>
-				<div>
+				<div className="filter-checkbox-container">
 					<input type="checkbox" id="search-fruit" name="fruits" onClick={toggleCategoryFilter}/>
 					<label htmlFor="search-fruit">Fruits</label>
 				</div>
-				<div>
+				<div className="filter-checkbox-container">
 					<input type="checkbox" id="search-meat" name="meat" onClick={toggleCategoryFilter}/>
 					<label htmlFor="search-meat">Meat</label>
 				</div>
-				<div>
+				<div className="filter-checkbox-container">
 					<input type="checkbox" id="search-prepared-goods" name="preparedGoods" onClick={toggleCategoryFilter}/>
 					<label htmlFor="search-prepared-goods">Prepared Goods</label>
 				</div>
-				<div>
+				<div className="filter-checkbox-container">
 					<input type="checkbox" id="search-vegetables" name="vegetables" onClick={toggleCategoryFilter}/>
 					<label htmlFor="search-vegetables">Vegetables</label>
 				</div>
 			</div>
 			<hr />
-			<div className="filter-price">
-				<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="0" id="min-price-filter" className="price-input" onChange={handlePriceRange}/>
-				<label htmlFor="min-price-filter">Min price</label>
-				<span>to</span>
-				<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="no limit" id="max-price-filter" className="price-input" onChange={handlePriceRange}/>
-				<label htmlFor="max-price-filter">Max price</label>
+			<div>
+				<div className="filter-price flex">
+					<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="0" id="min-price-filter" className="price-input" onChange={handlePriceRange}/>
+					<span>to</span>
+					<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="no limit" id="max-price-filter" className="price-input" onChange={handlePriceRange}/>
+				</div>
+				<div className="flex">
+					<label htmlFor="min-price-filter">Min price</label>
+					<span>to</span>
+					<label htmlFor="max-price-filter">Max price</label>
+				</div>
 			</div>
+
 
 		</aside>
 	)
