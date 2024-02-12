@@ -1,4 +1,4 @@
-const { User, Product, Store, Category, Image } = require("../models");
+const { User, Product, Category, Image } = require("../models");
 //import for JWT authentication
 const { signToken, AuthenticationError } = require("../utils/auth");
 
@@ -10,14 +10,14 @@ const resolvers = {
     },
     // find one user by ID
     user: async (parent, { userId }) => {
-      return User.findOne({ _id: userId }).populate("orders").populate("store");
+      return User.findOne({ _id: userId }).populate("orders");
     },
     // find my store (aka profile page)
     myStore: async (parent, args, context) => {
       if (context.user) {
-        const userData = await User.findOne({ _id: context.user._id })
-          .select("-__v -password")
-          .populate("store");
+        const userData = await User.findOne({ _id: context.user._id }).select(
+          "-__v -password"
+        );
 
         return userData;
       }
@@ -30,21 +30,11 @@ const resolvers = {
     },
     // find one product by ID
     product: async (parent, { productId }) => {
-      return Product.findOne({ _id: productId })
-        .populate("category")
-        .populate("store");
+      return Product.findOne({ _id: productId }).populate("category");
     },
     // find all categories
     categories: async () => {
       return Category.find();
-    },
-    // find one store by ID
-    store: async (parent, { storeId }) => {
-      return Store.findOne({ _id: storeId }).populate("product");
-    },
-    // find all stores
-    stores: async () => {
-      return Store.find();
     },
   },
   Mutation: {
@@ -62,8 +52,13 @@ const resolvers = {
       throw AuthenticationError;
     },
     // create user in db (signup)
-    addUser: async (parent, args) => {
-      const user = await User.create(args);
+    addUser: async (parent, { username, email, password, storeName }) => {
+      const user = await User.create({
+        username,
+        email,
+        password,
+        store: { storeName },
+      });
       const token = signToken(user);
       return { token, user };
     },
@@ -115,18 +110,27 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    // create store in db
-    createStore: async (parent, args, context) => {
-      if (context.user) {
-        return await Store.create(args);
-      }
-      throw AuthenticationError;
-    },
     addCategory: async (parent, { name }, context) => {
       const newCategory = await Category.create({
         name,
       });
       return newCategory;
+    },
+    updateProduct: async (
+      parent,
+      { _id, name, price, description, category, imageId }
+    ) => {
+      return await Product.findByIdAndUpdate(
+        _id,
+        {
+          name: name,
+          price: price,
+          description: description,
+          category: category,
+          image: imageId,
+        },
+        { new: true }
+      );
     },
   },
 };
