@@ -12,7 +12,11 @@
   margin: 10px;
   
 }
-
+:root {
+  /* Grabbed these color defs from tailwind. Sometimes I need them here */
+  --bg-red-200: rgb(254 202 202);
+  --bg-red-800: rgb(153 27 27);
+}
 .product-picture-box img {
   aspect-ratio: 1;
   margin-top: 10px;
@@ -40,4 +44,13 @@ h2, h3, h4 {
 .price-input {
   max-width: 40%;
   border-radius: 10%;
+}
+
+aside > hr {
+  width: 80%;
+  border: solid 1px var(--bg-red-800);
+  margin: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
 }
