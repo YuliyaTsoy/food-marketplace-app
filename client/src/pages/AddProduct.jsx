@@ -1,3 +1,9 @@
+import ImageUploadDragOver from "../components/ImageUploadDragOver"
+
 export default function AddProduct() {
-    return <div></div>
+    return (
+        <div>
+            <ImageUploadDragOver />
+        </div>
+    )
 }
