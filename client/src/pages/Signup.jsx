@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { ADD_USER } from '../utils/mutations'
-import Auth  from '../utils/auth';
+import Auth from '../utils/auth';
 
 
 function Signup() {
@@ -30,14 +30,16 @@ function Signup() {
 
         //create user using mutation
 
-        // try {
-        //     const { data } = await createUser({
-        //         variables: { ...userFormData }
-        //     })
-        // }
-        // catch (err) {
-        //     console.error(err)
-        // }
+        try {
+            const { data } = await createUser({
+                variables: { ...userFormData }
+            });
+            //login user just created 
+            Auth.login(data.createUser.token)
+        }
+        catch (err) {
+            console.error(err)
+        }
 
         //clear form
         setUserFormData({
@@ -47,7 +49,6 @@ function Signup() {
             password: ''
         })
 
-        //redirect user to their store 
     }
 
     return (<div className="container">
