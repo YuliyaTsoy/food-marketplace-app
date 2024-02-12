@@ -107,6 +107,9 @@ function Filter() {
 				</button>
 			</div>
 			<hr />
+			<div>
+				<h3 className="font-bold my-2.5">Product Categories</h3>
+			</div>
 			<div className="filter-categories">
 				<CategoryCheckbox id="search-canned-goods" name="cannedGoods" />
 				<CategoryCheckbox id="search-dairy" name="dairy" />
@@ -117,12 +120,12 @@ function Filter() {
 			</div>
 			<hr />
 			<div>
-				<div className="filter-price flex">
+				<div className="filter-price flex space-x-2.5 px-2.5">
 					<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="0" id="min-price-filter" className="price-input" onChange={handlePriceRange}/>
 					<span>to</span>
 					<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="no limit" id="max-price-filter" className="price-input" onChange={handlePriceRange}/>
 				</div>
-				<div className="flex">
+				<div className="flex space-x-2.5">
 					<label htmlFor="min-price-filter">Min price</label>
 					<span>to</span>
 					<label htmlFor="max-price-filter">Max price</label>
