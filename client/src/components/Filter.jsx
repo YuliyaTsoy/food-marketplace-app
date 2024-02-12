@@ -9,9 +9,51 @@ const initialCategoryFilter = {
 	vegetables: false
 }
 
+// Infinity is technically not a number but it is guaranteed to be bigger
+// than ANY price set for a product
+const initialPriceRange = [0, Infinity];
+
 function Filter() {
 	const [filterCount, setFilterCount] = useState(0);
 	const [filters, setFilters] = useState(initialCategoryFilter);
+
+	const [priceRange, setPriceRange] = useState(initialPriceRange);
+
+	function handlePriceRange(props) {
+		console.log('props -> ', props);
+
+		let { id, value } = props.target;
+
+		// If input contains non-numeric characters, get rid of them
+		if (props.target.validity.patternMismatch) {
+			value = value.replace(/\D/g, "");
+		}
+
+		// Up until this point 'value' is a String
+		// value = Number.parseFloat(value);
+		value = Number.parseInt(value);
+
+		// If min/max is not set -> pull currently cached value
+		// If min/max is set     -> set to 0 (if negative) otherwise the value is unchanged
+		let min, max;
+		if (id === "min-price-filter") {
+			min = value ? Math.max(value, 0) : priceRange[0];
+			max = priceRange[1];
+		} else {
+			min = priceRange[0];
+			max = value ? Math.max(value, 0) : priceRange[1]
+		}
+
+		if (max < min) {
+			const temp = max;
+			max = min;
+			min = temp;
+		}
+
+		setPriceRange([min, max]);
+
+		console.log('current price range is -> ', priceRange);
+	}
 
 	function clearFilters() {
 		setFilters(initialCategoryFilter);
@@ -76,6 +118,14 @@ function Filter() {
 					<input type="checkbox" id="search-vegetables" name="vegetables" onClick={toggleCategoryFilter}/>
 					<label htmlFor="search-vegetables">Vegetables</label>
 				</div>
+			</div>
+			<hr />
+			<div className="filter-price">
+				<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="0" id="min-price-filter" className="price-input" onChange={handlePriceRange}/>
+				<label htmlFor="min-price-filter">Min price</label>
+				<span>to</span>
+				<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="no limit" id="max-price-filter" className="price-input" onChange={handlePriceRange}/>
+				<label htmlFor="max-price-filter">Max price</label>
 			</div>
 
 		</aside>
