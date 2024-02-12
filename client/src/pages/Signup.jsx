@@ -32,7 +32,7 @@ function Signup() {
 
         try {
             const { data } = await createUser({
-                variables: { username: 'Bono', email: 'test@email.com', password: '123456' }
+                variables: { username: 'Bono', email: 'test@email.com', password: '123456', storeName: 'myCoolStore' }
             });
             //login user just created 
             console.log("created user data: ", data)

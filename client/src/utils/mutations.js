@@ -44,44 +44,9 @@ export const LOGIN_USER = gql`
 `;
 
 export const ADD_USER = gql`
-  mutation AddUser($username: String!, $password: String!, $email: String!) {
-    addUser(username: $username, password: $password, email: $email) {
+mutation AddUser($username: String!, $email: String!, $password: String!, $storeName: String!) {
+    addUser(username: $username, email: $email, password: $password, storeName: $storeName) {
       token
-      user {
-        _id
-        username
-        store {
-          _id
-          storeName
-          products {
-            _id
-            category {
-              _id
-              name
-            }
-            dateListed
-            description
-            image
-            name
-            price
-          }
-        }
-        orders {
-          _id
-          category {
-            _id
-            name
-          }
-          dateListed
-          description
-          image
-          name
-          price
-          store {
-            storeName
-          }
-        }
-      }
     }
   }
 `;
