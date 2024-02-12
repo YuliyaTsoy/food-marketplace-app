@@ -50,6 +50,7 @@ type Mutation {
     login(email: String!, password: String!): Auth
     addProduct(name: String!, price: Float!, description: String!, category: ID!): Product
     addCategory(name: String!): Category
+    updateProduct(_id: ID!, name: String!, price: Float!, description: String!, category: ID!): Product
 }
 
 `;
