@@ -25,11 +25,14 @@ class Product extends React.Component {
                         title="Click to see more product information"
                         loading="lazy" className="fit-picture mx-auto" />
                     </div>
-                    <div className="product-description ml-2.5">
+                    <div
+                    className="product-description ml-2.5"
+                    title={`${name} sold by "${storeName}"`}
+                    >
                         {/* price tag is trimmed down to 2 decimal points */}
                         <h2 className="price-tag font-bold">{`$${price.toFixed(2)}`}</h2>
-                        <h3 className="product-name text-xl">{titleCaseString(name)}</h3>
-                        <h4 className="store-name font-light">{storeName}</h4>
+                        <h3 className="product-name text-xl line-clamp-1">{titleCaseString(name)}</h3>
+                        <h4 className="store-name font-light line-clamp-1">{storeName}</h4>
                     </div>
                 </div>
         )

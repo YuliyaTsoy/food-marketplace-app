@@ -26,7 +26,11 @@
   height: auto;
 }
 
-/* In case a user provides too long of a name we must check and deal with text overflow */
+/*
+In case a user provides too long of a name we must check and deal with text
+overflow. Combined with tailwind's line-clamp-1 class to force product names
+and store names onto one line.
+*/
 h2, h3, h4 {
   overflow: hidden;
   text-overflow: ellipsis;
@@ -37,8 +41,8 @@ h2, h3, h4 {
 }
 
 .price-input {
-  max-width: 40%;
-  border-radius: 10%;
+  max-width: 80%;
+  border-radius: 5%;
 }
 
 aside > div > hr {

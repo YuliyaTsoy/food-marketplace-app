@@ -109,19 +109,19 @@ function Filter() {
 			</div>
 			<hr />
 			<div>
-				<div className="filter-price flex space-x-2.5 px-2.5">
-					<div className="flex grow flex-col">
-						<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="0" id="min-price-filter" className="price-input" onChange={handlePriceRange}/>
+				<h3 className="font-bold my-2.5">Filter by Price</h3>
+				<div className="filter-price flex space-x-2.5 flex-col justify-center">
+					<div className="flex-col">
+						<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="0" id="min-price-filter" className="price-input flex grow" onChange={handlePriceRange}/>
 						<label htmlFor="min-price-filter">Min price</label>
 					</div>
-					<span>to</span>
-					<div className="flex grow flex-col">
-						<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="no limit" id="max-price-filter" className="price-input" onChange={handlePriceRange}/>
+					<span className="flex">to</span>
+					<div className="flex-col">
+						<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="no limit" id="max-price-filter" className="price-input flex grow" onChange={handlePriceRange}/>
 						<label htmlFor="max-price-filter">Max price</label>
 					</div>
 				</div>
 			</div>
-
 			</div>
 		</aside>
 	)
