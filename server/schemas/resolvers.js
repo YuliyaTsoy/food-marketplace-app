@@ -54,12 +54,13 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    // add order to user (checkout)
-    addOrder: async (parent, { orderData }, context) => {
+    // add order to user ("checkout")
+    addOrder: async (parent, { productId }, context) => {
+      console.log(context.user);
       if (context.user) {
         const updatedUser = await User.findByIdAndUpdate(
-          { _id: context.user._id },
-          { $push: { orders: orderData } },
+          context.user._id,
+          { $push: { orders: productId } },
           { new: true }
         );
 
