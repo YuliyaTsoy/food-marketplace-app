@@ -27,15 +27,31 @@ export default function Login() {
 
     //handleformsubmit
     const handleFormSubmit = async (event) => {
-        event.prevent.default();
-    }
+        event.preventDefault();
 
+        //login user mutation and Auth
+        try {
+            const { data } = await loginUser({
+                variables: { ...userFormData }
+            });
+
+
+            Auth.login(data.login.token);
+        } catch (err) {
+            console.error(err);
+        }
+
+        setUserFormData({
+            email: '',
+            password: '',
+        });
+    }
 
     return (
 
         <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
             <div className="sm:mx-auto sm:w-full sm:max-w-sm">
-                <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign into your account</h2>
+                <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Login to your account</h2>
             </div>
 
             <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
@@ -52,7 +68,7 @@ export default function Login() {
                                 onChange={handleInputChange}
                                 value={userFormData.email}
                                 required
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
                     </div>
                     {/* password */}
@@ -68,15 +84,15 @@ export default function Login() {
                                 value={userFormData.password}
                                 autoComplete="current-password"
                                 required
-                                className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
+                                className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
                     </div>
                     <div>
                         <button
                             type="submit"
-                            disabled={!(userFormData.username && userFormData.email && userFormData.password)}
+                            disabled={!(userFormData.email && userFormData.password)}
                             className="flex w-full justify-center rounded-md bg-red-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                            Sign in</button>
+                            Login</button>
                     </div>
                 </form>
 
@@ -89,4 +105,4 @@ export default function Login() {
             </div>
         </div >
     )
-};
+}
