@@ -87,11 +87,13 @@ function Filter() {
 	}
 
 	return (
-		<aside className="product-filter w-1/6 bg-red-800">
-			<span>Filters ({filterCount})</span>
-			<button onClick={clearFilters}>
-				<span>Clear filters</span>
-			</button>
+		<aside className="product-filter w-1/6 bg-red-200">
+			<div className="flex space-x-4">
+				<span className="text-center">Filters ({filterCount})</span>
+				<button className="bg-red-800 text-white rounded" onClick={clearFilters}>
+					<span>Clear filters</span>
+				</button>
+			</div>
 			<hr />
 			<div className="filter-categories">
 				<div className="filter-checkbox-container">
