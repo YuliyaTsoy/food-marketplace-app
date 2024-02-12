@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { useMutation } from '@apollo/client'
 import { ADD_USER } from '../utils/mutations'
-// import Auth from '../utils/auth';
+import Auth  from '../utils/auth';
 
 
 function Signup() {
@@ -46,7 +46,7 @@ function Signup() {
             storeName: '',
             password: ''
         })
-        
+
         //redirect user to their store 
     }
 
