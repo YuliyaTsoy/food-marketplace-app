@@ -1,4 +1,4 @@
-const { User, Product, Store, Category } = require("../models");
+const { User, Product, Store, Category, Image } = require("../models");
 //import for JWT authentication
 const { signToken, AuthenticationError } = require("../utils/auth");
 
@@ -48,6 +48,19 @@ const resolvers = {
     },
   },
   Mutation: {
+    uploadImage: async (_, args) => {
+      if (context.user) {
+        const imageData = args;
+        const imageBuffer = Buffer.from(imageData.data, "base64");
+        const newImage = await Image.create({
+          name: imageData.name,
+          type: imageData.type,
+          data: imageBuffer,
+        });
+        return newImage;
+      }
+      throw AuthenticationError;
+    },
     // create user in db (signup)
     addUser: async (parent, args) => {
       const user = await User.create(args);

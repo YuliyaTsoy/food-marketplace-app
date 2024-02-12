@@ -62,6 +62,7 @@ type Mutation {
     addProduct(name: String!, price: Float!, description: String!, category: ID!): Product
     createStore(storeName: String!, storeOwner: String!): Store
     addCategory(name: String!): Category
+    uploadImage(name: String, type: String, data: String): Image
 }
 
 `;
