@@ -65,3 +65,9 @@ aside > div {
 input[type="checkbox"]:checked {
   accent-color: var(--bg-red-800);
 }
+
+img#product-preview {
+  aspect-ratio: 1;
+  width: calc(100%);
+  height: auto;
+}

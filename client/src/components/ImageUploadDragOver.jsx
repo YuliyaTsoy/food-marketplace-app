@@ -24,8 +24,6 @@ export default function ImageUploadDragOver() {
     const imagePreviewEl = document.getElementById("product-preview");
     const productImage = e.dataTransfer.files[0];
     const reader = new FileReader();
-    console.log("product url -> ", reader.readAsDataURL(productImage));
-
     reader.addEventListener(
       "load",
       () => {
@@ -37,14 +35,18 @@ export default function ImageUploadDragOver() {
   
     if (productImage) {
       setProductImageUrl(reader.readAsDataURL(productImage));
+      console.log("product url -> ", productImageUrl);
     }
   }
 
   return (
-  <div className="bg-slate-300 hover:bg-slate-400 size-52 border-dashed border-2 border-slate-950" onDragOver={handleImageDrag} onDragEnter={handleImageDrag} onDrop={handleImageDrop}>
-    <label htmlFor="imageUpload">Drag in a product Image</label>
-    <input type="file" accept="image/*" className="hidden multiple" id="imageUpload" />
-    <img src={productImageUrl} alt="Product image preview" id="product-preview" />
-  </div>
+    <div>
+      <label htmlFor="imageUpload">Drag in a product Image</label>
+      <div className="bg-slate-300 hover:bg-slate-400 w-1/5 aspect-square border-dashed rounded-lg border-2 border-slate-950" onDragOver={handleImageDrag} onDragEnter={handleImageDrag} onDrop={handleImageDrop}>
+        <input type="file" accept="image/*" className="hidden multiple" id="imageUpload" />
+        {/* No alt on this img until an image has bee */}
+        <img src={productImageUrl} title="Product image preview" id="product-preview" className="object-fill" />
+      </div>
+    </div>
   )
 }
