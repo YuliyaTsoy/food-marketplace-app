@@ -103,6 +103,21 @@ const resolvers = {
       });
       return newCategory;
     },
+    updateProduct: async (
+      parent,
+      { _id, name, price, description, category }
+    ) => {
+      return await Product.findByIdAndUpdate(
+        _id,
+        {
+          name: name,
+          price: price,
+          description: description,
+          category: category,
+        },
+        { new: true }
+      );
+    },
   },
 };
 
