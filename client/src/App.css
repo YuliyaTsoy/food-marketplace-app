@@ -33,9 +33,6 @@ h2, h3, h4 {
   text-overflow: ellipsis;
 }
 
-.filter-checkbox-container > input {
-  border-radius: 50%;
-}
 
 .filter-checkbox-container > label {
   padding-left: 1.5em;
@@ -46,11 +43,13 @@ h2, h3, h4 {
   border-radius: 10%;
 }
 
-aside > hr {
+aside > div > hr {
   width: 80%;
   border: solid 1px var(--bg-red-800);
-  margin: auto;
   margin-top: 10px;
   margin-bottom: 10px;
+}
 
+aside > div {
+  margin-left: 10%;
 }

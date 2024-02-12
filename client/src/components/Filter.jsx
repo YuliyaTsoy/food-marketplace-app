@@ -1,6 +1,5 @@
 import { useState } from "react";
-
-import { titleCaseString } from "../utils/strings";
+import CategoryCheckbox from "./CategoryCheckbox";
 
 const initialCategoryFilter = {
 	cannedGoods: false,
@@ -67,6 +66,7 @@ function Filter() {
 	}
 
 	const toggleCategoryFilter = (e) => {
+		console.log("This button is checked: ", e.target);
 		const { name } = e.target;
 
 		const currFilter = filters[name];
@@ -86,20 +86,9 @@ function Filter() {
 		}));
 	}
 
-	// refactor this pattern into a single component for easier editing
-	function CategoryCheckbox(props) {
-		const checkboxText = titleCaseString(props.id.split('search-')[1].replace('-', ' '));
-		return (
-			<div className="filter-checkbox-container">
-				<input type="checkbox" id={props.id} name={props.name} onClick={toggleCategoryFilter}/>
-				<label htmlFor={props.id}>{checkboxText}</label>
-			</div>	
-		)
-	}
-	
-
 	return (
 		<aside className="product-filter w-1/6 bg-red-200">
+			<div>
 			<div className="flex space-x-4">
 				<span className="text-center">Filters ({filterCount})</span>
 				<button className="bg-red-800 text-white rounded" onClick={clearFilters}>
@@ -111,28 +100,29 @@ function Filter() {
 				<h3 className="font-bold my-2.5">Product Categories</h3>
 			</div>
 			<div className="filter-categories">
-				<CategoryCheckbox id="search-canned-goods" name="cannedGoods" />
-				<CategoryCheckbox id="search-dairy" name="dairy" />
-				<CategoryCheckbox id="search-fruit" name="fruits" />
-				<CategoryCheckbox id="search-meat" name="meat" />
-				<CategoryCheckbox id="search-prepared-goods" name="preparedGoods" />
-				<CategoryCheckbox id="search-vegetables" name="vegetables" />
+				<CategoryCheckbox id="search-canned-goods" name="cannedGoods" onClick={toggleCategoryFilter} />
+				<CategoryCheckbox id="search-dairy" name="dairy" onClick={toggleCategoryFilter} />
+				<CategoryCheckbox id="search-fruit" name="fruits" onClick={toggleCategoryFilter} />
+				<CategoryCheckbox id="search-meat" name="meat" onClick={toggleCategoryFilter} />
+				<CategoryCheckbox id="search-prepared-goods" name="preparedGoods" onClick={toggleCategoryFilter} />
+				<CategoryCheckbox id="search-vegetables" name="vegetables" onClick={toggleCategoryFilter} />
 			</div>
 			<hr />
 			<div>
 				<div className="filter-price flex space-x-2.5 px-2.5">
-					<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="0" id="min-price-filter" className="price-input" onChange={handlePriceRange}/>
+					<div className="flex grow flex-col">
+						<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="0" id="min-price-filter" className="price-input" onChange={handlePriceRange}/>
+						<label htmlFor="min-price-filter">Min price</label>
+					</div>
 					<span>to</span>
-					<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="no limit" id="max-price-filter" className="price-input" onChange={handlePriceRange}/>
-				</div>
-				<div className="flex space-x-2.5">
-					<label htmlFor="min-price-filter">Min price</label>
-					<span>to</span>
-					<label htmlFor="max-price-filter">Max price</label>
+					<div className="flex grow flex-col">
+						<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="no limit" id="max-price-filter" className="price-input" onChange={handlePriceRange}/>
+						<label htmlFor="max-price-filter">Max price</label>
+					</div>
 				</div>
 			</div>
 
-
+			</div>
 		</aside>
 	)
 }
