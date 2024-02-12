@@ -17,7 +17,15 @@ export default function Product() {
         <div className="product-image-container mx-20">
           <img className="object-cover" src={Carrots} />
         </div>
-       
+        <div className="product-details ml-10">
+          <h1 className="text-xl px-5 py-2">Carrots</h1>
+          <p className="px-5 py-2">Price: ${price}</p>
+          <p className=" px-5 py-2">
+            Description: Lorem ipsum, dolor sit amet consectetur adipisicing
+            elit.
+          </p>
+         
+        </div>
       </div>
     </>
   );
