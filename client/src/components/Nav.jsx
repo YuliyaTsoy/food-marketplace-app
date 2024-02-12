@@ -3,6 +3,7 @@ import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline'
 import { useLocation } from 'react-router-dom'
 //import logo 
 import logo from '../assets/logo2.png'
+import Auth from '../utils/auth'
 
 function NavBar() {
     const currentPage = useLocation().pathname
@@ -14,12 +15,19 @@ function NavBar() {
         currentBg: 'bg-red-800'
     }
 
-    const navigation = [
+    //conditional for navigation, if the user is loggedin or not
+    let navigation = [];
+
+    Auth.loggedIn() ? navigation = [
         { name: 'Home', href: '/', current: true },
         { name: 'About', href: '/About', current: false },
         { name: 'Your Store', href: '/Store', current: false },
-        { name: 'Login/Signup', href: '/Login', current: false },
-    ]
+        { name: 'Logout', href: '#', onClick: () => Auth.logout(), current: false }] :
+        navigation = [
+            { name: 'Home', href: '/', current: true },
+            { name: 'About', href: '/About', current: false },
+            { name: 'Login', href: '/Login', current: false },
+        ]
 
     function classNames(...classes) {
         return classes.filter(Boolean).join(' ')
@@ -60,6 +68,7 @@ function NavBar() {
                                                 < a
                                                     key={item.name}
                                                     href={item.href}
+                                                    onClick={item.onClick}
                                                     className={
                                                         classNames(
                                                             item.current ? `${colorPalette.currentBg} text-white` : `${colorPalette.text} hover:${colorPalette.hoverBg} hover:text-white`,
@@ -85,6 +94,7 @@ function NavBar() {
                                         key={item.name}
                                         as="a"
                                         href={item.href}
+                                        onClick={item.onClick}
                                         className={classNames(
                                             item.current ? `${colorPalette.currentBg} text-white` : `${colorPalette.text} hover:${colorPalette.hoverBg} hover:text-white`,
                                             'block rounded-md px-3 py-2 text-base font-medium'
