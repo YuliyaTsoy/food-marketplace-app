@@ -25,6 +25,23 @@ query MyStore {
       }
     }
   }`;
+  export const GET_ALL_PRODUCTS = gql`
+  query getAllProducts {
+    products {
+      _id
+      category {
+        name
+      }
+      description
+      image
+      name
+      price
+      store {
+        storeName
+      }
+    }
+  }
+  `;
 
 
 
