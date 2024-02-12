@@ -107,3 +107,30 @@ export const ADD_ORDER = gql`
     }
   }
 `;
+
+export const ADD_PRODUCT = gql`
+  mutation AddProduct(
+    $name: String!
+    $price: Float!
+    $description: String!
+    $category: ID!
+  ) {
+    addProduct(
+      name: $name
+      price: $price
+      description: $description
+      category: $category
+    ) {
+      _id
+      category {
+        _id
+        name
+      }
+      dateListed
+      description
+      image
+      name
+      price
+    }
+  }
+`;
