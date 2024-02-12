@@ -26,13 +26,11 @@
   height: auto;
 }
 
-
 /* In case a user provides too long of a name we must check and deal with text overflow */
 h2, h3, h4 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 
 .filter-checkbox-container > label {
   padding-left: 1.5em;
@@ -52,4 +50,9 @@ aside > div > hr {
 
 aside > div {
   margin-left: 10%;
+}
+
+/* Set the checked color of the filter category checkboxes to our color scheme for active buttons */
+input[type="checkbox"]:checked {
+  accent-color: var(--bg-red-800);
 }
