@@ -1,19 +1,15 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
-import { Carrots } from "../assets/samplepics/index.jsx";
 
-const colorPalette = {
-  background: "bg-red-200",
-  text: "text-black-300",
-  hoverBg: "bg-red-300",
-  currentBg: "bg-red-800",
-};
+import ProductCard from "../components/ProductCard.jsx";
+// import { Carrots } from "../assets/samplepics/index.jsx";
 
-export default function Product() {
-  const [price, setPrice] = useState();
 
+export default function Product(props) {
+  const [product, setProduct] = useState({});
+   
   return (
     <>
-     <ProductCard/>
+    <link rel="stylesheet" href="" />
      </>
   );
 }
