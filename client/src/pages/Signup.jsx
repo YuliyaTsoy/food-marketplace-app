@@ -6,7 +6,7 @@ import Auth from '../utils/auth';
 
 function Signup() {
     //set initial form state
-    const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '' })
+    const [userFormData, setUserFormData] = useState({ username: '', email: '', password: '', storeName: '' })
     // color palette used in the page
     const colorPalette = {
         focus: 'ring-red-200',
@@ -32,11 +32,11 @@ function Signup() {
 
         try {
             const { data } = await createUser({
-                variables: { username: 'Bono', email: 'test@email.com', password: '123456', storeName: 'myCoolStore' }
+                variables: { ...userFormData }
             });
             //login user just created 
             console.log("created user data: ", data)
-            // Auth.login(data.addUser.token)
+            Auth.login(data.addUser.token)
         }
         catch (err) {
             console.error(err)
@@ -46,7 +46,8 @@ function Signup() {
         setUserFormData({
             username: '',
             email: '',
-            password: ''
+            password: '',
+            storeName: ''
         })
 
     }
@@ -78,7 +79,7 @@ function Signup() {
                         </div>
                     </div>
                     {/* Store name */}
-                    {/* <div>
+                    <div>
                         <label htmlFor="storeName" className="block text-sm font-medium leading-6 text-gray-900">Store name</label>
                         <div className="mt-2">
                             <input id="storeName"
@@ -90,7 +91,7 @@ function Signup() {
                                 required
                                 className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6" />
                         </div>
-                    </div> */}
+                    </div>
                     {/* email input */}
                     <div>
                         <label htmlFor="email" className="block text-sm font-medium leading-6 text-gray-900">Email address</label>

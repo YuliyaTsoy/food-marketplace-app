@@ -47,6 +47,41 @@ export const ADD_USER = gql`
 mutation AddUser($username: String!, $email: String!, $password: String!, $storeName: String!) {
     addUser(username: $username, email: $email, password: $password, storeName: $storeName) {
       token
+      user {
+        _id
+        email
+        username
+        store {
+          storeName
+          products {
+            _id
+            price
+            name
+            image
+            description
+            dateListed
+            category {
+              _id
+              name
+            }
+          }
+        }
+        orders {
+          _id
+          price
+          name
+          image
+          description
+          dateListed
+          category {
+            _id
+            name
+          }
+          store {
+            storeName
+          }
+        }
+      }
     }
   }
 `;
