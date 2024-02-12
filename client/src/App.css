@@ -1,16 +1,23 @@
 .product-filter {
   /*
   Make the height of the filter tab as the height of the screen minus
-  the height of the header (7 rem) and the height of the footer (7 rem)
+  the height of the header (7 rem), the height of the footer (7 rem),
+  the height of the filter's margin-top (2.5 rem), and the height of
+  the filter's margin-bottom (2.5 rem)
   */
-  height: calc(100vh - 14rem);
+  height: calc(100vh - 19rem);
+  min-width: 175px;
 }
 
 .product-card {
-  margin: 10px;
+  margin: 20px;
   
 }
-
+:root {
+  /* Grabbed these color defs from tailwind. Sometimes I need them here */
+  --bg-red-200: rgb(254 202 202);
+  --bg-red-800: rgb(153 27 27);
+}
 .product-picture-box img {
   aspect-ratio: 1;
   margin-top: 10px;
@@ -20,9 +27,41 @@
   height: auto;
 }
 
-
-/* In case a user provides too long of a name we must check and deal with text overflow */
+/*
+In case a user provides too long of a name we must check and deal with text
+overflow. Combined with tailwind's line-clamp-1 class to force product names
+and store names onto one line.
+*/
 h2, h3, h4 {
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.filter-checkbox-container > label {
+  padding-left: 1.5em;
+}
+
+.filter-price {
+  height: 100px;
+}
+
+.price-input {
+  max-width: 80%;
+  border-radius: 5%;
+}
+
+aside > div > hr {
+  width: 80%;
+  border: solid 1px var(--bg-red-800);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+aside > div {
+  margin-left: 10%;
+}
+
+/* Set the checked color of the filter category checkboxes to our color scheme for active buttons */
+input[type="checkbox"]:checked {
+  accent-color: var(--bg-red-800);
 }
