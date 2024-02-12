@@ -22,11 +22,11 @@ function NavBar() {
         { name: 'Home', href: '/', current: true },
         { name: 'About', href: '/About', current: false },
         { name: 'Your Store', href: '/Store', current: false },
-        { name: 'Logout', onClick: () => Auth.logout(), current: false }] :
+        { name: 'Logout', href: '#', onClick: () => Auth.logout(), current: false }] :
         navigation = [
             { name: 'Home', href: '/', current: true },
             { name: 'About', href: '/About', current: false },
-            { name: 'Login/Signup', href: '/Login', current: false },
+            { name: 'Login', href: '/Login', current: false },
         ]
 
     function classNames(...classes) {
@@ -67,8 +67,7 @@ function NavBar() {
                                             return (
                                                 < a
                                                     key={item.name}
-                                                    // {{item.href ? href = item.href : href = ''}}
-                                                    href={item.href || ''}
+                                                    href={item.href}
                                                     onClick={item.onClick}
                                                     className={
                                                         classNames(
