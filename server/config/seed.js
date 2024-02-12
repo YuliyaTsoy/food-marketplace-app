@@ -81,6 +81,7 @@ db.once("open", async () => {
     username: "jimmythetester",
     email: "jimmy@test.com",
     password: "password123",
+    store: { storeName: "Jimmy's Store" },
   });
 
   await User.create({
@@ -88,6 +89,7 @@ db.once("open", async () => {
     email: "leon@lemartin.com",
     password: "supersecretpassword",
     orders: [products[5]._id, products[2]._id, products[7]._id],
+    store: { storeName: "Flight of Fancy" },
   });
 
   console.log("seed complete!");
