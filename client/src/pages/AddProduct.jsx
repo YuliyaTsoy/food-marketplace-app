@@ -1,10 +1,16 @@
 import ImageUploadDragOver from "../components/ImageUploadDragOver"
 
 export default function AddProduct() {
+
+    function handleFormSubmit(e) {
+        e.preventDefault();
+        console.log('e -> ', e);
+    }
+
     return (
         <div className="flex flex-col">
             <h2 className="text-3xl font-bold text-center">Add a Product to Store</h2>
-            <form>
+            <form onSubmit={handleFormSubmit}>
                 <div className="flex flex-col">
                     <label htmlFor="product-name">Enter a product name</label>
                     <input type="text" id="product-name" className="border-dashed rounded-lg border-2 border-slate-950 w-1/5"></input>
