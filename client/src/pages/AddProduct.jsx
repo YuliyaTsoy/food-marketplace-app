@@ -21,7 +21,6 @@ export default function AddProduct() {
                     <input type="text" id="product-description" className="border-dashed rounded-lg border-2 border-slate-950 w-1/5 h-1/5"></input>
                 </div>
             </form>
-            
         </div>
     )
 }
