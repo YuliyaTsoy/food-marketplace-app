@@ -9,8 +9,6 @@ type User {
 }
 
 type Store {
-    _id: ID
-    storeOwner: User!
     storeName: String!
     products: [Product]
 }
@@ -53,7 +51,6 @@ type Mutation {
     addOrder(productId: ID!): User
     login(email: String!, password: String!): Auth
     addProduct(name: String!, price: Float!, description: String!, category: ID!): Product
-    createStore(storeName: String!, storeOwner: String!): Store
     addCategory(name: String!): Category
 }
 

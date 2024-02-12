@@ -1,7 +1,7 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
-import storeSchema from "./Store";
+const storeSchema = require("./Store");
 
 const userSchema = new Schema(
   {

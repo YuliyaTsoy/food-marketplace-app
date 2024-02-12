@@ -102,13 +102,6 @@ const resolvers = {
       }
       throw AuthenticationError;
     },
-    // create store in db
-    createStore: async (parent, args, context) => {
-      if (context.user) {
-        return await Store.create(args);
-      }
-      throw AuthenticationError;
-    },
     addCategory: async (parent, { name }, context) => {
       const newCategory = await Category.create({
         name,
