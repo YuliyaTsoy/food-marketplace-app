@@ -37,9 +37,9 @@ export default function Store() {
     }
 
     // if data is not defined, it will show a loading prompt
-    // if (loading) {
-    //     return <h2>LOADING...</h2>
-    // }
+    if (loading) {
+        return <h2>LOADING...</h2>
+    }
 
     // when data is defined it will return this: 
     return (
