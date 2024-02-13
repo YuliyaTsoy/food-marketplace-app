@@ -1,4 +1,4 @@
-import tomatoes from '../assets/samplepics/tomato'
+import { Tomato } from '../assets/samplepics/index'
 
 const sampleProfile = {
     _id: "123456785412587455",
@@ -9,7 +9,7 @@ const sampleProfile = {
             id: "1",
             name: "Homemade dog treats",
             description: "these are homemade treats, peanut butter, pumpkin puree, yogurt, and broth",
-            image: tomatoes,
+            image: Tomato,
             dateListed: "02/13/2024",
             price: 7.80,
             category: {
@@ -21,7 +21,7 @@ const sampleProfile = {
             id: "2",
             name: "Homemade cat treats",
             description: "these are homemade treats for felines",
-            image: tomatoes,
+            image: Tomato,
             dateListed: "02/13/2024",
             price: 7.80,
             category: {
