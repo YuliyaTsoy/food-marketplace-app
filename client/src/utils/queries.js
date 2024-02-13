@@ -1,5 +1,6 @@
 import { gql } from "@apollo/client";
 
+// get all users
 export const USERS = gql`
   query Users {
     users {
@@ -10,6 +11,30 @@ export const USERS = gql`
       store {
         _id
         name
+      }
+    }
+  }
+`;
+
+// get one user
+export const USER = gql`
+  query User($id: ID!) {
+    user(_id: $id) {
+      _id
+      email
+      storeName
+      username
+      store {
+        _id
+        name
+      }
+      orders {
+        _id
+        name
+        price
+        dateListed
+        description
+        image
       }
     }
   }
