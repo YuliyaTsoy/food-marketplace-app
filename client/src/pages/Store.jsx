@@ -43,9 +43,16 @@ export default function Store() {
     // when data is defined it will return this: 
     return (
         <>
-            <div className='flex flex-col container m-4'>
+            <div className='flex flex-col justify-items-center m-4 px-3'>
 
-                <div className='text-4xl font-bold'><h1>Welcome to {userStore.storeName}!</h1></div>
+                <div className='text-4xl text-center font-bold'><h1>Welcome to {userStore.storeName}!</h1></div>
+
+                {/* Add a button to redirect the user to add a product */}
+                <div className='flex justify-end'>
+                    <button className="bg-red-300 cursor-pointer hover:text-white hover:bg-red-800 rounded-full mx-10 mt-8 mb-3 px-5 py-2">
+                        Add product
+                    </button>
+                </div>
                 {/* if the user has products, map through all of them and render using ProductCard component */}
                 {userStore.store ? (
 
