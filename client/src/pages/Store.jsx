@@ -7,5 +7,16 @@ export default function Store() {
     const { loading, data } = useQuery(GET_MYSTORE)
     const userStore = data?.myStore || {}
     console.log(userStore)
-    return <div><h1>this is your store page</h1></div>
+
+    // if data is not defined, it will show a loading prompt
+    if (loading) {
+        return <h2>LOADING...</h2>
+    }
+
+    // when data is dfined it will return this: 
+    return (
+        <>
+            <div><h1>this is your store page</h1></div>
+        </>
+    )
 };
