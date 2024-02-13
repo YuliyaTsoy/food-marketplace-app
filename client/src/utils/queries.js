@@ -76,4 +76,11 @@ export const GET_ONE_PRODUCT = gql`
   }
 `;
 
-export const GET_CATEGORIES = gql``;
+export const GET_CATEGORIES = gql`
+  query Categories {
+    categories {
+      _id
+      name
+    }
+  }
+`;
