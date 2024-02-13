@@ -43,6 +43,23 @@ query MyStore {
   }
   `;
 
-
+  export const GET_ONE_PRODUCT = gql`
+  query Product($id: ID!) {
+    product(_id: $id) {
+      _id
+      name
+      price
+      description
+      dateListed
+      image
+      category {
+        name
+      }
+      store {
+        storeName
+      }
+    }
+  }
+  `;
 
 
