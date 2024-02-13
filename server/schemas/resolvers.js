@@ -129,13 +129,14 @@ const resolvers = {
       context
     ) => {
       if (context.user) {
+        console.log(context.user);
         const product = await Product.create({
           name,
           price,
           category,
           description,
         });
-        console.log(product);
+
         return product.populate("category");
       }
       throw AuthenticationError;
