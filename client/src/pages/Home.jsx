@@ -15,7 +15,7 @@ export default function Home() {
             </div>
             <div className="home-page flex">
                 <Filter />
-                <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-4">
+                <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 px-8">
                     <ProductCard name="tomato" image={Tomato} price={432.891} storeName={"Luc's store"} />
                     <ProductCard name="samosa" image={Samosa} price={12.32} storeName={"A store with way way too long of a name"} />
                     <ProductCard name="potato" image={Potatoes} price={6.99} storeName={"my potato store"} />
