@@ -8,6 +8,7 @@ import { useMutation, useQuery } from "@apollo/client";
 
 // TODO: Delete this dummy 'AddProduct' function when AddProduct mutation
 // is ready
+/*
 function addProduct(name, price, image, description, categories) {
     console.log(`
 name = ${name}
@@ -17,12 +18,13 @@ description = ${description}
 categories = ${categories}
 `);
 }
+*/
 
 export default function AddProduct() {
 
     // TODO: comment back in AddProduct and its corresponding await
     // when ready
-    // const [addProduct, {error}] = useMutation(ADD_PRODUCT);
+    const [addProduct, {error}] = useMutation(ADD_PRODUCT);
 
     // MVP AND BEYOND - cache product information in local storage here
     /*
@@ -32,7 +34,7 @@ export default function AddProduct() {
     const [productName, setProductName] = useState("")
     const [productPrice, setProductPrice] = useState(0);
     const [productDescription, setProductDescription] = useState("");
-    const [productCategories, setProductCategories] = useState(initialCategories);
+    const [productCategories, setProductCategories] = useState(new Set());
 
 
     const {loading, data} = useQuery(GET_CATEGORIES);
@@ -59,11 +61,13 @@ export default function AddProduct() {
             return;
         }
 
-        setProductPrice(priceValue.toPrecision(2));
+        setProductPrice(priceValue);
     }
 
     function handleCategoryClick({target}) {
+        const categoryName = target.name;
         console.log('target -> ', target);
+        setProductCategories(new Set(...productCategories, categoryName));
     }
 
     async function handleFormSubmit(e) {
@@ -90,9 +94,10 @@ export default function AddProduct() {
 
         // TODO: Get rid of dummy addProduct function and comment back in
         // the below mutation
-
-        /*
-        return await addProduct(
+        console.log(typeof(productPrice));
+        console.log('productPrice -> ', productPrice);
+        
+        return await addProduct({
             variables: {
                 name: productName,
                 price: productPrice,
@@ -100,9 +105,9 @@ export default function AddProduct() {
                 image: image,
                 category: productCategories
             }
-        )
-        */
-
+        })
+        
+        /*
         // DELETE ME SOON
         addProduct({
             name: productName,
@@ -111,6 +116,7 @@ export default function AddProduct() {
             image: image,
             category: productCategories
         })
+        */
     }
 
     return (
