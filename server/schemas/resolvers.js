@@ -39,7 +39,14 @@ const resolvers = {
     // from search products
     productSearch: async (parents, { searchQuery }) => {
       console.log(searchQuery)
-      return 
+      const productsFound = await Product.find({
+        $or: [
+          { name: { $regex: searchQuery, $options: 'i' } },
+          { description: { $regex: searchQuery, $options: 'i' } }
+        ]
+      })
+
+      return productsFound
     }
   },
   Mutation: {
