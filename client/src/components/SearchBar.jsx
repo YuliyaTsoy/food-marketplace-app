@@ -1,6 +1,24 @@
+import { useState } from 'react'
+
 function SearchBar() {
+
+    const [searchForm, setSearchForm] = useState('')
+
+    const handleInputChange = (event) => {
+        setSearchForm(event.target.value);
+    }
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+
+        //clear search bar
+        setSearchForm('')
+
+    }
+
     return (
-        <form className="min-w-full px-4 my-4">
+        <form className="min-w-full px-4 my-4"
+            onSubmit={handleFormSubmit}>
             <div className="relative">
                 <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -20,6 +38,8 @@ function SearchBar() {
                     type="text"
                     placeholder="Search Products"
                     className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-2xl outline-none bg-gray-50 focus:bg-white focus:border-red-800"
+                    value={searchForm}
+                    onChange={handleInputChange}
                 />
             </div>
         </form>
