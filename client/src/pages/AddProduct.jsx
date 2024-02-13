@@ -55,11 +55,8 @@ export default function AddProduct() {
             return alert("A product can't have a negative price!");
         }
 
-
         dummySubmit(productName, productPrice)
 
-
-        // clear form
     }
 
     return (
