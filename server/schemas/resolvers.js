@@ -142,6 +142,7 @@ const resolvers = {
           { $push: { store: product } },
           { new: true }
         );
+        console.log(updatedUser);
 
         return updatedUser;
       }
