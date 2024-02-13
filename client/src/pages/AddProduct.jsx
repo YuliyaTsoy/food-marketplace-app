@@ -49,6 +49,10 @@ export default function AddProduct() {
         setProductPrice(priceValue.toPrecision(2));
     }
 
+    function handleCategoryChange({target}) {
+        console.log('target -> ', target);
+    }
+
     async function handleFormSubmit(e) {
         e.preventDefault();
         console.log('e -> ', e);
@@ -116,7 +120,7 @@ export default function AddProduct() {
                     <input type="text" id="product-description" className="border-dashed rounded-lg border-2 border-slate-950 w-1/5 h-1/5" onChange={handleDescriptionChange}></input>
                 </div>
                 <div className="flex flex-col">
-                    <CategoryCheckbox id="search-canned-goods" name="cannedGoods"/>
+                    <CategoryCheckbox id="search-canned-goods" name="cannedGoods" handleChange={handleCategoryChange}/>
                 </div>
                 <div className="flex flex-col">
                     <input type="submit" value="Add Product!"/>
