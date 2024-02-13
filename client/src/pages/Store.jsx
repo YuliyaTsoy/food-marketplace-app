@@ -12,6 +12,8 @@ export default function Store() {
     const userStore = sampleProfile
     console.log(userStore)
 
+    //use mutation 
+
     // if data is not defined, it will show a loading prompt
     // if (loading) {
     //     return <h2>LOADING...</h2>
