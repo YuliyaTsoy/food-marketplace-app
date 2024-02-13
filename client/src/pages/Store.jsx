@@ -24,15 +24,15 @@ export default function Store() {
 
                 <div className='text-4xl font-bold'><h1>Welcome to {userStore.storeName}!</h1></div>
                 {/* if the user has products, map through all of them and render using ProductCard component */}
-                <div className='grid flex grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:gap-x-12'>{userStore.store ? (<>
+                <div className='grid flex grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:gap-x-12 my-6'>{userStore.store ? (<>
                     {userStore.store.map((product) => {
                         return (
                             <>
-                                <div>
-
-                                    <XCircleIcon className='block h-6 w-6' />
+                                <div className='flex flex-col'>
+                                    <div className='grid justify-items-end'>
+                                        <XCircleIcon className='h-10 w-14 cursor-pointer' style={{ color: 'grey' }} />
+                                    </div>
                                     <ProductCard
-                                        className='m-0'
                                         key={product.id}
                                         name={product.name}
                                         image={product.image}
