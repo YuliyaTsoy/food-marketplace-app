@@ -170,12 +170,11 @@ const resolvers = {
     },
     deleteProduct: async (parent, { productId }, context) => {
       if (context.user) {
-        const product = await Product.findByIdAndDelete({
+        const product = await Product.findOneAndDelete({
           _id: productId,
-          lister: context.user._id,
         });
 
-        await User.findByIdAndUpdate(
+        await User.findOneAndUpdate(
           { _id: context.user._id },
           { $pull: { store: product._id } }
         );
