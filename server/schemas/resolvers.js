@@ -36,6 +36,11 @@ const resolvers = {
     categories: async () => {
       return Category.find();
     },
+    // from search products
+    productSearch: async (parents, { searchQuery }) => {
+      console.log(searchQuery)
+      return 
+    }
   },
   Mutation: {
     uploadImage: async (_, args) => {

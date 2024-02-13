@@ -45,7 +45,7 @@ type Auth {
 type Query {
     product(_id: ID!): Product
     products: [Product]
-    products(searchQuery: String!): [Products]
+    productSearch(searchQuery: String!): [Product]
     users: [User]
     user: User
     categories: [Category]
