@@ -29,8 +29,9 @@ export default function Store() {
                         return (
                             <>
                                 <div className='flex flex-col'>
-                                    <div className='grid justify-items-end'>
-                                        <XCircleIcon className='h-10 w-14 cursor-pointer' style={{ color: 'grey' }} />
+                                    <div className='grid grid-cols-4 justify-items-end'>
+                                        <XCircleIcon className='h-10 w-14 col-end-5 cursor-pointer' style={{ color: 'grey' }} />
+                                        {/* <PencilIcon className='h-6 w-6 col-end-4 cursor-pointer' /> */}
                                     </div>
                                     <ProductCard
                                         key={product.id}
