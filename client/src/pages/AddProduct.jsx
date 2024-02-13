@@ -1,7 +1,6 @@
 import { useState } from "react";
 import ImageUploadDragOver from "../components/ImageUploadDragOver";
 
-
 function dummySubmit(name, price, image, description, categories) {
     console.log(`
 name = ${name}
@@ -17,6 +16,7 @@ export default function AddProduct() {
     const [productName, setProductName] = useState("")
     const [productPrice, setProductPrice] = useState(0);
     const [productDescription, setProductDescription] = useState("");
+    const [productCategories, setProductCategories] = useState([]);
 
     function handleNameChange({target}) {
         setProductName(target.value);
@@ -47,15 +47,20 @@ export default function AddProduct() {
             return alert("Product name must be a valid string!");
         }
 
-        if (!productDescription.trim().length) {
-            return alert("Product description must be a valid string!");
-        }
-
         if (productPrice < 0) {
             return alert("A product can't have a negative price!");
         }
 
-        dummySubmit(productName, productPrice)
+        if (!productDescription.trim().length) {
+            return alert("Product description must be a valid string!");
+        }
+
+        const image = document.getElementById("product-preview").src;
+        if (!image) {
+            return alert("Your product must have an image!");
+        }
+
+        dummySubmit(productName, productPrice, image, productDescription)
 
     }
 
