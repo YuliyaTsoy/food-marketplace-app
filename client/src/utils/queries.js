@@ -1,9 +1,22 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
+export const USERS = gql`
+  query Users {
+    users {
+      _id
+      email
+      storeName
+      username
+      store {
+        _id
+        name
+      }
+    }
+  }
+`;
 //get the user's store logged in to render
-
 export const GET_MYSTORE = gql`
-query MyStore {
+  query MyStore {
     myStore {
       _id
       username
@@ -24,8 +37,9 @@ query MyStore {
         }
       }
     }
-  }`;
-  export const GET_ALL_PRODUCTS = gql`
+  }
+`;
+export const GET_ALL_PRODUCTS = gql`
   query getAllProducts {
     products {
       _id
@@ -41,9 +55,9 @@ query MyStore {
       }
     }
   }
-  `;
+`;
 
-  export const GET_ONE_PRODUCT = gql`
+export const GET_ONE_PRODUCT = gql`
   query Product($id: ID!) {
     product(_id: $id) {
       _id
@@ -60,6 +74,6 @@ query MyStore {
       }
     }
   }
-  `;
+`;
 
-
+export const GET_CATEGORIES = gql``;
