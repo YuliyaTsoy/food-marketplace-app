@@ -129,7 +129,6 @@ const resolvers = {
       context
     ) => {
       if (context.user) {
-        console.log(context.user);
         const product = await Product.create({
           name,
           price,
@@ -143,7 +142,6 @@ const resolvers = {
           { $push: { store: product._id } },
           { new: true }
         );
-        console.log(product);
         return product.populate(["category", "lister"]);
       }
       throw AuthenticationError;
@@ -169,6 +167,21 @@ const resolvers = {
         },
         { new: true }
       );
+    },
+    deleteProduct: async (parent, { productId }, context) => {
+      if (context.user) {
+        const product = await Product.findOneAndDelete({
+          _id: productId,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { store: product._id } }
+        );
+
+        return product.populate(["category", "lister"]);
+      }
+      throw AuthenticationError;
     },
   },
 };
