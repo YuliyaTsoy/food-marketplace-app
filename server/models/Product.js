@@ -17,9 +17,9 @@ const productSchema = new Schema({
   image: {
     type: String,
   },
-  store: {
+  lister: {
     type: Schema.Types.ObjectId,
-    ref: "Store",
+    ref: "User",
   },
   dateListed: {
     type: String,
