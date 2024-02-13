@@ -6,11 +6,11 @@ const resolvers = {
   Query: {
     // find all users
     users: async () => {
-      return User.find();
+      return User.find().populate("store");
     },
     // find one user by ID
-    user: async (parent, { userId }) => {
-      return User.findOne({ _id: userId }).populate("orders");
+    user: async (parent, { _id }) => {
+      return User.findOne({ _id }).populate(["store", "orders"]);
     },
     // find my store (aka profile page)
     myStore: async (parent, args, context) => {
@@ -26,12 +26,12 @@ const resolvers = {
     },
     // find all products
     products: async () => {
-      return Product.find();
+      return Product.find().populate(["category", "lister"]);
     },
     // find one product by ID
     product: async (parent, { _id }) => {
       try {
-        return await Product.findOne({ _id }).populate("category");
+        return await Product.findOne({ _id }).populate(["category", "lister"]);
       } catch (err) {
         console.log(err);
       }
@@ -86,7 +86,7 @@ const resolvers = {
         username,
         email,
         password,
-        store: { storeName },
+        storeName,
       });
       const token = signToken(user);
       return { token, user };
@@ -135,9 +135,16 @@ const resolvers = {
           price,
           category,
           description,
+          lister: context.user._id,
         });
 
-        return product.populate("category");
+        const updatedUser = await User.findByIdAndUpdate(
+          context.user._id,
+          { $push: { store: product._id } },
+          { new: true }
+        );
+        console.log(product);
+        return product.populate(["category", "lister"]);
       }
       throw AuthenticationError;
     },

@@ -1,8 +1,6 @@
 const { Schema, model } = require("mongoose");
 const bcrypt = require("bcrypt");
 
-const storeSchema = require("./Store");
-
 const userSchema = new Schema(
   {
     username: {
@@ -20,7 +18,15 @@ const userSchema = new Schema(
       type: String,
       required: true,
     },
-    store: storeSchema,
+    store: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Product",
+      },
+    ],
+    storeName: {
+      type: String,
+    },
     orders: [
       {
         type: Schema.Types.ObjectId,
