@@ -1,26 +1,24 @@
-import React, { useState, useEffect, useRef, useMemo } from "react";
-import { Routes, Route, useParams } from 'react-router-dom';
-import ProductCard from "../components/SilngeProductCard.jsx";
-// import { Carrots } from "../assets/samplepics/index.jsx";
+import React from "react";
+import { useParams } from "react-router-dom";
+import ProductCard from "../components/SingleProductCard";
+import { useQuery } from "@apollo/client";
+import { GET_ONE_PRODUCT } from "../utils/queries";
 
+function ProductPage() {
+  let { productId } = useParams();
+  //   console.log(productId);
+  const { loading, error, data } = useQuery(GET_ONE_PRODUCT, {
+    variables: { id: productId },
+  });
+  console.log(data);
 
-// export default function Product(props) {
-//   const [product, setProduct] = useState({});
-   
-//   return (
-//     <>
-//     <link rel="stylesheet" href="" />
-//      </>
-//   );
-// }
-
-function ProductPage () {
-    let { productId } = useParams();
-    return 
-    <Routes>
-      
-            <Route path = "/Product/:productId" element = {<ProductCard/>} />
-       
-    </Routes>
+  const product = data?.product || {};
+  console.log(product);
+  return (
+    <div>
+      <ProductCard product={product} />
+    </div>
+  );
 }
-export default ProductPage
+
+export default ProductPage;

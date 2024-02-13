@@ -1,4 +1,4 @@
-const { User, Product, Category } = require("../models");
+const { User, Product, Category, Image } = require("../models");
 //import for JWT authentication
 const { signToken, AuthenticationError } = require("../utils/auth");
 
@@ -6,11 +6,11 @@ const resolvers = {
   Query: {
     // find all users
     users: async () => {
-      return User.find();
+      return User.find().populate("store");
     },
     // find one user by ID
     user: async (parent, { userId }) => {
-      return User.findOne({ _id: userId }).populate("orders");
+      return User.findOne({ _id: userId }).populate("store").populate("orders");
     },
     // find my store (aka profile page)
     myStore: async (parent, args, context) => {
@@ -26,25 +26,67 @@ const resolvers = {
     },
     // find all products
     products: async () => {
-      return Product.find();
+      return Product.find().populate("category");
     },
     // find one product by ID
-    product: async (parent, { productId }) => {
-      return Product.findOne({ _id: productId }).populate("category");
+    product: async (parent, { _id }) => {
+      try {
+        return await Product.findOne({ _id }).populate("category");
+      } catch (err) {
+        console.log(err);
+      }
     },
     // find all categories
     categories: async () => {
       return Category.find();
     },
+    // from search products
+    productSearch: async (parents, { searchQuery }) => {
+      // if the search query has more than one word, it will split them at the space
+      const arrayOfQuery = searchQuery.split(" ");
+      //ignore common words: the, this, a, an, of, from
+      const filteredQuery = arrayOfQuery.filter(
+        (word) =>
+          word !== "the" &&
+          word !== "this" &&
+          word !== "a" &&
+          word !== "an" &&
+          word !== "of" &&
+          word !== "from"
+      );
+      const regexQuery = filteredQuery.join("|");
+      console.log(regexQuery);
+      const productsFound = await Product.find({
+        $or: [
+          { name: { $regex: regexQuery, $options: "i" } },
+          { description: { $regex: regexQuery, $options: "i" } },
+        ],
+      });
+
+      return productsFound;
+    },
   },
   Mutation: {
+    uploadImage: async (_, args) => {
+      if (context.user) {
+        const imageData = args;
+        const imageBuffer = Buffer.from(imageData.data, "base64");
+        const newImage = await Image.create({
+          name: imageData.name,
+          type: imageData.type,
+          data: imageBuffer,
+        });
+        return newImage;
+      }
+      throw AuthenticationError;
+    },
     // create user in db (signup)
     addUser: async (parent, { username, email, password, storeName }) => {
       const user = await User.create({
         username,
         email,
         password,
-        store: { storeName },
+        storeName,
       });
       const token = signToken(user);
       return { token, user };
@@ -83,17 +125,25 @@ const resolvers = {
     // add product to db
     addProduct: async (
       parent,
-      { name, price, category, descripton },
+      { name, price, category, description },
       context
     ) => {
       if (context.user) {
+        console.log(context.user);
         const product = await Product.create({
           name,
           price,
           category,
-          descripton,
+          description,
         });
-        return product;
+
+        const updatedUser = await User.findByIdAndUpdate(
+          context.user._id,
+          { $push: { store: product } },
+          { new: true }
+        );
+
+        return updatedUser;
       }
       throw AuthenticationError;
     },
@@ -105,7 +155,7 @@ const resolvers = {
     },
     updateProduct: async (
       parent,
-      { _id, name, price, description, category }
+      { _id, name, price, description, category, imageId }
     ) => {
       return await Product.findByIdAndUpdate(
         _id,
@@ -114,6 +164,7 @@ const resolvers = {
           price: price,
           description: description,
           category: category,
+          image: imageId,
         },
         { new: true }
       );

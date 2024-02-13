@@ -4,13 +4,16 @@ type User {
     username: String!
     email: String!
     password: String!
-    store: Store
+    store: [Product]
+    storeName: String!
     orders: [Product]
 }
 
-type Store {
-    storeName: String!
-    products: [Product]
+type Image {
+    _id: ID
+    name: String!
+    type: String!
+    data: String!
 }
 
 type Product {
@@ -19,7 +22,7 @@ type Product {
     price: Float
     description: String
     image: String
-    store: Store
+    lister: User
     dateListed: String
     category: Category
 }
@@ -38,6 +41,7 @@ type Auth {
 type Query {
     product(_id: ID!): Product
     products: [Product]
+    productSearch(searchQuery: String!): [Product]
     users: [User]
     user: User
     categories: [Category]
@@ -49,7 +53,9 @@ type Mutation {
     addOrder(productId: ID!): User
     login(email: String!, password: String!): Auth
     addProduct(name: String!, price: Float!, description: String!, category: ID!): Product
+    deleteProduct(productId: ID!): User
     addCategory(name: String!): Category
+    uploadImage(name: String, type: String, data: String): Image
     updateProduct(_id: ID!, name: String!, price: Float!, description: String!, category: ID!): Product
 }
 
