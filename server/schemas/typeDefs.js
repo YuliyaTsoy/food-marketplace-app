@@ -4,8 +4,8 @@ type User {
     username: String!
     email: String!
     password: String!
-    storeName: String!
     store: [Product]
+    storeName: String!
     orders: [Product]
 }
 
@@ -22,6 +22,7 @@ type Product {
     price: Float
     description: String
     image: String
+    lister: User
     dateListed: String
     category: Category
 }

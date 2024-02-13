@@ -19,7 +19,10 @@ const productSchema = new Schema({
   image: {
     type: String,
   },
-  store: storeSchema,
+  lister: {
+    type: Schema.Types.ObjectId,
+    ref: "User",
+  },
   dateListed: {
     type: String,
   },
