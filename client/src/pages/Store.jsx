@@ -1,7 +1,9 @@
 import ProductCard from '../components/ProductCard'
+import { PencilIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import { useQuery } from '@apollo/client'
 import { GET_MYSTORE } from '../utils/queries'
 import sampleProfile from '../assets/sampleProfile'
+
 
 export default function Store() {
     // get user info using UseQuery method
@@ -22,9 +24,24 @@ export default function Store() {
 
                 <div className='text-4xl font-bold'><h1>Welcome to {userStore.storeName}!</h1></div>
                 {/* if the user has products, map through all of them and render using ProductCard component */}
-                <div className='grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-4'>{userStore.store ? (<>
-                    {userStore.store.map((product) =>
-                        <ProductCard key={product.id} name={product.name} image={product.image} price={product.price} storeName={userStore.storeName} />
+                <div className='grid flex grid-cols-1 sm:grid-cols-2 md:grid-cols-4 md:gap-x-12'>{userStore.store ? (<>
+                    {userStore.store.map((product) => {
+                        return (
+                            <>
+                                <div>
+
+                                    <XCircleIcon className='block h-6 w-6' />
+                                    <ProductCard
+                                        className='m-0'
+                                        key={product.id}
+                                        name={product.name}
+                                        image={product.image}
+                                        price={product.price}
+                                        storeName={userStore.storeName} />
+                                </div>
+                            </>
+                        )
+                    }
                     )}
                 </>
                 ) : <p>your active listings will show here</p>}</div>
