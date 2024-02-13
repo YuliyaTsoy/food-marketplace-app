@@ -13,7 +13,7 @@ export default function Store() {
         return <h2>LOADING...</h2>
     }
 
-    // when data is dfined it will return this: 
+    // when data is defined it will return this: 
     return (
         <>
             <div><h1>this is your store page</h1></div>
