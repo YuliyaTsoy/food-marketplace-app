@@ -88,4 +88,15 @@ export const ADD_CATEGORY = gql`
   }
 `;
 
-// export const DELETE_PRODUCT = gql``;
+export const DELETE_PRODUCT = gql`
+mutation DeleteProduct($productId: ID!) {
+  deleteProduct(productId: $productId) {
+    _id
+    lister {
+      _id
+      storeName
+      username
+    }
+  }
+}
+`;
