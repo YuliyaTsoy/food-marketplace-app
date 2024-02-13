@@ -1,38 +1,41 @@
 import { useState } from "react";
 import ImageUploadDragOver from "../components/ImageUploadDragOver";
 
+
+function dummySubmit(name, price, image, description, categories) {
+    console.log(`
+name = ${name}
+price = ${price}
+image = ${image}
+description = ${description}
+categories = ${categories}
+`);
+}
+
 export default function AddProduct() {
 
     const [productName, setProductName] = useState("")
     const [productPrice, setProductPrice] = useState(0);
+    const [productDescription, setProductDescription] = useState("");
 
-    function handleNameChange(props) {
-        setProductName(props.target.value);
+    function handleNameChange({target}) {
+        setProductName(target.value);
     }
 
-    function handlePriceChange(props) {
+    function handleDescriptionChange({target}) {
+        setProductDescription(target.value);
+    }
+
+    function handlePriceChange({target}) {
         // This is a string and must be parsed first
-        let priceText = props.target.value;
+        let priceText = target.value;
 
         const priceValue = Number.parseFloat(priceText);
-        console.log('props.target -> ', props.target);
-        console.log('priceValue -> ', priceValue);
-
-        // A valid price must not be a NaN or a negative number
-        if (!isNaN(priceValue) && priceValue >= 0) {
-            return setProductPrice(priceValue);
-        }
-
-        // Handle invalid prices below
-
-        // if invalidstring or negative number
         if (isNaN(priceValue)) {
-            alert("Invalid product price");
+            return;
         }
 
-        if (priceValue < 0) {
-            alert("A product can't have a negative price!")
-        }
+        setProductPrice(priceValue.toPrecision(2));
     }
 
     function handleFormSubmit(e) {
@@ -44,6 +47,16 @@ export default function AddProduct() {
             return alert("Product name must be a valid string!");
         }
 
+        if (!productDescription.trim().length) {
+            return alert("Product description must be a valid string!");
+        }
+
+        if (productPrice < 0) {
+            return alert("A product can't have a negative price!");
+        }
+
+
+        dummySubmit(productName, productPrice)
 
 
         // clear form
@@ -66,7 +79,7 @@ export default function AddProduct() {
                 </div>
                 <div className="flex flex-col">
                     <label htmlFor="product-description">Make a Product Description</label>
-                    <input type="text" id="product-description" className="border-dashed rounded-lg border-2 border-slate-950 w-1/5 h-1/5"></input>
+                    <input type="text" id="product-description" className="border-dashed rounded-lg border-2 border-slate-950 w-1/5 h-1/5" onChange={handleDescriptionChange}></input>
                 </div>
                 <div className="flex flex-col">
                     <input type="submit" value="Add Product!"/>
