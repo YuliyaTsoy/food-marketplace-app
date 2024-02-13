@@ -41,8 +41,8 @@ export const USER = gql`
 `;
 //get the user's store logged in to render
 export const GET_MYSTORE = gql`
-  query MyStore($id: ID!) {
-    myStore(_id: $id) {
+  query MyStore {
+    myStore {
       _id
       storeName
       store {

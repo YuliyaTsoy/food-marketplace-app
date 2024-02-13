@@ -45,7 +45,7 @@ type Query {
     users: [User]
     user(_id: ID!): User
     categories: [Category]
-    myStore(_id: ID!): User
+    myStore: User
 }
 
 type Mutation {
