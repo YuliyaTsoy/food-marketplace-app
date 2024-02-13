@@ -9,8 +9,8 @@ const resolvers = {
       return User.find().populate("store");
     },
     // find one user by ID
-    user: async (parent, { userId }) => {
-      return User.findOne({ _id: userId }).populate("store").populate("orders");
+    user: async (parent, { _id }) => {
+      return User.findOne({ _id }).populate(["store", "orders"]);
     },
     // find my store (aka profile page)
     myStore: async (parent, args, context) => {
@@ -26,12 +26,12 @@ const resolvers = {
     },
     // find all products
     products: async () => {
-      return Product.find().populate("category");
+      return Product.find().populate(["category", "lister"]);
     },
     // find one product by ID
     product: async (parent, { _id }) => {
       try {
-        return await Product.findOne({ _id }).populate("category");
+        return await Product.findOne({ _id }).populate(["category", "lister"]);
       } catch (err) {
         console.log(err);
       }
@@ -135,15 +135,16 @@ const resolvers = {
           price,
           category,
           description,
+          lister: context.user._id,
         });
 
         const updatedUser = await User.findByIdAndUpdate(
           context.user._id,
-          { $push: { store: product } },
+          { $push: { store: product._id } },
           { new: true }
         );
-
-        return updatedUser;
+        console.log(product);
+        return product.populate(["category", "lister"]);
       }
       throw AuthenticationError;
     },

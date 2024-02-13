@@ -43,7 +43,7 @@ type Query {
     products: [Product]
     productSearch(searchQuery: String!): [Product]
     users: [User]
-    user: User
+    user(_id: ID!): User
     categories: [Category]
     myStore: User
 }
