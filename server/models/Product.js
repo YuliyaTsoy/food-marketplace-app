@@ -1,8 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
 
-const storeSchema = require("./Store");
-
 const productSchema = new Schema({
   name: {
     type: String,
