@@ -6,11 +6,11 @@ const resolvers = {
   Query: {
     // find all users
     users: async () => {
-      return User.find();
+      return User.find().populate("store");
     },
     // find one user by ID
     user: async (parent, { userId }) => {
-      return User.findOne({ _id: userId }).populate("orders");
+      return User.findOne({ _id: userId }).populate("store").populate("orders");
     },
     // find my store (aka profile page)
     myStore: async (parent, args, context) => {
@@ -26,7 +26,7 @@ const resolvers = {
     },
     // find all products
     products: async () => {
-      return Product.find();
+      return Product.find().populate("category");
     },
     // find one product by ID
     product: async (parent, { _id }) => {
@@ -86,7 +86,7 @@ const resolvers = {
         username,
         email,
         password,
-        store: { storeName },
+        storeName,
       });
       const token = signToken(user);
       return { token, user };
@@ -137,7 +137,7 @@ const resolvers = {
           description,
         });
 
-        return product.populate("category");
+        return (await product.populate("category")).populate("store");
       }
       throw AuthenticationError;
     },

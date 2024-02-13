@@ -4,13 +4,9 @@ type User {
     username: String!
     email: String!
     password: String!
-    store: Store
-    orders: [Product]
-}
-
-type Store {
     storeName: String!
-    products: [Product]
+    store: [Product]
+    orders: [Product]
 }
 
 type Image {
@@ -26,7 +22,6 @@ type Product {
     price: Float
     description: String
     image: String
-    store: Store
     dateListed: String
     category: Category
 }
