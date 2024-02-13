@@ -137,7 +137,13 @@ const resolvers = {
           description,
         });
 
-        return (await product.populate("category")).populate("store");
+        const updatedUser = await User.findByIdAndUpdate(
+          context.user._id,
+          { $push: { store: product } },
+          { new: true }
+        );
+
+        return updatedUser;
       }
       throw AuthenticationError;
     },
