@@ -29,12 +29,41 @@ const resolvers = {
       return Product.find();
     },
     // find one product by ID
-    product: async (parent, { productId }) => {
-      return Product.findOne({ _id: productId }).populate("category");
+    product: async (parent, { _id }) => {
+      try {
+        return await Product.findOne({ _id }).populate("category");
+      } catch (err) {
+        console.log(err);
+      }
     },
     // find all categories
     categories: async () => {
       return Category.find();
+    },
+    // from search products
+    productSearch: async (parents, { searchQuery }) => {
+      // if the search query has more than one word, it will split them at the space
+      const arrayOfQuery = searchQuery.split(" ");
+      //ignore common words: the, this, a, an, of, from
+      const filteredQuery = arrayOfQuery.filter(
+        (word) =>
+          word !== "the" &&
+          word !== "this" &&
+          word !== "a" &&
+          word !== "an" &&
+          word !== "of" &&
+          word !== "from"
+      );
+      const regexQuery = filteredQuery.join("|");
+      console.log(regexQuery);
+      const productsFound = await Product.find({
+        $or: [
+          { name: { $regex: regexQuery, $options: "i" } },
+          { description: { $regex: regexQuery, $options: "i" } },
+        ],
+      });
+
+      return productsFound;
     },
   },
   Mutation: {
@@ -96,17 +125,19 @@ const resolvers = {
     // add product to db
     addProduct: async (
       parent,
-      { name, price, category, descripton },
+      { name, price, category, description },
       context
     ) => {
       if (context.user) {
+        console.log(context.user);
         const product = await Product.create({
           name,
           price,
           category,
-          descripton,
+          description,
         });
-        return product;
+
+        return product.populate("category");
       }
       throw AuthenticationError;
     },
