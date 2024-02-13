@@ -1,40 +1,13 @@
 import { gql } from "@apollo/client";
 
 export const LOGIN_USER = gql`
-mutation Login($email: String!, $password: String!) {
+  mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
       user {
         _id
         email
         username
-        store {
-          storeName
-          products {
-            _id
-            price
-            name
-            image
-            description
-            dateListed
-            category {
-              _id
-              name
-            }
-          }
-        }
-        orders {
-          _id
-          price
-          name
-          image
-          description
-          dateListed
-          category {
-            _id
-            name
-          }
-        }
       }
     }
   }
@@ -58,36 +31,7 @@ export const ADD_USER = gql`
         _id
         email
         username
-        store {
-          storeName
-          products {
-            _id
-            price
-            name
-            image
-            description
-            dateListed
-            category {
-              _id
-              name
-            }
-          }
-        }
-        orders {
-          _id
-          price
-          name
-          image
-          description
-          dateListed
-          category {
-            _id
-            name
-          }
-          store {
-            storeName
-          }
-        }
+        storeName
       }
     }
   }
@@ -97,19 +41,8 @@ export const ADD_ORDER = gql`
   mutation AddOrder($productId: ID!) {
     addOrder(productId: $productId) {
       _id
-      email
-      username
       orders {
         _id
-        name
-        price
-        category {
-          _id
-          name
-        }
-      }
-      store {
-        storeName
       }
     }
   }
@@ -129,12 +62,16 @@ export const ADD_PRODUCT = gql`
       category: $category
     ) {
       _id
+      lister {
+        _id
+        username
+        email
+      }
+      description
       category {
         _id
         name
       }
-      dateListed
-      description
       image
       name
       price
