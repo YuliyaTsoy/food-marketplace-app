@@ -4,27 +4,26 @@ import { gql } from '@apollo/client';
 
 export const GET_MYSTORE = gql`
 query MyStore {
-    myStore {
-      _id
-      username
-      store {
+  myStore {
+    _id
+    username
+    store {
+      storeName
+      products {
         _id
-        storeName
-        products {
+        name
+        description
+        image
+        dateListed
+        price
+        category {
           _id
           name
-          price
-          image
-          description
-          dateListed
-          category {
-            _id
-            name
-          }
         }
       }
     }
-  }`;
+  }
+}`;
   export const GET_ALL_PRODUCTS = gql`
   query getAllProducts {
     products {
