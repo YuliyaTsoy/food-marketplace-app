@@ -1,7 +1,14 @@
 import { useState } from "react";
 import ImageUploadDragOver from "../components/ImageUploadDragOver";
+import CategoryCheckbox from "../components/CategoryCheckbox";
 
-function dummySubmit(name, price, image, description, categories) {
+import { ADD_PRODUCT } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
+
+
+// TODO: Delete this dummy 'AddProduct' function when AddProduct mutation
+// is ready
+function addProduct(name, price, image, description, categories) {
     console.log(`
 name = ${name}
 price = ${price}
@@ -12,6 +19,10 @@ categories = ${categories}
 }
 
 export default function AddProduct() {
+
+    // TODO: comment back in AddProduct and its corresponding await
+    // when ready
+    //const [addProduct, {error}] = useMutation(ADD_PRODUCT);
 
     const [productName, setProductName] = useState("")
     const [productPrice, setProductPrice] = useState(0);
@@ -38,7 +49,7 @@ export default function AddProduct() {
         setProductPrice(priceValue.toPrecision(2));
     }
 
-    function handleFormSubmit(e) {
+    async function handleFormSubmit(e) {
         e.preventDefault();
         console.log('e -> ', e);
 
@@ -60,8 +71,29 @@ export default function AddProduct() {
             return alert("Your product must have an image!");
         }
 
-        dummySubmit(productName, productPrice, image, productDescription)
+        // TODO: Get rid of dummy addProduct function and comment back in
+        // the below mutation
 
+        /*
+        return await addProduct(
+            variables: {
+                name: productName,
+                price: productPrice,
+                description: productDescription,
+                image: image,
+                category: productCategories
+            }
+        )
+        */
+
+        // DELETE ME SOON
+        addProduct({
+            name: productName,
+            price: productPrice,
+            description: productDescription,
+            image: image,
+            category: productCategories
+        })
     }
 
     return (
@@ -82,6 +114,9 @@ export default function AddProduct() {
                 <div className="flex flex-col">
                     <label htmlFor="product-description">Make a Product Description</label>
                     <input type="text" id="product-description" className="border-dashed rounded-lg border-2 border-slate-950 w-1/5 h-1/5" onChange={handleDescriptionChange}></input>
+                </div>
+                <div className="flex flex-col">
+                    <CategoryCheckbox id="search-canned-goods" name="cannedGoods"/>
                 </div>
                 <div className="flex flex-col">
                     <input type="submit" value="Add Product!"/>
