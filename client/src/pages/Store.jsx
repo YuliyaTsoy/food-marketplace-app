@@ -1,8 +1,9 @@
 import ProductCard from '../components/ProductCard'
 import { PencilIcon, XCircleIcon } from '@heroicons/react/24/outline'
-import { useQuery } from '@apollo/client'
+import { useQuery, useMutation } from '@apollo/client'
 import { GET_MYSTORE } from '../utils/queries'
 import sampleProfile from '../assets/sampleProfile'
+import { DELETE_PRODUCT } from '../utils/mutations'
 
 
 export default function Store() {
@@ -12,7 +13,22 @@ export default function Store() {
     const userStore = sampleProfile
     console.log(userStore)
 
-    //use mutation 
+    //use mutation DELETE_PRODUCT and refetches my store to update page
+    const [deleteProduct, { error }] = useMutation(DELETE_PRODUCT,
+        //     {
+        //     refetchQueries: [
+        //         GET_MYSTORE
+        //     ]
+        // }
+    )
+
+    //function that accepts _id (mongoDB) and deletes the product from the db
+    const handleProductDelete = async (productId) => {
+        console.log('wants to delete product ', productId)
+        // const data = await deleteProduct({
+        //     variables: { productId: productId }
+        // })
+    }
 
     // if data is not defined, it will show a loading prompt
     // if (loading) {
