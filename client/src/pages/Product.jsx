@@ -7,11 +7,12 @@ import { GET_ALL_PRODUCTS } from "../utils/queries";
 function ProductPage() {
     let { productId } = useParams();
     //   console.log(productId);
-    const { loading, error, data } = useQuery(GET_ALL_PRODUCTS);
+    const { loading, error, data } = useQuery(GET_ONE_PRODUCT, {
+      variables: { id: productId },
+    });
     console.log(data);
-
-    const product =
-    data?.products.filter((product) => product._id === productId)[0] || {};
+  
+    const product = data?.product || {};
     console.log(product);
     return (
       <div>
