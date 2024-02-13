@@ -29,8 +29,12 @@ const resolvers = {
       return Product.find();
     },
     // find one product by ID
-    product: async (parent, { productId }) => {
-      return Product.findOne({ _id: productId }).populate("category");
+    product: async (parent, { _id }) => {
+      try {
+        return await Product.findOne({ _id }).populate("category");
+      } catch (err) {
+        console.log(err);
+      }
     },
     // find all categories
     categories: async () => {
@@ -131,7 +135,8 @@ const resolvers = {
           category,
           description,
         });
-        return product;
+        console.log(product);
+        return product.populate("category");
       }
       throw AuthenticationError;
     },
