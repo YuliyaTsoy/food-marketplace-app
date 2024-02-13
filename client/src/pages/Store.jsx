@@ -1,4 +1,5 @@
 import ProductCard from '../components/ProductCard'
+import { Link } from 'react-router-dom'
 import { PencilIcon, XCircleIcon } from '@heroicons/react/24/outline'
 import { useQuery, useMutation } from '@apollo/client'
 import { GET_MYSTORE } from '../utils/queries'
@@ -43,15 +44,17 @@ export default function Store() {
     // when data is defined it will return this: 
     return (
         <>
-            <div className='flex flex-col justify-items-center m-4 px-3'>
+            <div className='flex flex-col justify-items-center my-4 mx-10 px-3'>
 
-                <div className='text-4xl text-center font-bold'><h1>Welcome to {userStore.storeName}!</h1></div>
+                <div className='text-4xl text-left font-bold'><h1>Welcome to {userStore.storeName}!</h1></div>
 
                 {/* Add a button to redirect the user to add a product */}
                 <div className='flex justify-end'>
-                    <button className="bg-red-300 cursor-pointer hover:text-white hover:bg-red-800 rounded-full mx-10 mt-8 mb-3 px-5 py-2">
-                        Add product
-                    </button>
+                    <Link
+                        className='bg-red-300 cursor-pointer hover:text-white hover:bg-red-800 rounded-full mx-10 mt-8 mb-3 px-5 py-2'
+                        to='/AddProduct'>
+                        Add product to {userStore.storeName}
+                    </Link>
                 </div>
                 {/* if the user has products, map through all of them and render using ProductCard component */}
                 {userStore.store ? (
