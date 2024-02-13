@@ -23,11 +23,16 @@ export default function Store() {
     )
 
     //function that accepts _id (mongoDB) and deletes the product from the db
-    const handleProductDelete = async (productId) => {
-        console.log('wants to delete product ', productId)
-        // const data = await deleteProduct({
-        //     variables: { productId: productId }
-        // })
+    const handleProductDelete = async (productId, productName) => {
+        //show an alert to prompt the user
+        const confirmPrompt = window.confirm(`are you sure you want to delete ${productName}?`)
+        // if user clicked 'ok' delete product, if not do nothing
+        confirmPrompt ? (console.log('wants to delete product ', productId)
+
+            // const data = await deleteProduct({
+            //     variables: { productId: productId }
+            // })
+        ) : ''
     }
 
     // if data is not defined, it will show a loading prompt
@@ -48,11 +53,15 @@ export default function Store() {
                             <>
                                 <div className='flex flex-col'>
                                     <div className='grid grid-cols-4 justify-items-end'>
-                                        <XCircleIcon className='h-10 w-14 col-end-5 cursor-pointer' style={{ color: 'grey' }} />
+                                        <XCircleIcon
+                                            key={product._id}
+                                            className='h-10 w-14 col-end-5 cursor-pointer'
+                                            style={{ color: 'grey' }}
+                                            onClick={() => handleProductDelete(product._id, product.name)} />
                                         {/* <PencilIcon className='h-6 w-6 col-end-4 cursor-pointer' /> */}
                                     </div>
                                     <ProductCard
-                                        key={product.id}
+                                        key={product._id}
                                         name={product.name}
                                         image={product.image}
                                         price={product.price}
@@ -63,7 +72,7 @@ export default function Store() {
                     }
                     )}
                 </>
-                ) : <p>your active listings will show here</p>}</div>
+                ) : <p className='text-2xl font-bold'>your active products will show here</p>}</div>
             </div>
         </>
     )
