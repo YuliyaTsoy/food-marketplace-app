@@ -8,6 +8,6 @@ export default function CategoryCheckbox({id, name, onClick}) {
 		<div className="filter-checkbox-container">
 			<input type="checkbox" id={id} name={name} onClick={onClick}/>
 			<label htmlFor={id}>{checkboxText}</label>
-		</div>	
+		</div>	 
 		)
 }

@@ -3,11 +3,6 @@
 */
 import { useState } from "react"
 
-// TODO: dummy uploadImage function reimplement
-function UploadImage(image) {
-  console.log('uploading image -> ', image);
-}
-
 export default function ImageUploadDragOver() {
 
   const [productImageUrl, setProductImageUrl] = useState("");
@@ -20,8 +15,6 @@ export default function ImageUploadDragOver() {
   }
 
   function handleImageCancel(e) {
-    console.log(`e -> ${e}`);
-
     setProductImageUrl("");
     setHasProductImage(false);
   }

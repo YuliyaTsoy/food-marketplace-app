@@ -18,6 +18,18 @@ categories = ${categories}
 `);
 }
 
+categories = [
+    {
+        id: "search-canned-goods",
+        name: "cannedGoods"
+    },
+    {
+        id: "search-dairy",
+        name: "dairy"
+    }
+    [id="search-canned-goods" "cannedGoods" ]
+]
+
 export default function AddProduct() {
 
     // TODO: comment back in AddProduct and its corresponding await
@@ -49,7 +61,7 @@ export default function AddProduct() {
         setProductPrice(priceValue.toPrecision(2));
     }
 
-    function handleCategoryChange({target}) {
+    function handleCategoryClick({target}) {
         console.log('target -> ', target);
     }
 
@@ -106,21 +118,37 @@ export default function AddProduct() {
             <form onSubmit={handleFormSubmit}>
                 <div className="flex flex-col">
                     <label htmlFor="product-name">Enter a product name</label>
-                    <input type="text" id="product-name" className="border-dashed rounded-lg border-2 border-slate-950 w-1/5" onChange={handleNameChange}></input>
+                    <input
+                    type="text" id="product-name"
+                    className="border-dashed rounded-lg border-2 border-slate-950 w-1/5"
+                    onChange={handleNameChange}>
+                    </input>
                 </div>
                 <div className="flex flex-col">
                     <label htmlFor="product-price">Enter a product price</label>
-                    <input type="text" inputMode="numeric" pattern="[0-9\.,]*" id="product-price" className="border-dashed rounded-lg border-2 border-slate-950 w-1/5" onChange={handlePriceChange}></input>
+                    <input
+                    type="text" inputMode="numeric" pattern="[0-9\.,]*" id="product-price"
+                    className="border-dashed rounded-lg border-2 border-slate-950 w-1/5"
+                    onChange={handlePriceChange}>
+                    </input>
                 </div>
                 <div className="flex flex-col">
                     <ImageUploadDragOver />
                 </div>
                 <div className="flex flex-col">
                     <label htmlFor="product-description">Make a Product Description</label>
-                    <input type="text" id="product-description" className="border-dashed rounded-lg border-2 border-slate-950 w-1/5 h-1/5" onChange={handleDescriptionChange}></input>
+                    <input
+                    type="text" id="product-description"
+                    className="border-dashed rounded-lg border-2 border-slate-950 w-1/5 h-1/5"
+                    onChange={handleDescriptionChange}>
+                    </input>
                 </div>
                 <div className="flex flex-col">
-                    <CategoryCheckbox id="search-canned-goods" name="cannedGoods" handleChange={handleCategoryChange}/>
+                    {[[]]}
+                    <CategoryCheckbox id="search-canned-goods" name="cannedGoods" onClick={handleCategoryClick} />
+                    <CategoryCheckbox id="search-canned-goods" name="cannedGoods" onClick={handleCategoryClick} />
+
+
                 </div>
                 <div className="flex flex-col">
                     <input type="submit" value="Add Product!"/>
