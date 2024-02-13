@@ -86,7 +86,7 @@ const resolvers = {
         username,
         email,
         password,
-        store: { storeName },
+        storeName,
       });
       const token = signToken(user);
       return { token, user };
