@@ -1,64 +1,107 @@
-import { gql } from '@apollo/client';
+import { gql } from "@apollo/client";
 
-//get the user's store logged in to render
-
-export const GET_MYSTORE = gql`
-query MyStore {
-  myStore {
-    _id
-    username
-    store {
+// get all users
+export const USERS = gql`
+  query Users {
+    users {
+      _id
+      email
       storeName
-      products {
+      username
+      store {
+        _id
+        name
+      }
+    }
+  }
+`;
+
+// get one user
+export const USER = gql`
+  query User($id: ID!) {
+    user(_id: $id) {
+      _id
+      email
+      storeName
+      username
+      store {
+        _id
+        name
+      }
+      orders {
+        _id
+        name
+        price
+        dateListed
+        description
+        image
+      }
+    }
+  }
+`;
+//get the user's store logged in to render
+export const GET_MYSTORE = gql`
+  query MyStore($id: ID!) {
+    myStore(_id: $id) {
+      _id
+      storeName
+      store {
         _id
         name
         description
-        image
         dateListed
         price
-        category {
-          _id
-          name
-        }
       }
     }
   }
-}`;
-  export const GET_ALL_PRODUCTS = gql`
-  query getAllProducts {
+`;
+export const GET_ALL_PRODUCTS = gql`
+  query allProducts {
     products {
       _id
       category {
+        _id
         name
       }
+      dateListed
       description
       image
       name
       price
-      store {
+      lister {
+        _id
         storeName
       }
     }
   }
-  `;
+`;
 
-  export const GET_ONE_PRODUCT = gql`
-  query Product($id: ID!) {
+export const GET_ONE_PRODUCT = gql`
+  query oneProduct($id: ID!) {
     product(_id: $id) {
       _id
-      name
-      price
+      category {
+        _id
+        name
+      }
+      lister {
+        _id
+        storeName
+      }
       description
       dateListed
       image
-      category {
-        name
-      }
-      store {
-        storeName
-      }
+      price
+      name
     }
   }
-  `;
+`;
 
-
+export const GET_CATEGORIES = gql`
+  query Categories {
+    categories {
+      _id
+      name
+    }
+  }
+`;
