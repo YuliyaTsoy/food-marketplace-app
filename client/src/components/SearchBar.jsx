@@ -19,7 +19,7 @@ function SearchBar() {
                 <input
                     type="text"
                     placeholder="Search Products"
-                    className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-md outline-none bg-gray-50 focus:bg-white focus:border-indigo-600"
+                    className="w-full py-3 pl-12 pr-4 text-gray-500 border rounded-2xl outline-none bg-gray-50 focus:bg-white focus:border-red-800"
                 />
             </div>
         </form>

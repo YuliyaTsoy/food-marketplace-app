@@ -10,7 +10,7 @@ import { Tomato, Samosa, Potatoes, FishTacos, Brisket, Eggplant, Empanadas, Goud
 export default function Home() {
     return (
         <>
-            <div className='flex justify-center mx-32'>
+            <div className='flex justify-center md:mx-32 sm:mx-20'>
                 <SearchBar />
             </div>
             <div className="home-page flex">
