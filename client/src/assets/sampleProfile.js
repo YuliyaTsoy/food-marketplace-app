@@ -4,7 +4,7 @@ const sampleProfile = {
     _id: "123456785412587455",
     username: "BonoFluff",
     storeName: "Bono sells treats",
-    products: [
+    store: [
         {
             id: "1",
             name: "Homemade dog treats",

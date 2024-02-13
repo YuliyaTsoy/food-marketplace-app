@@ -18,7 +18,17 @@ export default function Store() {
     // when data is defined it will return this: 
     return (
         <>
-            <div><h1>this is your store page</h1></div>
+            <div className='flex flex-col container m-4'>
+
+                <div className='text-4xl font-bold'><h1>Welcome to {userStore.storeName}!</h1></div>
+                {/* if the user has products, map through all of them and render using ProductCard component */}
+                <div className='grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-4'>{userStore.store ? (<>
+                    {userStore.store.map((product) =>
+                        <ProductCard key={product.id} name={product.name} image={product.image} price={product.price} storeName={userStore.storeName} />
+                    )}
+                </>
+                ) : <p>your active listings will show here</p>}</div>
+            </div>
         </>
     )
 };
