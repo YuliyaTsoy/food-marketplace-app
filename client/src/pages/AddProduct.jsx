@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ImageUploadDragOver from "../components/ImageUploadDragOver";
 import CategoryCheckbox from "../components/CategoryCheckbox";
 
 import { ADD_PRODUCT } from "../utils/mutations";
-import { useMutation } from "@apollo/client";
-
+import { GET_CATEGORIES } from "../utils/queries";
+import { useMutation, useQuery } from "@apollo/client";
 
 // TODO: Delete this dummy 'AddProduct' function when AddProduct mutation
 // is ready
@@ -18,28 +18,29 @@ categories = ${categories}
 `);
 }
 
-categories = [
-    {
-        id: "search-canned-goods",
-        name: "cannedGoods"
-    },
-    {
-        id: "search-dairy",
-        name: "dairy"
-    }
-    [id="search-canned-goods" "cannedGoods" ]
-]
-
 export default function AddProduct() {
 
     // TODO: comment back in AddProduct and its corresponding await
     // when ready
-    //const [addProduct, {error}] = useMutation(ADD_PRODUCT);
+    // const [addProduct, {error}] = useMutation(ADD_PRODUCT);
 
+    // MVP AND BEYOND - cache product information in local storage here
+    /*
+    useEffect(() => {
+    }, []);
+    */
     const [productName, setProductName] = useState("")
     const [productPrice, setProductPrice] = useState(0);
     const [productDescription, setProductDescription] = useState("");
-    const [productCategories, setProductCategories] = useState([]);
+    const [productCategories, setProductCategories] = useState(initialCategories);
+
+
+    const {loading, data} = useQuery(GET_CATEGORIES);
+    console.log('data -> ', data);
+    
+    if (loading) {
+        return <h5>Fetching categories...</h5>;
+    }
 
     function handleNameChange({target}) {
         setProductName(target.value);
@@ -144,11 +145,7 @@ export default function AddProduct() {
                     </input>
                 </div>
                 <div className="flex flex-col">
-                    {[[]]}
                     <CategoryCheckbox id="search-canned-goods" name="cannedGoods" onClick={handleCategoryClick} />
-                    <CategoryCheckbox id="search-canned-goods" name="cannedGoods" onClick={handleCategoryClick} />
-
-
                 </div>
                 <div className="flex flex-col">
                     <input type="submit" value="Add Product!"/>
