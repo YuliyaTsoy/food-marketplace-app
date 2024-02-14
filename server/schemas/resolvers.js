@@ -160,27 +160,37 @@ const resolvers = {
       throw AuthenticationError;
     },
     // from search products
-    productSearch: async (parents, { searchQuery }) => {
+    productSearch: async (parents, { searchQuery, searchCategories }) => {
       // if the search query has more than one word, it will split them at the space
-      const arrayOfQuery = searchQuery.split(" ");
-      //ignore common words: the, this, a, an, of, from
-      const filteredQuery = arrayOfQuery.filter(
-        (word) =>
-          word !== "the" &&
-          word !== "this" &&
-          word !== "a" &&
-          word !== "an" &&
-          word !== "of" &&
-          word !== "from"
-      );
-      const regexQuery = filteredQuery.join("|");
-      console.log(regexQuery);
-      const productsFound = await Product.find({
-        $or: [
-          { name: { $regex: regexQuery, $options: "i" } },
-          { description: { $regex: regexQuery, $options: "i" } },
-        ],
-      }).populate(["category", "lister"]);
+      if (searchQuery) {
+
+        const arrayOfQuery = searchQuery.split(" ");
+        //ignore common words: the, this, a, an, of, from
+        const filteredQuery = arrayOfQuery.filter(
+          (word) =>
+            word !== "the" &&
+            word !== "this" &&
+            word !== "a" &&
+            word !== "an" &&
+            word !== "of" &&
+            word !== "from"
+        );
+        const regexQuery = filteredQuery.join("|");
+        console.log(regexQuery);
+        return productsFound = await Product.find({
+          $or: [
+            { name: { $regex: regexQuery, $options: "i" } },
+            { description: { $regex: regexQuery, $options: "i" } },
+          ],
+        }).populate(["category", "lister"]);
+      }
+
+      if (searchCategories) {
+        console.log(searchCategories)
+        // return productsFound = await Product.find({
+        //   category: { name: 'fruits' }
+        // }).populate(["category", "lister"])
+      }
 
       return productsFound;
     },
