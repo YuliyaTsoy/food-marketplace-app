@@ -1,6 +1,12 @@
+// test file for adding image seeding to server side
 const db = require("./connection");
 const { User, Category, Product } = require("../models");
 const dropDB = require("./dropDB");
+
+// This file uses the image-to-bas64 npm package to convert the sample pics
+// into a base 64 that can be stored in our DB and then served to the user
+const imageToBase64 = require('image-to-base64');
+
 
 db.once("open", async () => {
   await dropDB("User", "users");
@@ -8,12 +14,15 @@ db.once("open", async () => {
   await dropDB("Product", "products");
 
   const categories = await Category.insertMany([
-    { name: "Produce" },
-    { name: "Prepared Foods" },
-    { name: "Canned Gooods" },
-    { name: "Meat" },
+    { name: "Canned Goods" },
     { name: "Dairy" },
+    { name: "Fruits" },
+    { name: "Meat" },
+    { name: "Prepared Goods" },
+    { name: "Vegetables" }
   ]);
+
+  console.log('categories -> ', categories);
 
   const products = await Product.insertMany([
     {
@@ -21,6 +30,7 @@ db.once("open", async () => {
       price: 2.99,
       category: categories[0]._id,
       description: "Description here",
+
     },
     {
       name: "Potatoes",
@@ -97,3 +107,4 @@ db.once("open", async () => {
   console.log("seed complete!");
   process.exit();
 });
+
