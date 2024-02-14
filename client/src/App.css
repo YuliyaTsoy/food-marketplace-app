@@ -1,3 +1,7 @@
+main {
+  min-height: 100vh;
+}
+
 .product-filter {
   /*
   Make the height of the filter tab as the height of the screen minus
