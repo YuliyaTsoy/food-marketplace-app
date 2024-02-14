@@ -132,7 +132,6 @@ export default function AddProduct() {
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
             <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Add a Product to Your Store</h2>
         </div>
-
         <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form className="space-y-6 w-full" onSubmit={handleFormSubmit}>
                 <div>
@@ -157,14 +156,18 @@ export default function AddProduct() {
                         <ImageUploadDragOver />
                     </div>
                     <label htmlFor="product-description">Make a Product Description</label>
-                </div>
-                <div className="w-full">
+                    <div className="mt-2">
                         <textarea
-                        type="textarea" id="product-description"
+                        id="product-description"
                         className="block w-full h-32 rounded-md border-0 align-top py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                         onChange={handleDescriptionChange}>
                         </textarea>
                     </div>
+                    <label htmlFor="product-category">Select a Product Category</label>
+                    <div className="mt-2 border-red-800 w- h-32">
+                        <CategoryCheckbox id="search-canned-goods" name="cannedGoods" onClick={handleCategoryClick} />
+                    </div>
+                </div>
             </form>
         </div>
     </div>
