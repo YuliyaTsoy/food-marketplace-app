@@ -106,4 +106,18 @@ export const GET_CATEGORIES = gql`
   }
 `;
 
-
+export const GET_USER_ORDERS = gql`
+  query UserOrders {
+    userOrders {
+      _id
+      orders {
+        _id
+        name
+        price
+        description
+        image
+      }
+      username
+    }
+  }
+`;
