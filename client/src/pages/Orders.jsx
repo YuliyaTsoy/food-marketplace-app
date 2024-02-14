@@ -1,6 +1,6 @@
 import React from "react";
 // import { useParams } from "react-router-dom";
-// import ProductCard from "../components/SingleProductCard";
+import ProductCard from "../components/SingleProductCard";
 // import { useQuery } from "@apollo/client";
 // import { GET_ONE_PRODUCT } from "../utils/queries";
 
@@ -16,7 +16,7 @@ function Orders() {
   // console.log(product);
   return (
     <div>
-      {/* <ProductCard product={product} /> */}
+      {/* <ProductCard productId={_id} /> */}
       <h1>Here will be order list</h1>
     </div>
   );
