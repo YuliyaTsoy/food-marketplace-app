@@ -66,8 +66,30 @@ input[type="checkbox"]:checked {
   accent-color: var(--bg-red-800);
 }
 
-img#product-preview {
+/* container of image and cancel button */
+.add-product-image-container {
+  position: relative;
+}
+
+.add-product-image-container img {
+  position: relative;
   aspect-ratio: 1;
   width: calc(100%);
   height: auto;
+}
+
+.cancel-image-button > div{
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  opacity: 0.8;
+  background-color:var(--bg-red-800);
+  color: white;
+  font-size: 18px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 4px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
 }
