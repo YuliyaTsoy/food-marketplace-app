@@ -212,11 +212,25 @@ const resolvers = {
 
       if (searchCategories) {
         console.log(searchCategories);
-        // need to find the category _id by name 
-        return productsFound = await Product.find({
-          category: { _id: searchCategories[0] }
-        }
+        //searchCategories is an array, need to map through the array for everyId 
+        // const multipleSearch = searchCategories.map(
+        //   async (categoryId) =>
+        //     await Product.find({
+        //       category: {
+        //         _id: categoryId,
+        //       },
+        //     }).populate(["category", "lister"]))
+
+        // return multipleSearch
+
+        return await Product.find(
+          {
+            category: {
+              _id: searchCategories[0],
+            },
+          }
         ).populate(["category", "lister"])
+
       }
 
       return productsFound;
