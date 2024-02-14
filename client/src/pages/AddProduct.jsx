@@ -34,7 +34,7 @@ export default function AddProduct() {
     const [productName, setProductName] = useState("")
     const [productPrice, setProductPrice] = useState(0);
     const [productDescription, setProductDescription] = useState("");
-    const [productCategories, setProductCategories] = useState(new Set());
+    const [productCategories, setProductCategories] = useState([]);
 
 
     const {loading, data} = useQuery(GET_CATEGORIES);
@@ -67,7 +67,7 @@ export default function AddProduct() {
     function handleCategoryClick({target}) {
         const categoryName = target.name;
         console.log('target -> ', target);
-        setProductCategories(new Set(...productCategories, categoryName));
+        setProductCategories([...productCategories, categoryName]);
     }
 
     async function handleFormSubmit(e) {
