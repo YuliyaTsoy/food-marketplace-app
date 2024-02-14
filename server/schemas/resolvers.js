@@ -19,7 +19,7 @@ const resolvers = {
           "-__v -password"
         );
 
-        return userData.populate("store");
+        return userData.populate(["store"]);
       }
 
       throw AuthenticationError;
