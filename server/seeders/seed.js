@@ -102,7 +102,7 @@ db.once("open", async () => {
       name: "Homemade Mozzarella Cheese",
       price: 5.99,
       category: catId("Dairy"),
-      description: "Made in my bathtub",
+      description: "sooo cheesy",
       image: await getImage("mozzarella.jpg")
     },
     {
@@ -127,11 +127,15 @@ db.once("open", async () => {
       image: await getImage("tomato.jpg")
     }
   ]);
+
+  // same implementation as catId. Get product id from a name instead
+  const prodId = (name) => products.find((product) => product.name === name)?._id;
+
   await User.create({
     username: "jimmythetester",
     email: "jimmy@test.com",
     password: "password123",
-    store: [products[3]._id, products[8]._id],
+    store: [prodId("Empanadas"), prodId("Fish Tacos"), prodId("Brussel Sprouts")],
     storeName: "Jimmy's Store",
   });
 
@@ -139,10 +143,18 @@ db.once("open", async () => {
     username: "leonlemartin",
     email: "leon@lemartin.com",
     password: "supersecretpassword",
-    orders: [products[5]._id, products[2]._id, products[7]._id],
+    orders: [prodId("Tomato"), prodId("Mozarella"), prodId("Gouda"), prodId("Brisket")],
     store: [products[0]._id],
     storeName: "Flight of Fancy",
   });
+
+  await User.create({
+    username: "luc",
+    email: "luc@email.com",
+    password: "password123",
+    store: [prodId("Eggplant"), prodId("Canned Peas"), prodId("Carrots"), prodId("Potatoes"), prodId("Samosa")],
+    storeName: "Luc's rooftop garden"
+  })
 
   console.log("seed complete!");
   process.exit();
