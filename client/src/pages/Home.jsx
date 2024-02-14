@@ -4,7 +4,8 @@ import Filter from '../components/Filter'
 import ProductCard from '../components/ProductCard';
 import SearchBar from '../components/SearchBar';
 import { useQuery, useMutation } from '@apollo/client'
-import { GET_ALL_PRODUCTS, GET_PRODUCTS_FROM_SEARCH } from '../utils/queries';
+import { GET_ALL_PRODUCTS } from '../utils/queries';
+import { REFINE_PRODUCTS } from '../utils/mutations';
 
 // dummy imports
 import { Tomato, Samosa, Potatoes, FishTacos, Brisket, Eggplant, Empanadas, Gouda } from '../assets/samplepics/index'
@@ -18,21 +19,24 @@ export default function Home() {
     //get all products from mutation GET_ALL_PRODUCTS
     const { loading, data } = useQuery(GET_ALL_PRODUCTS)
     const allProducts = data?.products || []
-    console.log(allProducts)
+    // console.log(allProducts)
     //use effect to set the products to render once data is defined
     useEffect(() => {
         setProducts(allProducts)
     }, [data])
 
+    //useMutation to refineProducts from search query
+    const [refineProducts, { error }] = useMutation(REFINE_PRODUCTS)
+
     const getRefinedProducts = async (seachQuery) => {
         // will trigger to useQuery and re render the products found from the search
         console.log(`user wants to find products related to: ${seachQuery}`)
-        const { loading, data } = useQuery(GET_PRODUCTS_FROM_SEARCH, {
-            variables: { searchQuery:'potatoes' }
+        const { loading, data } = await refineProducts({
+            variables: { searchQuery: seachQuery }
         })
         const refinedProducts = data?.productSearch || []
         console.log(refinedProducts)
-        // setProducts(refinedProducts)
+        setProducts(refinedProducts)
     }
 
     //if data is not defined, it will show a loading prompt

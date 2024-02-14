@@ -100,3 +100,24 @@ mutation DeleteProduct($productId: ID!) {
   }
 }
 `;
+
+
+export const REFINE_PRODUCTS = gql`
+mutation ProductSearch($searchQuery: String!) {
+  productSearch(searchQuery: $searchQuery) {
+    _id
+    name
+    description
+    image
+    price
+    lister {
+      _id
+      storeName
+    }
+    category {
+      _id
+      name
+    }
+  }
+}
+`;

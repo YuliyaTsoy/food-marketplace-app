@@ -41,7 +41,6 @@ type Auth {
 type Query {
     product(_id: ID!): Product
     products: [Product]
-    productSearch(searchQuery: String!): [Product]
     users: [User]
     user(_id: ID!): User
     categories: [Category]
@@ -57,6 +56,7 @@ type Mutation {
     addCategory(name: String!): Category
     uploadImage(name: String, type: String, data: String): Image
     updateProduct(_id: ID!, name: String!, price: Float!, description: String!, category: ID!): Product
+    productSearch(searchQuery: String!): [Product]
 }
 
 `;
