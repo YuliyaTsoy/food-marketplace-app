@@ -96,6 +96,7 @@ export default function Home() {
 
         }
 
+        // if categories array is empty it wont run the mutation
         catArr.length > 0 ? getFilteredProduct(catArr) : setProducts(allProducts)
 
     }, [filterState])
