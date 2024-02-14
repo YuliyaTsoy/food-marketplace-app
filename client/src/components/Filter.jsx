@@ -1,25 +1,13 @@
 import { useState } from "react";
 import CategoryCheckbox from "./CategoryCheckbox";
 
-const initialCategoryFilter = {
-	cannedGoods: false,
-	dairy: false,
-	fruits: false,
-	meat: false,
-	preparedGoods: false,
-	vegetables: false
-}
-
 // Infinity is technically not a number but it is guaranteed to be bigger
 // than ANY price set for a product
-const initialPriceRange = [0, Infinity];
+// const initialPriceRange = [0, Infinity];
 
 function Filter({ filterState, setFilterState }) {
 	const { filterCount, filters, priceRange } = filterState
-	// const [filterCount, setFilterCount] = useState(0);
-	// const [filters, setFilters] = useState(initialCategoryFilter);
 
-	// const [priceRange, setPriceRange] = useState(initialPriceRange);
 
 	function handlePriceRange(props) {
 		let { id, value } = props.target;
@@ -44,11 +32,6 @@ function Filter({ filterState, setFilterState }) {
 			max = value ? Math.max(value, 0) : priceRange[1]
 		}
 
-		if (max < min) {
-			const temp = max;
-			max = min;
-			min = temp;
-		}
 
 		setFilterState({
 			...filterState,
@@ -71,24 +54,20 @@ function Filter({ filterState, setFilterState }) {
 		const { name } = e.target;
 
 		const currFilter = filters[name];
-	
+
 		// If the current filter is false, we are activating a filter and thus we
 		// should add 1 to the filterCount. If the current filter is true then
 		// we are removing a filter and should minus 1
 		let newFilterCount = filterState.filterCount;
 		if (!currFilter) {
-			// setFilterCount(filterCount + 1);
+
 			newFilterCount++;
 		} else {
-			// setFilterCount(filterCount - 1);
+
 			newFilterCount--;
 		}
 
-		// Flip the boolean of the category filter
-		// setFilters(prevState => ({
-		// 	...prevState,
-		// 	[name]: !currFilter
-		// }));
+
 
 		setFilterState({
 			...filterState,
@@ -98,12 +77,9 @@ function Filter({ filterState, setFilterState }) {
 				[name]: !filterState.filters[name]
 			}
 		})
-
-		//send it back to the home page 
-		// onFilterClick(filters)
 	}
 
-	console.log('filterState', filterState)
+	// console.log('filterState', filterState)
 
 	return (
 		<aside className="product-filter w-1/6 bg-red-200 rounded my-10">

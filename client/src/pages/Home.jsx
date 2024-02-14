@@ -38,14 +38,11 @@ export default function Home() {
         },
         priceRange: [0, Infinity]
     })
-    // const [filterCount, setFilterCount] = useState(0);
-    // const [filters, setFilters] = useState(initialCategoryFilter);
-    // const [priceRange, setPriceRange] = useState(initialPriceRange);
 
     //useEffect for filter tracking
     useEffect(() => {
         //watch filterState and refine products when filterstate changes
-
+        console.log(filterState.filters)
     }, [filterState])
 
     //useMutation to refineProducts from search query
@@ -62,17 +59,17 @@ export default function Home() {
         setProducts(refinedProducts)
     }
 
-    const filterByCategory = async (filterBy) => {
-        // build an array of strings with the applied filters'
-        let catArr = [];
+    // const filterByCategory = async (filterBy) => {
+    //     // build an array of strings with the applied filters'
+    //     let catArr = [];
 
-        // map through the object and add to array if the value is true
-        for (const [key, value] of Object.entries(filterBy)) {
-            value ? catArr.push(key) : ''
-        }
-        console.log(catArr)
-        console.log(filterBy)
-    }
+    //     // map through the object and add to array if the value is true
+    //     for (const [key, value] of Object.entries(filterBy)) {
+    //         value ? catArr.push(key) : ''
+    //     }
+    //     console.log(catArr)
+    //     console.log(filterBy)
+    // }
 
     //if data is not defined, it will show a loading prompt
     if (loading) {
