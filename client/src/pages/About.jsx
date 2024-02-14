@@ -5,7 +5,9 @@ function About() {
     <>
       <div className="">
         <div className="text-4xl text-center font-bold m-8">
-          <h1 className="font-sans">Finding Fresh Choices Made Easy</h1>
+          <h1 className="font-sans">
+            Fresh Finder: Finding Fresh Choices Made Easy
+          </h1>
         </div>
 
         <div className="about-container flex m-10 flex-col md:flex-row">
