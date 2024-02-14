@@ -1,9 +1,23 @@
 import React, { useState, useEffect, useRef, useMemo } from "react";
+import { ADD_ORDER } from "../utils/mutations";
+import { useMutation } from "@apollo/client";
 
 const ProductCard = (props) => {
-  const { image, title, price, description, store } = props;
+  const { _id, image, title, price, description, store } = props;
   console.log(props);
 
+  const [product, {error}] = useMutation (ADD_ORDER);
+  const addToOrder = async() => {
+    try {
+      const { data } = await product ({
+        variables: {
+          productId: _id
+        }
+      })
+    } catch (e) {
+      console.error(e);
+    }
+  }
   return (
     <>
       <div className="product-card lg:flex md:flex">
@@ -15,8 +29,8 @@ const ProductCard = (props) => {
           <p className="px-5 py-2">{props.product.price}</p>
           <p className="px-5 py-2">{props.product.description}</p>
           <p className="px-5 py-2 mb-3">{props.product.store}</p>
-          <button className="bg-red-300 cursor-pointer hover:text-white rounded-full ml-10 mt-8 mb-3 px-5 py-2">
-            Add to store
+          <button className="bg-red-300 cursor-pointer hover:text-white rounded-full ml-10 mt-8 mb-3 px-5 py-2" onClick = {()=>addToOrder()}>
+            Add to Order
           </button>
         </div>
       </div>
