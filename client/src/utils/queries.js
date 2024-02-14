@@ -51,6 +51,7 @@ export const GET_MYSTORE = gql`
         description
         dateListed
         price
+        image
       }
     }
   }

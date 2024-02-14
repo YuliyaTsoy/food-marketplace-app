@@ -12,9 +12,14 @@ const path = require("path");
 // image getting function wrapper
 const getImage = async (relPath) => {
   try {
-    return await imageToBase64(path.join(
+    const base64String = await imageToBase64(path.join(
       __dirname, "samplepics", relPath)
-      );
+    );
+    // Only required for seed images! The image-to-base64 library does not
+    // insert the required encoding data at the start of the base64. So,
+    // we do so here since we know all seed images are of type jpeg
+    return `data:image/jpeg;base64,${base64String}`;
+
   } catch(err) {
     console.error(err);
     return "";
@@ -127,31 +132,39 @@ db.once("open", async () => {
 
   // same implementation as catId. Get product id from a name instead
   const prodId = (name) => products.find((product) => product.name === name)?._id;
+  
+  const users = await User.insertMany([
+    {
+      username: "jimmythetester",
+      email: "jimmy@test.com",
+      password: "password123",
+      store: [prodId("Empanadas"), prodId("Fish Tacos"), prodId("Brussel Sprouts")],
+      storeName: "Jimmy's Store",
+    },
+    {
+      username: "leonlemartin",
+      email: "leon@lemartin.com",
+      password: "supersecretpassword",
+      store: [prodId("Tomato"), prodId("Homemade Mozzarella Cheese"), prodId("Gouda"), prodId("Brisket")],
+      storeName: "Flight of Fancy",
+    },
+    {
+      username: "luc",
+      email: "luc@email.com",
+      password: "password123",
+      store: [prodId("Eggplant"), prodId("Canned Peas"), prodId("Carrots"), prodId("Potatoes"), prodId("Samosas")],
+      storeName: "Luc's rooftop garden"
+    }
+  ]);
 
-  await User.create({
-    username: "jimmythetester",
-    email: "jimmy@test.com",
-    password: "password123",
-    store: [prodId("Empanadas"), prodId("Fish Tacos"), prodId("Brussel Sprouts")],
-    storeName: "Jimmy's Store",
-  });
-
-  await User.create({
-    username: "leonlemartin",
-    email: "leon@lemartin.com",
-    password: "supersecretpassword",
-    orders: [prodId("Tomato"), prodId("Mozarella"), prodId("Gouda"), prodId("Brisket")],
-    store: [products[0]._id],
-    storeName: "Flight of Fancy",
-  });
-
-  await User.create({
-    username: "luc",
-    email: "luc@email.com",
-    password: "password123",
-    store: [prodId("Eggplant"), prodId("Canned Peas"), prodId("Carrots"), prodId("Potatoes"), prodId("Samosa")],
-    storeName: "Luc's rooftop garden"
-  })
+  // reassign lister after the users have been created
+  for (const {_id, store} of users) {
+    await Product.updateMany(
+      { _id: { $in: store } },
+      { $set: { lister: _id } },
+      { multi: true } 
+    )
+  }
 
   console.log("seed complete!");
   process.exit();

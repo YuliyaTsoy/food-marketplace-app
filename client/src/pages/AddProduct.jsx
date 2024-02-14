@@ -5,25 +5,9 @@ import CategoryCheckbox from "../components/CategoryCheckbox";
 import { ADD_PRODUCT } from "../utils/mutations";
 import { GET_CATEGORIES } from "../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
-
-// TODO: Delete this dummy 'AddProduct' function when AddProduct mutation
-// is ready
-/*
-function addProduct(name, price, image, description, categories) {
-    console.log(`
-name = ${name}
-price = ${price}
-image = ${image}
-description = ${description}
-categories = ${categories}
-`);
-}
-*/
+import { UPLOAD_IMAGE } from "../utils/mutations";
 
 export default function AddProduct() {
-
-    // TODO: comment back in AddProduct and its corresponding await
-    // when ready
     const [addProduct, {error}] = useMutation(ADD_PRODUCT);
 
     // MVP AND BEYOND - cache product information in local storage here
@@ -154,7 +138,9 @@ export default function AddProduct() {
                     <CategoryCheckbox id="search-canned-goods" name="cannedGoods" onClick={handleCategoryClick} />
                 </div>
                 <div className="flex flex-col">
-                    <input type="submit" value="Add Product!"/>
+                    <button className="bg-red-800 text-white rounded w-1/5" onClick={() => {}}>
+						<span>Add Product</span>
+					</button>
                 </div>
             </form>
         </div>

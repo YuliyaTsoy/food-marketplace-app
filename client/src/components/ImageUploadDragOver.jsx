@@ -30,6 +30,7 @@ export default function ImageUploadDragOver() {
       () => {
         // convert image file to base64 string
         imagePreviewEl.src = reader.result;
+        console.log('product image url -> ', reader.result);
       },
       false
     );
