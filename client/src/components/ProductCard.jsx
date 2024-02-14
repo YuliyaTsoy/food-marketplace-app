@@ -13,11 +13,20 @@ class ProductCard extends React.Component {
         return (
                 <div className="product-card rounded-lg" ref={this.ref}>
                     <div className="product-picture-box">
+                        {/*
                         <img
                         src={image}
                         alt={`thumbnail of ${name}`}
                         title="Click to see more product information"
                         loading="lazy" className="fit-picture mx-auto" />
+                        */}
+                        <img
+                        src={image}
+                        alt={`thumbnail of ${name}`}
+                        title="Click to see more product information"
+                        loading="lazy" className="fit-picture mx-auto"
+                        />
+
                     </div>
                     <div
                     className="product-description ml-2.5"

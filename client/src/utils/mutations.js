@@ -121,3 +121,24 @@ mutation ProductSearch($searchQuery: String!) {
   }
 }
 `;
+
+export const UPLOAD_IMAGE = gql`
+mutation UploadImage(
+  $name: String!
+  $type: string!
+  $data: String!
+) {
+  uploadimage(
+    name: $name
+    type: $type
+    data: $data
+  ) {
+    img {
+      _id
+      name
+      type
+      data
+    }
+  }
+}
+`;

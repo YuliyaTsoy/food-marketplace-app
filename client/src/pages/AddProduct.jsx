@@ -5,20 +5,7 @@ import CategoryCheckbox from "../components/CategoryCheckbox";
 import { ADD_PRODUCT } from "../utils/mutations";
 import { GET_CATEGORIES } from "../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
-
-// TODO: Delete this dummy 'AddProduct' function when AddProduct mutation
-// is ready
-/*
-function addProduct(name, price, image, description, categories) {
-    console.log(`
-name = ${name}
-price = ${price}
-image = ${image}
-description = ${description}
-categories = ${categories}
-`);
-}
-*/
+import { UPLOAD_IMAGE } from "../utils/mutations";
 
 export default function AddProduct() {
 

@@ -65,13 +65,13 @@ export default function Home() {
                 <Filter onFilterClick={filterByCategory} />
                 <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 px-8 my-8">
                     {productsToRender.map((product) => {
+                        {console.log('product image -> ', product.image)}
                         return (
                             <>
                                 <ProductCard
                                     key={product._id}
                                     name={product.name}
-                                    image={Samosa}
-                                    // image={product.image}
+                                    image={product.image}
                                     price={product.price}
                                     storeName={product.lister?.storeName}
                                 />
