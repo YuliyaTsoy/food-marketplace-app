@@ -58,6 +58,7 @@ type Mutation {
     uploadImage(name: String, type: String, data: String): Image
     updateProduct(_id: ID!, name: String!, price: Float!, description: String!, category: ID!): Product
     productSearch(searchQuery: String, searchCategories: [String]): [Product]
+    removeOrder(productId: ID!): User
 }
 
 `;
