@@ -1,3 +1,7 @@
+main {
+  min-height: 100vh;
+}
+
 .product-filter {
   /*
   Make the height of the filter tab as the height of the screen minus
@@ -11,7 +15,6 @@
 
 .product-card {
   margin: 0px;
-  
 }
 :root {
   /* Grabbed these color defs from tailwind. Sometimes I need them here */
@@ -32,7 +35,9 @@ In case a user provides too long of a name we must check and deal with text
 overflow. Combined with tailwind's line-clamp-1 class to force product names
 and store names onto one line.
 */
-h2, h3, h4 {
+h2,
+h3,
+h4 {
   overflow: hidden;
   text-overflow: ellipsis;
 }
@@ -78,12 +83,12 @@ input[type="checkbox"]:checked {
   height: auto;
 }
 
-.cancel-image-button > div{
+.cancel-image-button > div {
   position: absolute;
   top: 2%;
   right: 2%;
   opacity: 0.8;
-  background-color:var(--bg-red-800);
+  background-color: var(--bg-red-800);
   color: white;
   font-size: 18px;
   padding-left: 8px;
