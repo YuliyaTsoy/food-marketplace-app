@@ -40,8 +40,11 @@ function Filter({ filterState, setFilterState, categories }) {
 	}
 
 	function clearFilters() {
-		setFilters(initialCategoryFilter);
-		setFilterCount(0);
+		setFilterState({
+			...filterState,
+			filterCount: 0
+		});
+		// setFilterCount(0);
 
 		// use plain-old js to unselect checkboxes - Not sure how to do it in react just yet
 		const checkBoxEls = document.querySelectorAll('input[type=checkbox]');
@@ -95,10 +98,16 @@ function Filter({ filterState, setFilterState, categories }) {
 					<h3 className="font-bold my-2.5">Product Categories</h3>
 				</div>
 				<div className="filter-categories">
+					{/* <CategoryCheckbox id="search-canned-goods" name="cannedGoods" onClick={toggleCategoryFilter} />
+					<CategoryCheckbox id="search-dairy" name="dairy" onClick={toggleCategoryFilter} />
+					<CategoryCheckbox id="search-fruit" name="fruits" onClick={toggleCategoryFilter} />
+					<CategoryCheckbox id="search-meat" name="meat" onClick={toggleCategoryFilter} />
+					<CategoryCheckbox id="search-prepared-goods" name="preparedGoods" onClick={toggleCategoryFilter} />
+					<CategoryCheckbox id="search-vegetables" name="vegetables" onClick={toggleCategoryFilter} /> */}
 					{categories.map((category) => {
 						return (
 							<>
-								<CategoryCheckbox id={`search-${category.name}`} name={category.name} onClick={toggleCategoryFilter} />
+								<CategoryCheckbox key={category._id} id={`search-${category.name}`} name={category.name} onClick={toggleCategoryFilter} />
 							</>
 						)
 					})}

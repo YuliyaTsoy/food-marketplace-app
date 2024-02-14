@@ -210,7 +210,7 @@ const resolvers = {
         }).populate(["category", "lister"]));
       }
 
-      if (searchCategories) {
+      if (searchCategories.length > 0) {
         console.log(searchCategories);
         //searchCategories is an array, need to map through the array for everyId 
         // const multipleSearch = searchCategories.map(

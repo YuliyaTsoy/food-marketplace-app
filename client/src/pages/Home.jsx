@@ -40,14 +40,7 @@ export default function Home() {
     //state for filters
     const [filterState, setFilterState] = useState({
         filterCount: 0,
-        filters: {
-            cannedGoods: false,
-            dairy: false,
-            fruits: false,
-            meat: false,
-            preparedGoods: false,
-            vegetables: false,
-        },
+        filters: {},
         priceRange: [0, Infinity]
     })
 
@@ -57,8 +50,9 @@ export default function Home() {
         console.log('get Id')
         for (let category of allCategories) {
             const catName = category.name
-            const toLowerCase = catName.toLowerCase()
-            if (toLowerCase === categoryName)
+            // console.log('this is the input', categoryName)
+            // const toLowerCase = catName.toLowerCase()
+            if (catName === categoryName)
                 return category._id
         }
     }
@@ -82,12 +76,12 @@ export default function Home() {
         console.log("filters by category", catArr)
 
         // get products in the categories using mutation
-        refineProducts({
-            variables: { searchCategories: catArr }
-        })
-        const filteredByCat = refinedProductsData?.productSearch || []
-        console.log(refinedProductsData?.productSearch)
-        setProducts(filteredByCat)
+        // refineProducts({
+        //     variables: { searchCategories: catArr }
+        // })
+        // const filteredByCat = refinedProductsData?.productSearch || []
+        // console.log(refinedProductsData?.productSearch)
+        // setProducts(filteredByCat)
 
 
     }, [filterState])
