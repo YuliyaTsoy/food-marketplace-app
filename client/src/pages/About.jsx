@@ -80,11 +80,11 @@ function About() {
 
           <ul>
             <li>- Search for products</li>
-            <li>- ilter by different Categories</li>
-            <li>- Login / Sign-up</li>
+            <li>- Filter by different Categories</li>
+            <li>- Create an account</li>
             <li>- List products</li>
-            <li>- See all products in the Sellers Store</li>
-            <li>- Saving a product to order list</li>
+            <li>- View seller stores</li>
+            <li>- Saving a product to an order page</li>
           </ul>
         </div>
       </div>
