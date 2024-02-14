@@ -36,10 +36,6 @@ const resolvers = {
         });
       }
       throw AuthenticationError;
-      //  populate({
-      //   path: 'friends',
-      //   // Get friends of friends - populate the 'friends' array for every friend
-      //   populate: { path: 'friends' }
     },
     // find all products
     products: async () => {
