@@ -105,3 +105,23 @@ export const GET_CATEGORIES = gql`
     }
   }
 `;
+
+export const GET_PRODUCTS_FROM_SEARCH = gql`
+query ProductSearch($searchQuery: String!) {
+  productSearch(searchQuery: $searchQuery) {
+    _id
+    name
+    description
+    image
+    price
+    lister {
+      _id
+      storeName
+    }
+    category {
+      _id
+      name
+    }
+  }
+}
+`;

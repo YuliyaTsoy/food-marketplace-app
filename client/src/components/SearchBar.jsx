@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function SearchBar() {
+function SearchBar({ onFormSubmit }) {
 
     const [searchForm, setSearchForm] = useState('')
 

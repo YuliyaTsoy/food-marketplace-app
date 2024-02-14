@@ -61,7 +61,7 @@ const resolvers = {
           { name: { $regex: regexQuery, $options: "i" } },
           { description: { $regex: regexQuery, $options: "i" } },
         ],
-      });
+      }).populate(["category", "lister"]);
 
       return productsFound;
     },
