@@ -35,7 +35,7 @@ const ProductCard = (props) => {
           <p className="px-5 py-2">{props.product.description}</p>
           <p className="px-5 py-2 mb-3">{props.product.store}</p>
           <button
-            className="bg-red-300 cursor-pointer hover:text-white rounded-full ml-10 mt-8 mb-3 px-5 py-2"
+            className="bg-red-300 cursor-pointer hover:text-white hover:bg-red-800 rounded-full mx-10 mt-8 mb-3 px-5 py-2"
             onClick={() => addToOrder(props.product._id)}
           >
             Add to Order
