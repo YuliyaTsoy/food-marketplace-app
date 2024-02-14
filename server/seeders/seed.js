@@ -1,4 +1,3 @@
-// test file for adding image seeding to server side
 const db = require("../config/connection");
 const { User, Category, Product } = require("../models");
 const dropDB = require("./dropDB");
@@ -39,15 +38,13 @@ db.once("open", async () => {
   // inefficient way of getting a category id from a category name
   // I dont want to remember 
   const catId = (name) => categories.find((category) => category.name === name)?._id;
-  ///home/luct/bootcamp/project3/food-marketplace-app/server/seeders/samplepics/carrots.jpg
   const products = await Product.insertMany([
     {
       name: "Carrots",
       price: 2.99,
       category: catId("Vegetables"),
       description: "Just harvested from my garden",
-      image: await getImage("carrots.jpg"),
-      //lister: 
+      image: await getImage("carrots.jpg") 
     },
     {
       name: "Potatoes",
