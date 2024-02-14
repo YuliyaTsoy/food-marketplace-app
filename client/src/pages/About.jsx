@@ -29,7 +29,19 @@ function About() {
             <li>Allows sellers to showcase their products, tell their story, and differentiate themselves from competitors.</li>
         </ul>
       </div>
-      
+      <div>
+        <h1>Key features</h1>
+      </div>
+      <div>
+        <ul>
+            <li>Search for products</li>
+            <li>Filter by different Categories</li>
+            <li>Login / Sign-up</li>
+            <li>List products</li>
+            <li>See all products in the Sellers Store</li>
+            <li>Saving a product to order list</li>
+        </ul>
+      </div>
     </>
   );
 }
