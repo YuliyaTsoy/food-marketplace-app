@@ -1,5 +1,5 @@
 // test file for adding image seeding to server side
-const db = require("./connection");
+const db = require("../config/connection");
 const { User, Category, Product } = require("../models");
 const dropDB = require("./dropDB");
 
@@ -22,70 +22,83 @@ db.once("open", async () => {
     { name: "Vegetables" }
   ]);
 
-  console.log('categories -> ', categories);
+  // inefficient way of getting a category id from a category name
+  // I dont want to remember 
+  const catId = (name) => categories.find((category) => category.name === name)?._id;
 
   const products = await Product.insertMany([
     {
       name: "Carrots",
       price: 2.99,
-      category: categories[0]._id,
-      description: "Description here",
-
+      category: catId("Vegetables"),
+      description: "Just harvested from my garden",
     },
     {
       name: "Potatoes",
       price: 3.99,
-      category: categories[0]._id,
-      description: "Description here",
+      category: catId("Vegetables"),
+      description: "very earthy taste",
     },
     {
       name: "Brussel Sprouts",
       price: 1.99,
-      category: categories[0]._id,
-      description: "Description here",
+      category: catId("Vegetables"),
+      description: "Very tasty when roasted",
     },
     {
       name: "Samosas",
       price: 6.99,
-      category: categories[1]._id,
-      description: "Description here",
+      category: catId("Prepared Goods"),
+      description: "made with love",
     },
     {
       name: "Empanadas",
       price: 7.99,
-      category: categories[1]._id,
-      description: "Description here",
+      category: catId("Prepared Goods"),
+      description: "made with love",
     },
     {
       name: "Fish Tacos",
       price: 17.52,
-      category: categories[1]._id,
-      description: "Description here",
+      category: catId("Prepared Goods"),
+      description: "World famous fish tacos",
     },
     {
       name: "Canned Peas",
       price: 3.99,
-      category: categories[2]._id,
-      description: "Description here",
+      category: catId("Canned Goods"),
+      description: "hate peas, please take",
     },
     {
       name: "Brisket",
       price: 13.99,
-      category: categories[3]._id,
-      description: "Description here",
+      category: catId("Meat"),
+      description: "Very tender",
     },
     {
       name: "Homemade Mozzarella Cheese",
       price: 5.99,
-      category: categories[4]._id,
-      description: "Description here",
+      category: catId("Dairy"),
+      description: "Made in my bathtub",
     },
     {
       name: "Gouda",
       price: 4.99,
-      category: categories[4]._id,
-      description: "Description here",
+      category: catId("Dairy"),
+      description: "Some good gouda",
     },
+    {
+      name: "Eggplant",
+      price: 9.99,
+      category: catId("Fruit"),
+      description: "From Luc's rooftop garden"
+    },
+    {
+      name: "Tomato",
+      price: 21.34,
+      category: catId("Fruit"),
+      description: "Soooo sweet!"
+    }
   ]);
   await User.create({
     username: "jimmythetester",
