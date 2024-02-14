@@ -40,7 +40,7 @@ export default function Home() {
     useEffect(() => {
         setCategories(categoriesFromDB)
     }, [categoriesResult])
-    console.log('categories', allCategories)
+    // console.log('categories', allCategories)
 
     //useMutation to refineProducts
     const [refineProducts, { data: refinedProductsData, error }] = useMutation(REFINE_PRODUCTS)
@@ -68,7 +68,7 @@ export default function Home() {
     //useEffect for filter tracking
     useEffect(() => {
         //watch filterState and refine products when filterstate changes
-        console.log(filterState.filters)
+        // console.log(filterState.filters)
         // build an array of strings with the applied filters'
         let catArr = [];
 
@@ -83,14 +83,20 @@ export default function Home() {
         }
         console.log("filters by category", catArr)
 
-        // get products in the categories using mutation
-        // refineProducts({
-        //     variables: { searchCategories: catArr }
-        // })
-        // const filteredByCat = refinedProductsData?.productSearch || []
-        // console.log(refinedProductsData?.productSearch)
-        // setProducts(filteredByCat)
 
+        // create an async function
+        const getFilteredProduct = async (catArr) => {
+            // get products in the categories using mutation
+            const { loading: loadingRefined, data: refinedProduct } = await refineProducts({
+                variables: { searchCategories: catArr }
+            })
+            const filteredByCat = refinedProduct?.productSearch || []
+            // console.log(filteredByCat)
+            setProducts(filteredByCat)
+
+        }
+
+        catArr.length > 0 ? getFilteredProduct(catArr) : setProducts(allProducts)
 
     }, [filterState])
 
