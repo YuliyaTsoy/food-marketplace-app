@@ -185,6 +185,8 @@ const resolvers = {
     },
     // from search products
     productSearch: async (parents, { searchQuery, searchCategories }) => {
+      console.log('searchQuery', searchQuery)
+      console.log('Categories', searchCategories)
       // if the search query has more than one word, it will split them at the space
       if (searchQuery) {
         const arrayOfQuery = searchQuery.split(" ");
@@ -200,7 +202,7 @@ const resolvers = {
         );
         const regexQuery = filteredQuery.join("|");
         console.log(regexQuery);
-        return (productsFound = await Product.find({
+        return (Product.find({
           $or: [
             { name: { $regex: regexQuery, $options: "i" } },
             { description: { $regex: regexQuery, $options: "i" } },
@@ -208,14 +210,30 @@ const resolvers = {
         }).populate(["category", "lister"]));
       }
 
-      if (searchCategories) {
+      if (searchCategories.length > 0) {
         console.log(searchCategories);
-        // return productsFound = await Product.find({
-        //   category: { name: 'fruits' }
-        // }).populate(["category", "lister"])
+        //searchCategories is an array, need to map through the array for everyId 
+        // const multipleSearch = searchCategories.map(
+        //   async (categoryId) =>
+        //     await Product.find({
+        //       category: {
+        //         _id: categoryId,
+        //       },
+        //     }).populate(["category", "lister"]))
+
+        // return multipleSearch
+
+        return await Product.find(
+          {
+            category: {
+              _id: searchCategories[0],
+            },
+          }
+        ).populate(["category", "lister"])
+
       }
 
-      return productsFound;
+      // return productsFound;
     },
   },
 };

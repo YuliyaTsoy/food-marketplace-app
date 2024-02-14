@@ -5,7 +5,9 @@ function About() {
     <>
       <div className="">
         <div className="text-4xl text-center font-bold m-8">
-          <h1 className="font-sans">Satisfy Your Every Craving</h1>
+          <h1 className="font-sans">
+            Fresh Finder: Finding Fresh Choices Made Easy
+          </h1>
         </div>
 
         <div className="about-container flex m-10 flex-col md:flex-row">
@@ -28,7 +30,7 @@ function About() {
           <div className=" m-3  rounded-2xl  shadow-xl">
             <img
               className="lg:size-full md:object-cover rounded-2xl"
-              src="../src/assets/about-pic.jpg"
+              src="./about-pic.jpg"
               alt="about-pic"
             />
           </div>
@@ -80,11 +82,11 @@ function About() {
 
           <ul>
             <li>- Search for products</li>
-            <li>- ilter by different Categories</li>
-            <li>- Login / Sign-up</li>
+            <li>- Filter by different Categories</li>
+            <li>- Create an account</li>
             <li>- List products</li>
-            <li>- See all products in the Sellers Store</li>
-            <li>- Saving a product to order list</li>
+            <li>- View seller stores</li>
+            <li>- Saving a product to an order page</li>
           </ul>
         </div>
       </div>
