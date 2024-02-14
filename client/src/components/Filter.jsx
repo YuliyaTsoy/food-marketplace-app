@@ -15,6 +15,7 @@ const initialCategoryFilter = {
 const initialPriceRange = [0, Infinity];
 
 function Filter({ filterState, setFilterState }) {
+	const { filterCount, filters, priceRange } = filterState
 	// const [filterCount, setFilterCount] = useState(0);
 	// const [filters, setFilters] = useState(initialCategoryFilter);
 
@@ -49,7 +50,10 @@ function Filter({ filterState, setFilterState }) {
 			min = temp;
 		}
 
-		setPriceRange([min, max]);
+		setFilterState({
+			...filterState,
+			priceRange: [min, max]
+		})
 	}
 
 	function clearFilters() {
@@ -67,24 +71,39 @@ function Filter({ filterState, setFilterState }) {
 		const { name } = e.target;
 
 		const currFilter = filters[name];
+	
 		// If the current filter is false, we are activating a filter and thus we
 		// should add 1 to the filterCount. If the current filter is true then
 		// we are removing a filter and should minus 1
+		let newFilterCount = filterState.filterCount;
 		if (!currFilter) {
-			setFilterCount(filterCount + 1);
+			// setFilterCount(filterCount + 1);
+			newFilterCount++;
 		} else {
-			setFilterCount(filterCount - 1);
+			// setFilterCount(filterCount - 1);
+			newFilterCount--;
 		}
 
 		// Flip the boolean of the category filter
-		setFilters(prevState => ({
-			...prevState,
-			[name]: !currFilter
-		}));
+		// setFilters(prevState => ({
+		// 	...prevState,
+		// 	[name]: !currFilter
+		// }));
+
+		setFilterState({
+			...filterState,
+			filterCount: newFilterCount,
+			filters: {
+				...filterState.filters,
+				[name]: !filterState.filters[name]
+			}
+		})
 
 		//send it back to the home page 
-		onFilterClick(filters)
+		// onFilterClick(filters)
 	}
+
+	console.log('filterState', filterState)
 
 	return (
 		<aside className="product-filter w-1/6 bg-red-200 rounded my-10">

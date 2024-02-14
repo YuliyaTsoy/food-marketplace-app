@@ -26,22 +26,24 @@ export default function Home() {
     }, [data])
 
     //state for filters
-    const [ filterState, setFilterState ] = useState({
+    const [filterState, setFilterState] = useState({
         filterCount: 0,
-        cannedGoods: false,
-        dairy: false,
-        fruits: false,
-        meat: false,
-        preparedGoods: false,
-        vegetables: false,
+        filters: {
+            cannedGoods: false,
+            dairy: false,
+            fruits: false,
+            meat: false,
+            preparedGoods: false,
+            vegetables: false,
+        },
         priceRange: [0, Infinity]
     })
     // const [filterCount, setFilterCount] = useState(0);
-	// const [filters, setFilters] = useState(initialCategoryFilter);
-	// const [priceRange, setPriceRange] = useState(initialPriceRange);
+    // const [filters, setFilters] = useState(initialCategoryFilter);
+    // const [priceRange, setPriceRange] = useState(initialPriceRange);
 
     //useEffect for filter tracking
-    useEffect(()=> {
+    useEffect(() => {
         //watch filterState and refine products when filterstate changes
 
     }, [filterState])
