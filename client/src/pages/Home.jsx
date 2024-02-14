@@ -4,7 +4,7 @@ import Filter from '../components/Filter'
 import ProductCard from '../components/ProductCard';
 import SearchBar from '../components/SearchBar';
 import { useQuery, useMutation } from '@apollo/client'
-import { GET_ALL_PRODUCTS } from '../utils/queries';
+import { GET_ALL_PRODUCTS, GET_CATEGORIES } from '../utils/queries';
 import { REFINE_PRODUCTS } from '../utils/mutations';
 
 // dummy imports
@@ -15,8 +15,9 @@ export default function Home() {
 
     //products to render will live in a state variable 
     const [productsToRender, setProducts] = useState([])
+    const [allCategories, setCategories] = useState([])
 
-    //get all products from mutation GET_ALL_PRODUCTS
+    // get all products from mutation GET_ALL_PRODUCTS
     const { loading, data } = useQuery(GET_ALL_PRODUCTS)
     const allProducts = data?.products || []
     // console.log(allProducts)
@@ -24,6 +25,15 @@ export default function Home() {
     useEffect(() => {
         setProducts(allProducts)
     }, [data])
+
+    //get all categories using query GET_CATEGORIES
+    const categoriesResult = useQuery(GET_CATEGORIES)
+    const categoriesFromDB = categoriesResult.data?.categories || []
+    useEffect(() => {
+        setCategories(categoriesFromDB)
+    }, [categoriesResult])
+    // console.log('categories', allCategories)
+
 
     //state for filters
     const [filterState, setFilterState] = useState({
@@ -43,6 +53,16 @@ export default function Home() {
     useEffect(() => {
         //watch filterState and refine products when filterstate changes
         console.log(filterState.filters)
+        // build an array of strings with the applied filters'
+        let catArr = [];
+
+        // map through the object and add to array if the value is true
+        for (const [key, value] of Object.entries(filterState.filters)) {
+            value ? catArr.push(key) : ''
+        }
+        console.log("filters by category", catArr)
+
+
     }, [filterState])
 
     //useMutation to refineProducts from search query

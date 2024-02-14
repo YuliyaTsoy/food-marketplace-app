@@ -198,9 +198,11 @@ const resolvers = {
 
       if (searchCategories) {
         console.log(searchCategories);
-        // return productsFound = await Product.find({
-        //   category: { name: 'fruits' }
-        // }).populate(["category", "lister"])
+        // need to find the category _id by name 
+        return productsFound = await Product.find({
+          category: { _id: '65cbe7cbeb58abb5417133c3' }
+        }
+        ).populate(["category", "lister"])
       }
 
       return productsFound;
