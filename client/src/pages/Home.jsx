@@ -41,7 +41,7 @@ export default function Home() {
     return (
         <>
             <div className='flex justify-center md:mx-32 sm:mx-20'>
-                <SearchBar />
+                <SearchBar onFormSubmit={getRefinedProducts} />
             </div>
             <div className="home-page flex">
                 <Filter />

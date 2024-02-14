@@ -11,6 +11,9 @@ function SearchBar({ onFormSubmit }) {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
+        //send it back with onFormSubmit with the value of search
+        onFormSubmit(searchForm)
+
         //clear search bar
         setSearchForm('')
 
