@@ -29,13 +29,13 @@ export default function Home() {
     const [refineProducts, { error }] = useMutation(REFINE_PRODUCTS)
 
     const getRefinedProducts = async (seachQuery) => {
-        // will trigger to useQuery and re render the products found from the search
+        // will trigger to refineproducts function from mutation and re render the products found from the search
         console.log(`user wants to find products related to: ${seachQuery}`)
         const { loading, data } = await refineProducts({
             variables: { searchQuery: seachQuery }
         })
         const refinedProducts = data?.productSearch || []
-        console.log(refinedProducts)
+        // console.log(refinedProducts)
         setProducts(refinedProducts)
     }
 
