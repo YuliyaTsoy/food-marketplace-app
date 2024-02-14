@@ -87,3 +87,37 @@ export const ADD_CATEGORY = gql`
     }
   }
 `;
+
+export const DELETE_PRODUCT = gql`
+mutation DeleteProduct($productId: ID!) {
+  deleteProduct(productId: $productId) {
+    _id
+    lister {
+      _id
+      storeName
+      username
+    }
+  }
+}
+`;
+
+
+export const REFINE_PRODUCTS = gql`
+mutation ProductSearch($searchQuery: String!) {
+  productSearch(searchQuery: $searchQuery) {
+    _id
+    name
+    description
+    image
+    price
+    lister {
+      _id
+      storeName
+    }
+    category {
+      _id
+      name
+    }
+  }
+}
+`;

@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-function SearchBar() {
+function SearchBar({ onFormSubmit }) {
 
     const [searchForm, setSearchForm] = useState('')
 
@@ -10,6 +10,9 @@ function SearchBar() {
 
     const handleFormSubmit = async (event) => {
         event.preventDefault();
+
+        //send it back with onFormSubmit with the value of search
+        onFormSubmit(searchForm)
 
         //clear search bar
         setSearchForm('')
