@@ -116,6 +116,9 @@ export const GET_USER_ORDERS = gql`
         price
         description
         image
+        lister {
+          email
+        }
       }
       username
     }
