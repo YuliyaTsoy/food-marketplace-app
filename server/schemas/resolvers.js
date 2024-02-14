@@ -19,9 +19,19 @@ const resolvers = {
           "-__v -password"
         );
 
-        return userData.populate("store");
+        return userData.populate(["store"]);
       }
 
+      throw AuthenticationError;
+    },
+    //  find a user's orders
+    userOrders: async (_, args, context) => {
+      if (context.user) {
+        const orderData = await User.findOne({ _id: context.user._id }).select(
+          "-__v -password"
+        );
+        return orderData.populate("orders");
+      }
       throw AuthenticationError;
     },
     // find all products
@@ -40,31 +50,7 @@ const resolvers = {
     categories: async () => {
       return Category.find();
     },
-    // from search products
-    productSearch: async (parents, { searchQuery }) => {
-      // if the search query has more than one word, it will split them at the space
-      const arrayOfQuery = searchQuery.split(" ");
-      //ignore common words: the, this, a, an, of, from
-      const filteredQuery = arrayOfQuery.filter(
-        (word) =>
-          word !== "the" &&
-          word !== "this" &&
-          word !== "a" &&
-          word !== "an" &&
-          word !== "of" &&
-          word !== "from"
-      );
-      const regexQuery = filteredQuery.join("|");
-      console.log(regexQuery);
-      const productsFound = await Product.find({
-        $or: [
-          { name: { $regex: regexQuery, $options: "i" } },
-          { description: { $regex: regexQuery, $options: "i" } },
-        ],
-      });
 
-      return productsFound;
-    },
   },
   Mutation: {
     uploadImage: async (_, args) => {
@@ -182,6 +168,41 @@ const resolvers = {
         return product.populate(["category", "lister"]);
       }
       throw AuthenticationError;
+    },
+    // from search products
+    productSearch: async (parents, { searchQuery, searchCategories }) => {
+      // if the search query has more than one word, it will split them at the space
+      if (searchQuery) {
+
+        const arrayOfQuery = searchQuery.split(" ");
+        //ignore common words: the, this, a, an, of, from
+        const filteredQuery = arrayOfQuery.filter(
+          (word) =>
+            word !== "the" &&
+            word !== "this" &&
+            word !== "a" &&
+            word !== "an" &&
+            word !== "of" &&
+            word !== "from"
+        );
+        const regexQuery = filteredQuery.join("|");
+        console.log(regexQuery);
+        return productsFound = await Product.find({
+          $or: [
+            { name: { $regex: regexQuery, $options: "i" } },
+            { description: { $regex: regexQuery, $options: "i" } },
+          ],
+        }).populate(["category", "lister"]);
+      }
+
+      if (searchCategories) {
+        console.log(searchCategories)
+        // return productsFound = await Product.find({
+        //   category: { name: 'fruits' }
+        // }).populate(["category", "lister"])
+      }
+
+      return productsFound;
     },
   },
 };

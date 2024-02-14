@@ -12,6 +12,7 @@ import Store from './pages/Store'
 import Signup from './pages/Signup'
 import AddProduct from './pages/AddProduct'
 import Product from './pages/Product'
+import Orders from './pages/Orders'
 
 const router = createBrowserRouter([
   {
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
       {
         path: '/Product/:productId',
         element: <Product />
+      },
+      {
+        path: '/Orders',
+        element: <Orders />
       }
     ]
   }
