@@ -32,9 +32,9 @@ export default function Home() {
     useEffect(() => {
         setCategories(categoriesFromDB)
     }, [categoriesResult])
-    // console.log('categories', allCategories)
+    console.log('categories', allCategories)
 
-    //use mutation to get products to render
+    //useMutation to refineProducts
     const [refineProducts, { data: refinedProductsData, error }] = useMutation(REFINE_PRODUCTS)
 
     //state for filters
@@ -51,6 +51,18 @@ export default function Home() {
         priceRange: [0, Infinity]
     })
 
+    const getCategoryId = (categoryName) => {
+        //finds the id of the category by the name 
+        //map through the allCategories array
+        console.log('get Id')
+        for (let category of allCategories) {
+            const catName = category.name
+            const toLowerCase = catName.toLowerCase()
+            if (toLowerCase === categoryName)
+                return category._id
+        }
+    }
+
     //useEffect for filter tracking
     useEffect(() => {
         //watch filterState and refine products when filterstate changes
@@ -60,22 +72,27 @@ export default function Home() {
 
         // map through the object and add to array if the value is true
         for (const [key, value] of Object.entries(filterState.filters)) {
-            value ? catArr.push(key) : ''
+            if (value) {
+                console.log(key)
+                const catId = getCategoryId(key)
+                console.log('catId', catId)
+                catArr.push(catId)
+            }
         }
         console.log("filters by category", catArr)
 
         // get products in the categories using mutation
-        const filterByCat = refineProducts({
-            variables: { searchCategories: ['65cbe7cbeb58abb5417133c3'] }
+        refineProducts({
+            variables: { searchCategories: catArr }
         })
         const filteredByCat = refinedProductsData?.productSearch || []
-        console.log(filteredByCat)
+        console.log(refinedProductsData?.productSearch)
         setProducts(filteredByCat)
 
 
     }, [filterState])
 
-    //useMutation to refineProducts from search query
+
 
     const getRefinedProducts = async (seachQuery) => {
         // will trigger to refineproducts function from mutation and re render the products found from the search
