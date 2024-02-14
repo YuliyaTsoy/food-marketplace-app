@@ -14,7 +14,7 @@ const initialCategoryFilter = {
 // than ANY price set for a product
 const initialPriceRange = [0, Infinity];
 
-function Filter() {
+function Filter({ onFilterClick }) {
 	const [filterCount, setFilterCount] = useState(0);
 	const [filters, setFilters] = useState(initialCategoryFilter);
 
@@ -55,7 +55,7 @@ function Filter() {
 	function clearFilters() {
 		setFilters(initialCategoryFilter);
 		setFilterCount(0);
-		
+
 		// use plain-old js to unselect checkboxes - Not sure how to do it in react just yet
 		const checkBoxEls = document.querySelectorAll('input[type=checkbox]');
 		for (const checkBox of checkBoxEls) {
@@ -72,7 +72,7 @@ function Filter() {
 		// we are removing a filter and should minus 1
 		if (!currFilter) {
 			setFilterCount(filterCount + 1);
-		}	else {
+		} else {
 			setFilterCount(filterCount - 1);
 		}
 
@@ -81,43 +81,46 @@ function Filter() {
 			...prevState,
 			[name]: !currFilter
 		}));
+
+		//send it back to the home page 
+		onFilterClick(filters)
 	}
 
 	return (
 		<aside className="product-filter w-1/6 bg-red-200 rounded my-10">
 			<div>
-			<div className="flex space-x-4 mt-2.5">
-				<span className="text-center">Filters ({filterCount})</span>
-				<button className="bg-red-800 text-white rounded" onClick={clearFilters}>
-					<span>Clear filters</span>
-				</button>
-			</div>
-			<hr />
-			<div>
-				<h3 className="font-bold my-2.5">Product Categories</h3>
-			</div>
-			<div className="filter-categories">
-				<CategoryCheckbox id="search-canned-goods" name="cannedGoods" onClick={toggleCategoryFilter} />
-				<CategoryCheckbox id="search-dairy" name="dairy" onClick={toggleCategoryFilter} />
-				<CategoryCheckbox id="search-fruit" name="fruits" onClick={toggleCategoryFilter} />
-				<CategoryCheckbox id="search-meat" name="meat" onClick={toggleCategoryFilter} />
-				<CategoryCheckbox id="search-prepared-goods" name="preparedGoods" onClick={toggleCategoryFilter} />
-				<CategoryCheckbox id="search-vegetables" name="vegetables" onClick={toggleCategoryFilter} />
-			</div>
-			<hr />
-			<div>
-				<h3 className="font-bold my-2.5">Filter by Price</h3>
-				<div className="filter-price flex flex-col content-start space-y-2.5">
-					<div className="flex flex-col">
-						<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="0" id="min-price-filter" className="price-input flex-col" onChange={handlePriceRange}/>
-						<label htmlFor="min-price-filter">Min price</label>
-					</div>
-					<div className="flex flex-col">
-						<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="no limit" id="max-price-filter" className="price-input" onChange={handlePriceRange}/>
-						<label htmlFor="max-price-filter">Max price</label>
+				<div className="flex space-x-4 mt-2.5">
+					<span className="text-center">Filters ({filterCount})</span>
+					<button className="bg-red-800 text-white rounded" onClick={clearFilters}>
+						<span>Clear filters</span>
+					</button>
+				</div>
+				<hr />
+				<div>
+					<h3 className="font-bold my-2.5">Product Categories</h3>
+				</div>
+				<div className="filter-categories">
+					<CategoryCheckbox id="search-canned-goods" name="cannedGoods" onClick={toggleCategoryFilter} />
+					<CategoryCheckbox id="search-dairy" name="dairy" onClick={toggleCategoryFilter} />
+					<CategoryCheckbox id="search-fruit" name="fruits" onClick={toggleCategoryFilter} />
+					<CategoryCheckbox id="search-meat" name="meat" onClick={toggleCategoryFilter} />
+					<CategoryCheckbox id="search-prepared-goods" name="preparedGoods" onClick={toggleCategoryFilter} />
+					<CategoryCheckbox id="search-vegetables" name="vegetables" onClick={toggleCategoryFilter} />
+				</div>
+				<hr />
+				<div>
+					<h3 className="font-bold my-2.5">Filter by Price</h3>
+					<div className="filter-price flex flex-col content-start space-y-2.5">
+						<div className="flex flex-col">
+							<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="0" id="min-price-filter" className="price-input flex-col" onChange={handlePriceRange} />
+							<label htmlFor="min-price-filter">Min price</label>
+						</div>
+						<div className="flex flex-col">
+							<input type="text" inputMode="numeric" pattern="[0-9]*" placeholder="no limit" id="max-price-filter" className="price-input" onChange={handlePriceRange} />
+							<label htmlFor="max-price-filter">Max price</label>
+						</div>
 					</div>
 				</div>
-			</div>
 			</div>
 		</aside>
 	)
