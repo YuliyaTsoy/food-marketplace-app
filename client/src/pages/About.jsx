@@ -1,7 +1,14 @@
 import React from "react";
 
-function About () {
-<h1>Get Ready to read something awesome about our application!</h1>
+function About() {
+  return (
+    <>
+    <div className='text-4xl text-center font-bold'>
+      <h1>Satisfy Your Every Craving</h1></div>
+      <hr/>
+      
+    </>
+  );
 }
 
 export default About;
