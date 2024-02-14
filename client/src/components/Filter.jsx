@@ -5,7 +5,7 @@ import CategoryCheckbox from "./CategoryCheckbox";
 // than ANY price set for a product
 // const initialPriceRange = [0, Infinity];
 
-function Filter({ filterState, setFilterState }) {
+function Filter({ filterState, setFilterState, categories }) {
 	const { filterCount, filters, priceRange } = filterState
 
 
@@ -95,12 +95,13 @@ function Filter({ filterState, setFilterState }) {
 					<h3 className="font-bold my-2.5">Product Categories</h3>
 				</div>
 				<div className="filter-categories">
-					<CategoryCheckbox id="search-canned-goods" name="cannedGoods" onClick={toggleCategoryFilter} />
-					<CategoryCheckbox id="search-dairy" name="dairy" onClick={toggleCategoryFilter} />
-					<CategoryCheckbox id="search-fruit" name="fruits" onClick={toggleCategoryFilter} />
-					<CategoryCheckbox id="search-meat" name="meat" onClick={toggleCategoryFilter} />
-					<CategoryCheckbox id="search-prepared-goods" name="preparedGoods" onClick={toggleCategoryFilter} />
-					<CategoryCheckbox id="search-vegetables" name="vegetables" onClick={toggleCategoryFilter} />
+					{categories.map((category) => {
+						return (
+							<>
+								<CategoryCheckbox id={`search-${category.name}`} name={category.name} onClick={toggleCategoryFilter} />
+							</>
+						)
+					})}
 				</div>
 				<hr />
 				<div>

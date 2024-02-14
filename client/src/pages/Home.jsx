@@ -117,7 +117,7 @@ export default function Home() {
                 <SearchBar onFormSubmit={getRefinedProducts} />
             </div>
             <div className="home-page flex">
-                <Filter filterState={filterState} setFilterState={setFilterState} />
+                <Filter categories={allCategories} filterState={filterState} setFilterState={setFilterState} />
                 <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 px-8 my-8">
                     {productsToRender.map((product) => {
                         return (
