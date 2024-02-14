@@ -25,6 +25,27 @@ export default function Home() {
         setProducts(allProducts)
     }, [data])
 
+    //state for filters
+    const [ filterState, setFilterState ] = useState({
+        filterCount: 0,
+        cannedGoods: false,
+        dairy: false,
+        fruits: false,
+        meat: false,
+        preparedGoods: false,
+        vegetables: false,
+        priceRange: [0, Infinity]
+    })
+    // const [filterCount, setFilterCount] = useState(0);
+	// const [filters, setFilters] = useState(initialCategoryFilter);
+	// const [priceRange, setPriceRange] = useState(initialPriceRange);
+
+    //useEffect for filter tracking
+    useEffect(()=> {
+        //watch filterState and refine products when filterstate changes
+
+    }, [filterState])
+
     //useMutation to refineProducts from search query
     const [refineProducts, { error }] = useMutation(REFINE_PRODUCTS)
 
@@ -48,6 +69,7 @@ export default function Home() {
             value ? catArr.push(key) : ''
         }
         console.log(catArr)
+        console.log(filterBy)
     }
 
     //if data is not defined, it will show a loading prompt
@@ -62,7 +84,7 @@ export default function Home() {
                 <SearchBar onFormSubmit={getRefinedProducts} />
             </div>
             <div className="home-page flex">
-                <Filter onFilterClick={filterByCategory} />
+                <Filter filterState={filterState} setFilterState={setFilterState} />
                 <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 px-8 my-8">
                     {productsToRender.map((product) => {
                         return (

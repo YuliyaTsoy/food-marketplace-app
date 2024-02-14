@@ -14,11 +14,11 @@ const initialCategoryFilter = {
 // than ANY price set for a product
 const initialPriceRange = [0, Infinity];
 
-function Filter({ onFilterClick }) {
-	const [filterCount, setFilterCount] = useState(0);
-	const [filters, setFilters] = useState(initialCategoryFilter);
+function Filter({ filterState, setFilterState }) {
+	// const [filterCount, setFilterCount] = useState(0);
+	// const [filters, setFilters] = useState(initialCategoryFilter);
 
-	const [priceRange, setPriceRange] = useState(initialPriceRange);
+	// const [priceRange, setPriceRange] = useState(initialPriceRange);
 
 	function handlePriceRange(props) {
 		let { id, value } = props.target;
