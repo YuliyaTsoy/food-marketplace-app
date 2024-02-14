@@ -102,37 +102,18 @@ export default function AddProduct() {
         })
         */
     }
-
+    /*
     return (
         <div className="flex flex-col">
             <h2 className="text-3xl font-bold text-center">Add a Product to Store</h2>
             <form onSubmit={handleFormSubmit}>
                 <div className="flex flex-col">
-                    <label htmlFor="product-name">Enter a product name</label>
-                    <input
-                    type="text" id="product-name"
-                    className="border-dashed rounded-lg border-2 border-slate-950 w-1/5"
-                    onChange={handleNameChange}>
-                    </input>
-                </div>
-                <div className="flex flex-col">
-                    <label htmlFor="product-price">Enter a product price</label>
-                    <input
-                    type="text" inputMode="numeric" pattern="[0-9\.,]*" id="product-price"
-                    className="border-dashed rounded-lg border-2 border-slate-950 w-1/5"
-                    onChange={handlePriceChange}>
-                    </input>
                 </div>
                 <div className="flex flex-col">
                     <ImageUploadDragOver />
                 </div>
                 <div className="flex flex-col">
-                    <label htmlFor="product-description">Make a Product Description</label>
-                    <input
-                    type="text" id="product-description"
-                    className="border-dashed rounded-lg border-2 border-slate-950 w-1/5 h-1/5"
-                    onChange={handleDescriptionChange}>
-                    </input>
+
                 </div>
                 <div className="flex flex-col">
                     <CategoryCheckbox id="search-canned-goods" name="cannedGoods" onClick={handleCategoryClick} />
@@ -145,4 +126,49 @@ export default function AddProduct() {
             </form>
         </div>
     )
+    */
+   return (
+    <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+            <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Add a Product to Your Store</h2>
+        </div>
+
+        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+            <form className="space-y-6 w-full" onSubmit={handleFormSubmit}>
+                <div>
+                    <label htmlFor="product-name">Enter a product name</label>
+                    <div className="mt-2">
+                        <input
+                        type="text" id="product-name"
+                        className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        onChange={handleNameChange}>
+                        </input>
+                    </div>
+                    <label htmlFor="product-price">Enter a product price</label>
+                    <div className="mt-2">
+                        <input
+                        type="text" inputMode="numeric" pattern="[0-9\.,]*" id="product-price"
+                        className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        onChange={handlePriceChange}>
+                        </input>
+                    </div>
+                    <label htmlFor="imageUpload">Add a product Image</label>
+                    <div className="mt-2 add-product-image-container">
+                        <ImageUploadDragOver />
+                    </div>
+                    <label htmlFor="product-description">Make a Product Description</label>
+                </div>
+                <div className="w-full">
+                        <input
+                        type="text" id="product-description"
+                        className="block w-full rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                        onChange={handleDescriptionChange}>
+                        </input>
+                    </div>
+            </form>
+        </div>
+    </div>
+
+   )
+   
 }
