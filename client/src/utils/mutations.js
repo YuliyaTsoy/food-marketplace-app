@@ -103,8 +103,8 @@ mutation DeleteProduct($productId: ID!) {
 
 
 export const REFINE_PRODUCTS = gql`
-mutation ProductSearch($searchQuery: String!) {
-  productSearch(searchQuery: $searchQuery) {
+mutation ProductSearch($searchQuery: String, $searchCategories: [String]) {
+  productSearch(searchQuery: $searchQuery, searchCategories: $searchCategories) {
     _id
     name
     description

@@ -173,6 +173,8 @@ const resolvers = {
     },
     // from search products
     productSearch: async (parents, { searchQuery, searchCategories }) => {
+      console.log('searchQuery', searchQuery)
+      console.log('Categories', searchCategories)
       // if the search query has more than one word, it will split them at the space
       if (searchQuery) {
         const arrayOfQuery = searchQuery.split(" ");
@@ -200,7 +202,7 @@ const resolvers = {
         console.log(searchCategories);
         // need to find the category _id by name 
         return productsFound = await Product.find({
-          category: { _id: '65cbe7cbeb58abb5417133c3' }
+          category: { _id: searchCategories[0] }
         }
         ).populate(["category", "lister"])
       }

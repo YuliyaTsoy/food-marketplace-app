@@ -34,6 +34,8 @@ export default function Home() {
     }, [categoriesResult])
     // console.log('categories', allCategories)
 
+    //use mutation to get products to render
+    const [refineProducts, { data: refinedProductsData, error }] = useMutation(REFINE_PRODUCTS)
 
     //state for filters
     const [filterState, setFilterState] = useState({
@@ -62,34 +64,29 @@ export default function Home() {
         }
         console.log("filters by category", catArr)
 
+        // get products in the categories using mutation
+        const filterByCat = refineProducts({
+            variables: { searchCategories: ['65cbe7cbeb58abb5417133c3'] }
+        })
+        const filteredByCat = refinedProductsData?.productSearch || []
+        console.log(filteredByCat)
+        setProducts(filteredByCat)
+
 
     }, [filterState])
 
     //useMutation to refineProducts from search query
-    const [refineProducts, { error }] = useMutation(REFINE_PRODUCTS)
 
     const getRefinedProducts = async (seachQuery) => {
         // will trigger to refineproducts function from mutation and re render the products found from the search
         console.log(`user wants to find products related to: ${seachQuery}`)
-        const { loading, data } = await refineProducts({
-            variables: { searchQuery: seachQuery }
+        refineProducts({
+            variables: { searchQuery: seachQuery, searchCategories: null }
         })
-        const refinedProducts = data?.productSearch || []
-        // console.log(refinedProducts)
+        const refinedProducts = refinedProductsData?.productSearch || []
+        console.log('refined', refinedProductsData)
         setProducts(refinedProducts)
     }
-
-    // const filterByCategory = async (filterBy) => {
-    //     // build an array of strings with the applied filters'
-    //     let catArr = [];
-
-    //     // map through the object and add to array if the value is true
-    //     for (const [key, value] of Object.entries(filterBy)) {
-    //         value ? catArr.push(key) : ''
-    //     }
-    //     console.log(catArr)
-    //     console.log(filterBy)
-    // }
 
     //if data is not defined, it will show a loading prompt
     if (loading) {
