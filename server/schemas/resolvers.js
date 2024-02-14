@@ -24,6 +24,16 @@ const resolvers = {
 
       throw AuthenticationError;
     },
+    //  find a user's orders
+    userOrders: async (_, args, context) => {
+      if (context.user) {
+        const orderData = await User.findOne({ _id: context.user._id }).select(
+          "-__v -password"
+        );
+        return orderData.populate("orders");
+      }
+      throw AuthenticationError;
+    },
     // find all products
     products: async () => {
       return Product.find().populate(["category", "lister"]);
