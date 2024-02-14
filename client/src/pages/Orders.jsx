@@ -28,7 +28,10 @@ function Orders() {
                         name={product.name}
                         image={product.image}
                         price={product.price}
-                      />
+                      ></ProductCard>
+                      <span>
+                        Contact the Seller directly at: {product.lister?.email}
+                      </span>
                     </div>
                   </>
                 );

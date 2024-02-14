@@ -30,7 +30,10 @@ const resolvers = {
         const orderData = await User.findOne({ _id: context.user._id }).select(
           "-__v -password"
         );
-        return orderData.populate("orders");
+        return await orderData.populate({
+          path: "orders",
+          populate: { path: "lister" },
+        });
       }
       throw AuthenticationError;
     },
@@ -50,7 +53,6 @@ const resolvers = {
     categories: async () => {
       return Category.find();
     },
-
   },
   Mutation: {
     uploadImage: async (_, args) => {
@@ -173,7 +175,6 @@ const resolvers = {
     productSearch: async (parents, { searchQuery, searchCategories }) => {
       // if the search query has more than one word, it will split them at the space
       if (searchQuery) {
-
         const arrayOfQuery = searchQuery.split(" ");
         //ignore common words: the, this, a, an, of, from
         const filteredQuery = arrayOfQuery.filter(
@@ -187,16 +188,16 @@ const resolvers = {
         );
         const regexQuery = filteredQuery.join("|");
         console.log(regexQuery);
-        return productsFound = await Product.find({
+        return (productsFound = await Product.find({
           $or: [
             { name: { $regex: regexQuery, $options: "i" } },
             { description: { $regex: regexQuery, $options: "i" } },
           ],
-        }).populate(["category", "lister"]);
+        }).populate(["category", "lister"]));
       }
 
       if (searchCategories) {
-        console.log(searchCategories)
+        console.log(searchCategories);
         // return productsFound = await Product.find({
         //   category: { name: 'fruits' }
         // }).populate(["category", "lister"])
