@@ -99,10 +99,10 @@ export default function Home() {
     const getRefinedProducts = async (seachQuery) => {
         // will trigger to refineproducts function from mutation and re render the products found from the search
         console.log(`user wants to find products related to: ${seachQuery}`)
-        refineProducts({
+        const { loading, data } = await refineProducts({
             variables: { searchQuery: seachQuery, searchCategories: null }
         })
-        const refinedProducts = refinedProductsData?.productSearch || []
+        const refinedProducts = data?.productSearch || []
         console.log('refined', refinedProductsData)
         setProducts(refinedProducts)
     }
