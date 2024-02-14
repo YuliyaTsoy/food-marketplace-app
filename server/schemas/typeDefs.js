@@ -44,6 +44,7 @@ type Query {
     productSearch(searchQuery: String!): [Product]
     users: [User]
     user(_id: ID!): User
+    userOrders( userId: ID!): [Product]
     categories: [Category]
     myStore: User
 }
