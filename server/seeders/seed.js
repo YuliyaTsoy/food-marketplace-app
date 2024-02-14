@@ -15,6 +15,9 @@ const getImage = async (relPath) => {
     const base64String = await imageToBase64(path.join(
       __dirname, "samplepics", relPath)
     );
+    // Only required for seed images! The image-to-base64 library does not
+    // insert the required encoding data at the start of the base64. So,
+    // we do so here since we know all seed images are of type jpeg
     return `data:image/jpeg;base64,${base64String}`;
 
   } catch(err) {
