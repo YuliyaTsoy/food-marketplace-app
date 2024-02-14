@@ -85,7 +85,7 @@ function Filter({ filterState, setFilterState, categories }) {
 	// console.log('filterState', filterState)
 
 	return (
-		<aside className="product-filter w-1/6 bg-red-200 rounded my-10">
+		<aside className="hidden md:block product-filter w-1/6 bg-red-200 rounded my-10">
 			<div>
 				<div className="flex space-x-4 mt-2.5">
 					<span className="text-center">Filters ({filterCount})</span>
