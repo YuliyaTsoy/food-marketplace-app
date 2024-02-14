@@ -202,7 +202,7 @@ const resolvers = {
         );
         const regexQuery = filteredQuery.join("|");
         console.log(regexQuery);
-        return (productsFound = await Product.find({
+        return (Product.find({
           $or: [
             { name: { $regex: regexQuery, $options: "i" } },
             { description: { $regex: regexQuery, $options: "i" } },
@@ -233,7 +233,7 @@ const resolvers = {
 
       }
 
-      return productsFound;
+      // return productsFound;
     },
   },
 };
