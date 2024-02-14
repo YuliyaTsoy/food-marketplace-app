@@ -39,6 +39,17 @@ export default function Home() {
         setProducts(refinedProducts)
     }
 
+    const filterByCategory = async (filterBy) => {
+        // build an array of strings with the applied filters'
+        let catArr = [];
+
+        // map through the object and add to array if the value is true
+        for (const [key, value] of Object.entries(filterBy)) {
+            value ? catArr.push(key) : ''
+        }
+        console.log(catArr)
+    }
+
     //if data is not defined, it will show a loading prompt
     if (loading) {
         return <h2>LOADING...</h2>
@@ -51,7 +62,7 @@ export default function Home() {
                 <SearchBar onFormSubmit={getRefinedProducts} />
             </div>
             <div className="home-page flex">
-                <Filter />
+                <Filter onFilterClick={filterByCategory} />
                 <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-4 px-8 my-8">
                     {productsToRender.map((product) => {
                         return (
