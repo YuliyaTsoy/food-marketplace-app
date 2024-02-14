@@ -88,7 +88,7 @@ const resolvers = {
           { new: true }
         );
 
-        return updatedUser;
+        return updatedUser.populate("orders");
       }
 
       throw AuthenticationError;
@@ -168,6 +168,18 @@ const resolvers = {
         );
 
         return product.populate(["category", "lister"]);
+      }
+      throw AuthenticationError;
+    },
+
+    removeOrder: async (parent, { productId }, context) => {
+      if (context.user) {
+        const user = await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { orders: productId } },
+          { new: true }
+        );
+        return user.populate("orders");
       }
       throw AuthenticationError;
     },
