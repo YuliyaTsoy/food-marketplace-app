@@ -6,6 +6,9 @@ const ProductCard = (props) => {
   const { _id, image, title, price, description, store } = props;
   console.log(props);
 
+  //state variable for button click
+  const [buttonClick, setButton] = useState(false);
+
   const [product, { error }] = useMutation(ADD_ORDER);
   const addToOrder = async (_id) => {
     try {
@@ -35,10 +38,17 @@ const ProductCard = (props) => {
           <p className="px-5 py-2">{props.product.description}</p>
           <p className="px-5 py-2 mb-3">{props.product.store}</p>
           <button
-            className="bg-red-300 cursor-pointer hover:text-white hover:bg-red-800 rounded-full mx-10 mt-8 mb-3 px-5 py-2"
-            onClick={() => addToOrder(props.product._id)}
+            className={`cursor-pointer   rounded-full mx-10 mt-8 mb-3 px-5 py-2 ${buttonClick? "bg-red-100" : "bg-red-300 hover:bg-red-800 hover:text-white" }`}
+            onClick={() => {
+              //can only run if button is false
+              if (!buttonClick) {
+                addToOrder(props.product._id);
+                setButton(true);
+              }
+            }}
+            disabled={buttonClick}
           >
-            Add to Order
+            {buttonClick ? "Saved" : "Add to Order"}
           </button>
         </div>
       </div>
