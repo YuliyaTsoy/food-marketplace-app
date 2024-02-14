@@ -33,7 +33,7 @@ function About() {
             />
           </div>
         </div>
-        <div className="flex m-10">
+        <div className="flex m-10 flex-col md:flex-row">
           <div className="buyers-benefits p-8 m-3  rounded-2xl border-slate-300 shadow-xl">
             <h1 className="underline mb-3">Benefits for Buyers</h1>
             <div>
