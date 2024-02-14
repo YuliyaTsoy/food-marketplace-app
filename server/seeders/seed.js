@@ -12,9 +12,11 @@ const path = require("path");
 // image getting function wrapper
 const getImage = async (relPath) => {
   try {
-    return await imageToBase64(path.join(
+    const base64String = await imageToBase64(path.join(
       __dirname, "samplepics", relPath)
-      );
+    );
+    return `data:image/jpeg;base64,${base64String}`;
+
   } catch(err) {
     console.error(err);
     return "";
