@@ -28,7 +28,7 @@ function About() {
           <div className=" m-3  rounded-2xl  shadow-xl">
             <img
               className="lg:size-full md:object-cover rounded-2xl"
-              src="../src/assets/about-pic.jpg"
+              src="./about-pic.jpg"
               alt="about-pic"
             />
           </div>
