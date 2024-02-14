@@ -132,31 +132,39 @@ db.once("open", async () => {
 
   // same implementation as catId. Get product id from a name instead
   const prodId = (name) => products.find((product) => product.name === name)?._id;
+  
+  const users = await User.insertMany([
+    {
+      username: "jimmythetester",
+      email: "jimmy@test.com",
+      password: "password123",
+      store: [prodId("Empanadas"), prodId("Fish Tacos"), prodId("Brussel Sprouts")],
+      storeName: "Jimmy's Store",
+    },
+    {
+      username: "leonlemartin",
+      email: "leon@lemartin.com",
+      password: "supersecretpassword",
+      store: [prodId("Tomato"), prodId("Homemade Mozzarella Cheese"), prodId("Gouda"), prodId("Brisket")],
+      storeName: "Flight of Fancy",
+    },
+    {
+      username: "luc",
+      email: "luc@email.com",
+      password: "password123",
+      store: [prodId("Eggplant"), prodId("Canned Peas"), prodId("Carrots"), prodId("Potatoes"), prodId("Samosas")],
+      storeName: "Luc's rooftop garden"
+    }
+  ]);
 
-  await User.create({
-    username: "jimmythetester",
-    email: "jimmy@test.com",
-    password: "password123",
-    store: [prodId("Empanadas"), prodId("Fish Tacos"), prodId("Brussel Sprouts")],
-    storeName: "Jimmy's Store",
-  });
-
-  await User.create({
-    username: "leonlemartin",
-    email: "leon@lemartin.com",
-    password: "supersecretpassword",
-    orders: [prodId("Tomato"), prodId("Mozarella"), prodId("Gouda"), prodId("Brisket")],
-    store: [products[0]._id],
-    storeName: "Flight of Fancy",
-  });
-
-  await User.create({
-    username: "luc",
-    email: "luc@email.com",
-    password: "password123",
-    store: [prodId("Eggplant"), prodId("Canned Peas"), prodId("Carrots"), prodId("Potatoes"), prodId("Samosa")],
-    storeName: "Luc's rooftop garden"
-  })
+  // reassign lister after the users have been created
+  for (const {_id, store} of users) {
+    await Product.updateMany(
+      { _id: { $in: store } },
+      { $set: { lister: _id } },
+      { multi: true } 
+    )
+  }
 
   console.log("seed complete!");
   process.exit();

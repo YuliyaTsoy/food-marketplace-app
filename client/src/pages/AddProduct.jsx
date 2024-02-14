@@ -8,9 +8,6 @@ import { useMutation, useQuery } from "@apollo/client";
 import { UPLOAD_IMAGE } from "../utils/mutations";
 
 export default function AddProduct() {
-
-    // TODO: comment back in AddProduct and its corresponding await
-    // when ready
     const [addProduct, {error}] = useMutation(ADD_PRODUCT);
 
     // MVP AND BEYOND - cache product information in local storage here
@@ -141,7 +138,9 @@ export default function AddProduct() {
                     <CategoryCheckbox id="search-canned-goods" name="cannedGoods" onClick={handleCategoryClick} />
                 </div>
                 <div className="flex flex-col">
-                    <input type="submit" value="Add Product!"/>
+                    <button className="bg-red-800 text-white rounded w-1/5" onClick={() => {}}>
+						<span>Add Product</span>
+					</button>
                 </div>
             </form>
         </div>
