@@ -27,8 +27,11 @@ export default function Home() {
     const getRefinedProducts = async (seachQuery) => {
         // will trigger to useQuery and re render the products found from the search
         console.log(`user wants to find products related to: ${seachQuery}`)
-        // const { loading, data } = useQuery(GET_PRODUCTS_FROM_SEARCH)
-        // const refinedProducts = data?.productSearch || []
+        const { loading, data } = useQuery(GET_PRODUCTS_FROM_SEARCH, {
+            variables: { searchQuery:'potatoes' }
+        })
+        const refinedProducts = data?.productSearch || []
+        console.log(refinedProducts)
         // setProducts(refinedProducts)
     }
 
