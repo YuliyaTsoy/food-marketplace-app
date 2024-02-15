@@ -21,7 +21,6 @@ export default function AddProduct() {
         key: ''
     });
 
-
     const {loading, data} = useQuery(GET_CATEGORIES);
 
     const categories = data?.categories || {};
@@ -85,8 +84,6 @@ export default function AddProduct() {
         if (!image) {
             return alert("Your product must have an image!");
         }
-
-        console.log('image src -> ', image)
         
         await addProduct({
             variables: {
