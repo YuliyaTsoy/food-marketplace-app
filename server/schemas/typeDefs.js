@@ -52,7 +52,7 @@ type Mutation {
     addUser(username: String!, email: String!, password: String!, storeName: String!): Auth
     addOrder(productId: ID!): User
     login(email: String!, password: String!): Auth
-    addProduct(name: String!, price: Float!, description: String!, category: ID!): Product
+    addProduct(name: String!, price: Float!, image: String! description: String!, category: ID!): Product
     deleteProduct(productId: ID!): Product
     addCategory(name: String!): Category
     uploadImage(name: String, type: String, data: String): Image

@@ -84,6 +84,7 @@ input[type="checkbox"]:checked {
 }
 
 .cancel-image-button {
+  color: var(--bg-red-800);
   position: absolute;
   top: 2%;
   right: 2%;

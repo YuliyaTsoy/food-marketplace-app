@@ -22,7 +22,6 @@ export default function ImageUploadDragOver() {
 
   function handleImageDrop(e) {
     e.preventDefault();
-    console.log("e -> ", e);
     const imagePreviewEl = document.getElementById("product-preview");
     const productImage = e.dataTransfer.files[0];
     const reader = new FileReader();
@@ -56,7 +55,7 @@ export default function ImageUploadDragOver() {
           {hasProductImage ? 
           <div className='grid grid-cols-4 justify-items-end'>
             <XCircleIcon className='cancel-image-button h-10 w-14 cursor-pointer'
-              style={{ color: 'grey' }} onClick={() => {}} />
+              onClick={handleImageCancel} title="Cancel image upload"/>
           </div>
           :
           <></>}

@@ -63,7 +63,6 @@ export default function AddProduct() {
             checkbox.checked = false;
         }
         setProductCategory({name, key});
-        console.log('pro - ', productCategory)
     }
 
     async function handleFormSubmit(e) {
@@ -86,17 +85,22 @@ export default function AddProduct() {
         if (!image) {
             return alert("Your product must have an image!");
         }
+
+        console.log('image src -> ', image)
         
-        return await addProduct({
+        await addProduct({
             variables: {
                 name: productName,
                 price: productPrice,
                 description: productDescription,
-                image: image.src,
+                image: image,
                 // Just-In-Time we convert productCat
                 category: productCategory.key
             }
         })
+
+        // relocate back to users' personal store upon submit
+        document.location.replace('/Store');
     }
    return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
