@@ -213,28 +213,20 @@ const resolvers = {
 
       if (searchCategories.length > 0) {
         console.log(searchCategories);
-        //searchCategories is an array, need to map through the array for everyId 
-        // const multipleSearch = searchCategories.map(
-        //   async (categoryId) =>
-        //     await Product.find({
-        //       category: {
-        //         _id: categoryId,
-        //       },
-        //     }).populate(["category", "lister"]))
-
-        // return multipleSearch
-
-        return await Product.find(
-          {
+        // create an array of objects for the or operator to find products in the selected categories
+        const categoriesToSearch = searchCategories.map((categoryId) => {
+          return {
             category: {
-              _id: searchCategories[0],
-            },
+              _id: categoryId
+            }
           }
+        })
+        return await Product.find({
+          $or: categoriesToSearch
+        }
         ).populate(["category", "lister"])
 
       }
-
-      // return productsFound;
     },
   },
 };
