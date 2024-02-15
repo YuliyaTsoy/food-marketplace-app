@@ -22,8 +22,11 @@ export default function AddProduct() {
 
 
     const {loading, data} = useQuery(GET_CATEGORIES);
-    console.log('data -> ', data);
-    
+
+    const categories = data?.categories || {};
+    // Add the pseudo category: "Add a new category" which allows
+    // a user to create a new one
+
     if (loading) {
         return <h5>Fetching categories...</h5>;
     }
@@ -90,43 +93,7 @@ export default function AddProduct() {
                 category: productCategories
             }
         })
-        
-        /*
-        // DELETE ME SOON
-        addProduct({
-            name: productName,
-            price: productPrice,
-            description: productDescription,
-            image: image,
-            category: productCategories
-        })
-        */
     }
-    /*
-    return (
-        <div className="flex flex-col">
-            <h2 className="text-3xl font-bold text-center">Add a Product to Store</h2>
-            <form onSubmit={handleFormSubmit}>
-                <div className="flex flex-col">
-                </div>
-                <div className="flex flex-col">
-                    <ImageUploadDragOver />
-                </div>
-                <div className="flex flex-col">
-
-                </div>
-                <div className="flex flex-col">
-                    <CategoryCheckbox id="search-canned-goods" name="cannedGoods" onClick={handleCategoryClick} />
-                </div>
-                <div className="flex flex-col">
-                    <button className="bg-red-800 text-white rounded w-1/5" onClick={() => {}}>
-						<span>Add Product</span>
-					</button>
-                </div>
-            </form>
-        </div>
-    )
-    */
    return (
     <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -163,10 +130,35 @@ export default function AddProduct() {
                         onChange={handleDescriptionChange}>
                         </textarea>
                     </div>
-                    <label htmlFor="product-category">Select a Product Category</label>
-                    <div className="mt-2 border-red-800 w- h-32">
-                        <CategoryCheckbox id="search-canned-goods" name="cannedGoods" onClick={handleCategoryClick} />
+                    <label htmlFor="product-category">Select an exisiting Product Category</label>
+                    <div className="mt-2 border-red-800 h-32">
+                    {categories ? (
+                        <div className="add-product-category">
+                            {categories.map((category) => {
+                                return (
+                                    <div className="product-category-checkbox-container">
+			                            <input
+                                        type="checkbox"
+                                        id={category._id}
+                                        key={category._id} name={category.name} onClick={handleCategoryClick} />
+			                            <label htmlFor={category._id} className="ml-2">{category.name}</label>
+                                    </div>
+                                )
+                            })
+                                
+                            }
+                        </div>
+                    ) : <></>}
                     </div>
+                    
+                </div>
+                <div>
+                    <button
+                    type="submit"
+                    className="flex w-full justify-center rounded-md bg-red-800 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                    >
+                        Create!
+                    </button>
                 </div>
             </form>
         </div>
