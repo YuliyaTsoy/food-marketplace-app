@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import ImageUploadDragOver from "../components/ImageUploadDragOver";
-import CategoryCheckbox from "../components/CategoryCheckbox";
 
 import { ADD_PRODUCT } from "../utils/mutations";
 import { GET_CATEGORIES } from "../utils/queries";
 import { useMutation, useQuery } from "@apollo/client";
-import { UPLOAD_IMAGE } from "../utils/mutations";
 
 export default function AddProduct() {
     const [addProduct, {error}] = useMutation(ADD_PRODUCT);
@@ -18,7 +16,7 @@ export default function AddProduct() {
     const [productName, setProductName] = useState("")
     const [productPrice, setProductPrice] = useState(0);
     const [productDescription, setProductDescription] = useState("");
-    const [productCategories, setProductCategories] = useState([]);
+    const [productCategory, setProductCategory] = useState("");
 
 
     const {loading, data} = useQuery(GET_CATEGORIES);
@@ -53,13 +51,11 @@ export default function AddProduct() {
 
     function handleCategoryClick({target}) {
         const categoryName = target.name;
-        console.log('target -> ', target);
-        setProductCategories([...productCategories, categoryName]);
+        setProductCategory(categoryName);
     }
 
     async function handleFormSubmit(e) {
         e.preventDefault();
-        console.log('e -> ', e);
 
         // If user attempts to submit only whitespace
         if (!productName.trim().length) {
@@ -78,11 +74,6 @@ export default function AddProduct() {
         if (!image) {
             return alert("Your product must have an image!");
         }
-
-        // TODO: Get rid of dummy addProduct function and comment back in
-        // the below mutation
-        console.log(typeof(productPrice));
-        console.log('productPrice -> ', productPrice);
         
         return await addProduct({
             variables: {
@@ -90,7 +81,7 @@ export default function AddProduct() {
                 price: productPrice,
                 description: productDescription,
                 image: image,
-                category: productCategories
+                category: productCategory
             }
         })
     }
@@ -150,7 +141,6 @@ export default function AddProduct() {
                         </div>
                     ) : <></>}
                     </div>
-                    
                 </div>
                 <div>
                     <button
