@@ -16,7 +16,10 @@ export default function AddProduct() {
     const [productName, setProductName] = useState("")
     const [productPrice, setProductPrice] = useState(0);
     const [productDescription, setProductDescription] = useState("");
-    const [productCategory, setProductCategory] = useState("");
+    const [productCategory, setProductCategory] = useState({
+        name: '',
+        key: ''
+    });
 
 
     const {loading, data} = useQuery(GET_CATEGORIES);
@@ -49,9 +52,18 @@ export default function AddProduct() {
         setProductPrice(priceValue);
     }
 
-    function handleCategoryClick({target}) {
-        const categoryName = target.name;
-        setProductCategory(categoryName);
+    function handleCategoryClick(name, key) {
+        // deselect current category -- this way we can only select one
+        // checkbox in the same manner as a radio input
+        const categoryCheckboxes = document.querySelectorAll("input[type=checkbox]");
+        for (const checkbox of categoryCheckboxes) {
+            if (checkbox.name === name) {
+                continue;
+            }
+            checkbox.checked = false;
+        }
+        setProductCategory({name, key});
+        console.log('pro - ', productCategory)
     }
 
     async function handleFormSubmit(e) {
@@ -81,7 +93,8 @@ export default function AddProduct() {
                 price: productPrice,
                 description: productDescription,
                 image: image,
-                category: productCategory
+                // Just-In-Time we convert productCat
+                category: productCategory.key
             }
         })
     }
@@ -131,7 +144,7 @@ export default function AddProduct() {
 			                            <input
                                         type="checkbox"
                                         id={category._id}
-                                        key={category._id} name={category.name} onClick={handleCategoryClick} />
+                                        key={category._id} name={category.name} onClick={() => handleCategoryClick(category.name, category._id)} />
 			                            <label htmlFor={category._id} className="ml-2">{category.name}</label>
                                     </div>
                                 )
