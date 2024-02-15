@@ -2,6 +2,7 @@
   Image Upload component.
 */
 import { useState } from "react"
+import { XCircleIcon } from '@heroicons/react/24/outline'
 
 export default function ImageUploadDragOver() {
 
@@ -21,7 +22,6 @@ export default function ImageUploadDragOver() {
 
   function handleImageDrop(e) {
     e.preventDefault();
-    console.log("e -> ", e);
     const imagePreviewEl = document.getElementById("product-preview");
     const productImage = e.dataTransfer.files[0];
     const reader = new FileReader();
@@ -30,7 +30,6 @@ export default function ImageUploadDragOver() {
       () => {
         // convert image file to base64 string
         imagePreviewEl.src = reader.result;
-        console.log('product image url -> ', reader.result);
       },
       false
     );
@@ -38,26 +37,29 @@ export default function ImageUploadDragOver() {
     if (productImage) {
       setProductImageUrl(reader.readAsDataURL(productImage));
       setHasProductImage(true);
-      console.log("product url -> ", productImageUrl);
     }
   }
 
   return (
     <div>
-      <label htmlFor="imageUpload">Drag in a product Image</label>
-      <div className="add-product-image-container bg-red-200 hover:bg-red-300 w-1/5 aspect-square border-dashed rounded-lg border-2 border-red-800" onDragOver={handleImageDrag} onDragEnter={handleImageDrag} onDrop={handleImageDrop}>
+      <div
+      className="block w-full h-1/5 rounded-md border-0 py-1.5 px-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+      onDragOver={handleImageDrag}
+      onDragEnter={handleImageDrag}
+      onDrop={handleImageDrop}>
         <input type="file" accept="image/*" className="hidden multiple" id="imageUpload" />
         {/* No alt on this img until an image has bee */}
-        <img src={productImageUrl} title="Product image preview" id="product-preview" className="object-fill" />
-        {/* If product image is set. Add a cancel button */}
-        {hasProductImage ? 
-        <div className="cancel-image-button" title="Cancel image upload" onClick={handleImageCancel}>
-          <div>
-            x
+        <div className="add-product-image-container">
+          <img src={productImageUrl} title="Product image preview" id="product-preview" className="object-fill" />
+          {/* If product image is set. Add a cancel button */}
+          {hasProductImage ? 
+          <div className='grid grid-cols-4 justify-items-end'>
+            <XCircleIcon className='cancel-image-button h-10 w-14 cursor-pointer'
+              onClick={handleImageCancel} title="Cancel image upload"/>
           </div>
+          :
+          <></>}
         </div>
-        :
-        <></>}
       </div>
     </div>
   )

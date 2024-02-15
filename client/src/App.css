@@ -83,18 +83,9 @@ input[type="checkbox"]:checked {
   height: auto;
 }
 
-.cancel-image-button > div {
+.cancel-image-button {
+  color: var(--bg-red-800);
   position: absolute;
   top: 2%;
   right: 2%;
-  opacity: 0.8;
-  background-color: var(--bg-red-800);
-  color: white;
-  font-size: 18px;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-bottom: 4px;
-  border: none;
-  cursor: pointer;
-  border-radius: 10px;
 }

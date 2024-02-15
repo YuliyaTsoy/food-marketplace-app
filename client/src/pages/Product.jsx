@@ -10,10 +10,8 @@ function ProductPage() {
   const { loading, error, data } = useQuery(GET_ONE_PRODUCT, {
     variables: { id: productId },
   });
-  console.log(data);
 
   const product = data?.product || {};
-  console.log(product);
   return (
     <div>
       <ProductCard product={product} />

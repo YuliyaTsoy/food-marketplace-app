@@ -54,12 +54,14 @@ export const ADD_PRODUCT = gql`
     $price: Float!
     $description: String!
     $category: ID!
+    $image: String!
   ) {
     addProduct(
       name: $name
       price: $price
       description: $description
       category: $category
+      image: $image
     ) {
       _id
       lister {

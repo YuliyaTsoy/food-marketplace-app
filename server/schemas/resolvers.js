@@ -113,7 +113,7 @@ const resolvers = {
     // add product to db
     addProduct: async (
       parent,
-      { name, price, category, description },
+      { name, price, category, image, description },
       context
     ) => {
       if (context.user) {
@@ -122,6 +122,7 @@ const resolvers = {
           price,
           category,
           description,
+          image,
           lister: context.user._id,
         });
 
