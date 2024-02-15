@@ -50,15 +50,17 @@ export default function ImageUploadDragOver() {
       onDrop={handleImageDrop}>
         <input type="file" accept="image/*" className="hidden multiple" id="imageUpload" />
         {/* No alt on this img until an image has bee */}
-        <img src={productImageUrl} title="Product image preview" id="product-preview" className="object-fill" />
-        {/* If product image is set. Add a cancel button */}
-        {hasProductImage ? 
-        <div className='grid grid-cols-4 justify-items-end'>
-          <XCircleIcon className='cancel-image-button h-10 w-14 col-end-5 cursor-pointer'
-            style={{ color: 'grey' }} onClick={() => {}} />
+        <div className="add-product-image-container">
+          <img src={productImageUrl} title="Product image preview" id="product-preview" className="object-fill" />
+          {/* If product image is set. Add a cancel button */}
+          {hasProductImage ? 
+          <div className='grid grid-cols-4 justify-items-end'>
+            <XCircleIcon className='cancel-image-button h-10 w-14 cursor-pointer'
+              style={{ color: 'grey' }} onClick={() => {}} />
+          </div>
+          :
+          <></>}
         </div>
-        :
-        <></>}
       </div>
     </div>
   )

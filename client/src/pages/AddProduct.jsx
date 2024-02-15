@@ -92,7 +92,7 @@ export default function AddProduct() {
                 name: productName,
                 price: productPrice,
                 description: productDescription,
-                image: image,
+                image: image.src,
                 // Just-In-Time we convert productCat
                 category: productCategory.key
             }
